@@ -1,9 +1,12 @@
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 
 export default function Footer() {
     return (
         <footer>
-            <div className="f-logo">NeoKlyn.com</div>
+            <div className="f-logo">
+                <Logo scale={0.5} />
+            </div>
             <div className="f-links">
                 <Link href="/services">Services</Link>
                 <Link href="/markets">Markets</Link>

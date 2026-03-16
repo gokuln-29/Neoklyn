@@ -17,7 +17,7 @@ export default function WorkPage() {
       location: "New York",
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       description: "A high-performance headless Shopify build allowing seamless discovery and frictionless checkout.",
-      color: "var(--pink)"
+      color: "var(--violet)"
     },
     {
       title: "FinTech Analytics Dash",
@@ -25,7 +25,7 @@ export default function WorkPage() {
       location: "Bangalore",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       description: "Real-time enterprise analytics platform featuring complex data visualization architectures.",
-      color: "var(--amber)"
+      color: "var(--blue)"
     },
     {
       title: "Automotive Brand Space",
@@ -41,7 +41,7 @@ export default function WorkPage() {
       location: "Austin",
       image: "https://images.unsplash.com/photo-1550831107-1553da8c8464?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       description: "Cross-platform iOS and Android application ensuring HIPAA compliance and sleek user experience.",
-      color: "var(--pink)"
+      color: "var(--violet)"
     },
     {
       title: "Web3 NFT Marketplace",
@@ -49,7 +49,7 @@ export default function WorkPage() {
       location: "Remote",
       image: "https://images.unsplash.com/photo-1639762681485-074b7f4f2314?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       description: "Scalable smart contract interfaces coupled with high-converting landing pages.",
-      color: "var(--amber)"
+      color: "var(--blue)"
     }
   ];
 

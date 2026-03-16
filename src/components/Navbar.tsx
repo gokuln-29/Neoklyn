@@ -1,10 +1,13 @@
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 
 export default function Navbar() {
     return (
         <nav>
             <div className="nav-logo">
-                <Link href="/">NeoKlyn</Link>
+                <Link href="/">
+                    <Logo scale={0.4} />
+                </Link>
             </div>
             <ul className="nav-links">
                 <li><Link href="/services">Services</Link></li>

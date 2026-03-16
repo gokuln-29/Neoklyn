@@ -20,7 +20,7 @@ export default function ProcessPage() {
                     {/* Step 1 */}
                     <div className="p-step reveal" style={{ background: 'var(--ink)', border: '1px solid var(--border)', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '3rem', padding: '4rem' }}>
                         <div style={{ flexShrink: 0 }}>
-                            <div className="p-num" style={{ fontSize: '10rem', color: 'rgba(0,255,224,0.03)', margin: '-2rem 0', fontFamily: "'Bebas Neue', sans-serif", lineHeight: 1 }}>01</div>
+                            <div className="p-num" style={{ fontSize: '10rem', color: 'rgba(6, 182, 212,0.03)', margin: '-2rem 0', fontFamily: "'Bebas Neue', sans-serif", lineHeight: 1 }}>01</div>
                         </div>
                         <div style={{ flex: 1 }}>
                             <div className="p-line" style={{ width: '60px', height: '3px', background: 'var(--cyan)', marginBottom: '1.5rem' }}></div>
@@ -35,37 +35,37 @@ export default function ProcessPage() {
                     {/* Step 2 */}
                     <div className="p-step reveal" style={{ background: 'var(--ink)', border: '1px solid var(--border)', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '3rem', padding: '4rem' }}>
                         <div style={{ flexShrink: 0 }}>
-                            <div className="p-num" style={{ fontSize: '10rem', color: 'rgba(255,45,107,0.03)', margin: '-2rem 0', fontFamily: "'Bebas Neue', sans-serif", lineHeight: 1 }}>02</div>
+                            <div className="p-num" style={{ fontSize: '10rem', color: 'rgba(124, 58, 237,0.03)', margin: '-2rem 0', fontFamily: "'Bebas Neue', sans-serif", lineHeight: 1 }}>02</div>
                         </div>
                         <div style={{ flex: 1 }}>
-                            <div className="p-line" style={{ width: '60px', height: '3px', background: 'var(--pink)', marginBottom: '1.5rem' }}></div>
+                            <div className="p-line" style={{ width: '60px', height: '3px', background: 'var(--violet)', marginBottom: '1.5rem' }}></div>
                             <h2 className="p-title" style={{ fontSize: '2.5rem', fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.04em', marginBottom: '1rem' }}>UX / UI Design</h2>
                             <p className="p-desc" style={{ fontSize: '1.1rem', maxWidth: '600px', marginBottom: '1.5rem' }}>A conversion-centric approach to interface design. From low-fidelity wireframes to interactive high-fidelity prototypes, you approve the vision before production begins.</p>
                             <div className="sc-tags"><span className="sc-tag">Wireframing</span><span className="sc-tag">Design Systems</span><span className="sc-tag">Prototyping</span></div>
                         </div>
                     </div>
 
-                    <div style={{ height: '40px', width: '2px', background: 'var(--pink)', margin: '0 6rem', opacity: 0.2 }}></div>
+                    <div style={{ height: '40px', width: '2px', background: 'var(--violet)', margin: '0 6rem', opacity: 0.2 }}></div>
 
                     {/* Step 3 */}
                     <div className="p-step reveal" style={{ background: 'var(--ink)', border: '1px solid var(--border)', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '3rem', padding: '4rem' }}>
                         <div style={{ flexShrink: 0 }}>
-                            <div className="p-num" style={{ fontSize: '10rem', color: 'rgba(255,184,0,0.03)', margin: '-2rem 0', fontFamily: "'Bebas Neue', sans-serif", lineHeight: 1 }}>03</div>
+                            <div className="p-num" style={{ fontSize: '10rem', color: 'rgba(59, 130, 246,0.03)', margin: '-2rem 0', fontFamily: "'Bebas Neue', sans-serif", lineHeight: 1 }}>03</div>
                         </div>
                         <div style={{ flex: 1 }}>
-                            <div className="p-line" style={{ width: '60px', height: '3px', background: 'var(--amber)', marginBottom: '1.5rem' }}></div>
+                            <div className="p-line" style={{ width: '60px', height: '3px', background: 'var(--blue)', marginBottom: '1.5rem' }}></div>
                             <h2 className="p-title" style={{ fontSize: '2.5rem', fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.04em', marginBottom: '1rem' }}>Engineering &amp; Build</h2>
                             <p className="p-desc" style={{ fontSize: '1.1rem', maxWidth: '600px', marginBottom: '1.5rem' }}>Clean, scalable, serverless-native code. Bi-weekly sprints ensure total transparency, with access to staging environments for continuous feedback.</p>
                             <div className="sc-tags"><span className="sc-tag">Agile Sprints</span><span className="sc-tag">Full-Stack Dev</span><span className="sc-tag">QA Testing</span></div>
                         </div>
                     </div>
 
-                    <div style={{ height: '40px', width: '2px', background: 'var(--amber)', margin: '0 6rem', opacity: 0.2 }}></div>
+                    <div style={{ height: '40px', width: '2px', background: 'var(--blue)', margin: '0 6rem', opacity: 0.2 }}></div>
 
                     {/* Step 4 */}
                     <div className="p-step reveal" style={{ background: 'var(--ink)', border: '1px solid var(--border)', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '3rem', padding: '4rem' }}>
                         <div style={{ flexShrink: 0 }}>
-                            <div className="p-num" style={{ fontSize: '10rem', color: 'rgba(0,255,224,0.03)', margin: '-2rem 0', fontFamily: "'Bebas Neue', sans-serif", lineHeight: 1 }}>04</div>
+                            <div className="p-num" style={{ fontSize: '10rem', color: 'rgba(6, 182, 212,0.03)', margin: '-2rem 0', fontFamily: "'Bebas Neue', sans-serif", lineHeight: 1 }}>04</div>
                         </div>
                         <div style={{ flex: 1 }}>
                             <div className="p-line" style={{ width: '60px', height: '3px', background: 'var(--cyan)', marginBottom: '1.5rem' }}></div>

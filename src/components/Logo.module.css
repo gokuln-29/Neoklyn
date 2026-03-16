@@ -1,0 +1,275 @@
+.logoWrap {
+  --logo-scale: 1;
+  /* allow overriding via style props */
+  font-size: calc(64px * var(--logo-scale));
+  /* Baseline size */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75em 1em;
+  /* 48/64, 64/64 */
+  background: linear-gradient(135deg, rgba(4, 4, 6, 0.9) 0%, rgba(10, 10, 15, 0.95) 100%);
+  border-radius: 0.25em;
+  /* 16/64 */
+  overflow: hidden;
+  box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(59, 130, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Scanlines */
+.logoWrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 220, 255, 0.025) 3px,
+      rgba(0, 220, 255, 0.025) 4px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ambient glow from center */
+.logoWrap::after {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 80%;
+  top: 10%;
+  left: 20%;
+  background: radial-gradient(ellipse, rgba(0, 100, 255, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Corner brackets */
+.corner {
+  position: absolute;
+  width: 0.4375em;
+  height: 0.4375em;
+  /* 28/64 */
+  border-color: rgba(180, 204, 207, 0.55);
+  border-style: solid;
+}
+
+.cornerTl {
+  top: 0.21875em;
+  left: 0.21875em;
+  border-width: 2px 0 0 2px;
+}
+
+/* 14/64 */
+.cornerTr {
+  top: 0.21875em;
+  right: 0.21875em;
+  border-width: 2px 2px 0 0;
+}
+
+.cornerBl {
+  bottom: 0.21875em;
+  left: 0.21875em;
+  border-width: 0 0 2px 2px;
+}
+
+.cornerBr {
+  bottom: 0.21875em;
+  right: 0.21875em;
+  border-width: 0 2px 2px 0;
+}
+
+/* Top + bottom accent lines */
+.accentTop,
+.accentBottom {
+  position: absolute;
+  left: 0.75em;
+  right: 0.75em;
+  /* 48/64 */
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 180, 255, 0.5) 30%, rgba(0, 240, 255, 0.8) 50%, rgba(0, 180, 255, 0.5) 70%, transparent);
+}
+
+.accentTop {
+  top: 0.6875em;
+}
+
+/* 44/64 */
+.accentBottom {
+  bottom: 0.6875em;
+}
+
+/* Wordmark */
+.wordmark {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125em;
+  /* 8/64 */
+}
+
+.brandName {
+  display: flex;
+  align-items: baseline;
+  line-height: 1;
+  font-family: var(--font-orbitron), 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 1em;
+  letter-spacing: -0.0156em;
+  /* -1/64 */
+}
+
+.neo {
+  background: linear-gradient(135deg, #FFFFFF 0%, #D1D5DB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 0.15em rgba(255, 255, 255, 0.2));
+}
+
+.kLetter {
+  background: linear-gradient(135deg, #FFFFFF 0%, #595b5c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 0.25em rgba(6, 182, 212, 0.5)) drop-shadow(0 0 0.1em rgba(255, 255, 255, 0.4));
+  animation: kPulse 4s ease-in-out infinite;
+}
+
+.lyn {
+  background: linear-gradient(135deg, #D1D5DB 0%, #9CA3AF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 0.15em rgba(209, 213, 219, 0.2));
+}
+
+@keyframes kPulse {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0.25em rgba(6, 182, 212, 0.5)) drop-shadow(0 0 0.1em rgba(255, 255, 255, 0.4));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 0.4em rgba(6, 182, 212, 0.8)) drop-shadow(0 0 0.15em rgba(255, 255, 255, 0.6));
+  }
+
+  /* 32/64, 14/64 */
+}
+
+.tagline {
+  font-family: var(--font-share-tech-mono), 'Share Tech Mono', monospace;
+  font-size: 0.15625em;
+  /* 10/64 */
+  letter-spacing: 0.078em;
+  /* 5/64 */
+  color: rgba(0, 200, 230, 0.55);
+  text-transform: uppercase;
+  margin-top: 0.0625em;
+  /* 4/64 */
+  white-space: nowrap;
+}
+
+/* Decorative circuit dots */
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 0.093em;
+  /* 6/64 */
+  margin-top: 0.031em;
+  /* 2/64 */
+}
+
+.dot {
+  width: 0.0625em;
+  height: 0.0625em;
+  /* 4/64 */
+  background: #00e5ff;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: dotBlink 2.4s ease-in-out infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+@keyframes dotBlink {
+
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.2);
+  }
+}
+
+/* LIGHT VERSION */
+.logoWrap.light {
+  background: linear-gradient(135deg, #e8f0fc 0%, #dce8ff 100%);
+  box-shadow: 0 0.125em 0.625em rgba(0, 80, 200, 0.15);
+  /* 8/64, 40/64 */
+}
+
+.logoWrap.light::before {
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 100, 220, 0.02) 3px,
+      rgba(0, 100, 220, 0.02) 4px);
+}
+
+.logoWrap.light::after {
+  background: radial-gradient(ellipse, rgba(0, 100, 255, 0.06) 0%, transparent 70%);
+}
+
+.logoWrap.light .corner {
+  border-color: rgba(0, 100, 200, 0.35);
+}
+
+.logoWrap.light .accentTop,
+.logoWrap.light .accentBottom {
+  background: linear-gradient(90deg, transparent, rgba(0, 100, 200, 0.3) 30%, rgba(0, 160, 220, 0.6) 50%, rgba(0, 100, 200, 0.3) 70%, transparent);
+}
+
+.logoWrap.light .neo {
+  background: linear-gradient(160deg, #1a3a8c 0%, #1a5ccc 60%, #0d3a80 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 0.156em rgba(0, 60, 200, 0.2));
+  /* 10/64 */
+}
+
+.logoWrap.light .kLetter {
+  background: linear-gradient(135deg, #0088dd 0%, #0055cc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 0.187em rgba(0, 150, 220, 0.45));
+  /* 12/64 */
+}
+
+.logoWrap.light .lyn {
+  background: linear-gradient(160deg, #1866cc 0%, #0d45b0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 0.125em rgba(0, 80, 200, 0.2));
+  /* 8/64 */
+}
+
+.logoWrap.light .tagline {
+  color: rgba(0, 80, 160, 0.5);
+}
+
+.logoWrap.light .dot {
+  background: #0077cc;
+}

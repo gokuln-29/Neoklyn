@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Effects from "@/components/Effects";
 import "./globals.css";
 
-const bebasNeue = Bebas_Neue({
-  variable: "--font-bebas-neue",
-  weight: "400",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -28,13 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
-      </head>
-      <body className={`${bebasNeue.variable} ${jetBrainsMono.variable} antialiased`}>
+      <body className={`${spaceGrotesk.variable} ${jetBrainsMono.variable} antialiased`}>
         <Effects />
         <Navbar />
         {children}

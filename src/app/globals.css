@@ -16,16 +16,16 @@
 }
 
 :root {
-  --bg: #050507;
+  --bg: #040406;
   --ink: #0a0a0f;
-  --white: #f4f3ee;
+  --white: #ffffff;
   --dim: #3a3a4a;
-  --muted: #5a5a70;
-  --cyan: #00ffe0;
-  --pink: #ff2d6b;
-  --amber: #ffb800;
-  --border: rgba(255, 255, 255, 0.06);
-  --glow: rgba(0, 255, 224, 0.15);
+  --muted: #8b949e;
+  --cyan: #06B6D4;
+  --blue: #3B82F6;
+  --violet: #7C3AED;
+  --border: rgba(255, 255, 255, 0.08);
+  --glow: rgba(59, 130, 246, 0.15);
 }
 
 html {
@@ -35,7 +35,7 @@ html {
 body {
   background: var(--bg);
   color: var(--white);
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   cursor: none;
   overflow-x: hidden;
 }
@@ -58,7 +58,7 @@ body {
   position: fixed;
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(0, 255, 224, 0.5);
+  border: 1px solid rgba(6, 182, 212, 0.5);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
@@ -105,7 +105,7 @@ nav {
 }
 
 .nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: 1.7rem;
   letter-spacing: 0.08em;
   background: linear-gradient(90deg, var(--white) 60%, var(--cyan));
@@ -192,8 +192,8 @@ nav {
   background: repeating-linear-gradient(0deg,
       transparent,
       transparent 2px,
-      rgba(0, 255, 224, 0.013) 2px,
-      rgba(0, 255, 224, 0.013) 4px);
+      rgba(6, 182, 212, 0.013) 2px,
+      rgba(6, 182, 212, 0.013) 4px);
   pointer-events: none;
 }
 
@@ -206,27 +206,27 @@ nav {
 }
 
 .orb-1 {
-  width: 500px;
-  height: 500px;
-  background: rgba(0, 255, 224, 0.07);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
   top: -10%;
-  left: -5%
+  left: -5%;
 }
 
 .orb-2 {
-  width: 400px;
-  height: 400px;
-  background: rgba(255, 45, 107, 0.06);
-  bottom: 0;
-  right: 10%
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+  bottom: -10%;
+  right: -5%;
 }
 
 .orb-3 {
-  width: 300px;
-  height: 300px;
-  background: rgba(255, 184, 0, 0.05);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
   top: 40%;
-  left: 40%
+  left: 40%;
 }
 
 .hero-left {
@@ -253,11 +253,13 @@ nav {
 }
 
 .hero-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(4.5rem, 9vw, 10rem);
-  line-height: 0.9;
-  letter-spacing: 0.02em;
-  margin-bottom: 2.5rem;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: clamp(3.5rem, 8vw, 8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
 }
 
 .hero-title .line {
@@ -295,12 +297,16 @@ nav {
 }
 
 .title-outline {
-  -webkit-text-stroke: 2px var(--white);
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
   color: transparent;
 }
 
 .title-cyan {
-  color: var(--cyan)
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
 }
 
 .hero-desc {
@@ -325,7 +331,7 @@ nav {
   gap: 0.6rem;
   background: var(--cyan);
   color: var(--bg);
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-weight: 700;
   font-size: 0.9rem;
   padding: 1rem 2rem;
@@ -336,7 +342,7 @@ nav {
 }
 
 .btn-main:hover {
-  box-shadow: 0 0 30px rgba(0, 255, 224, 0.4), 0 0 60px rgba(0, 255, 224, 0.15);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.4), 0 0 60px rgba(6, 182, 212, 0.15);
   transform: translateY(-2px);
 }
 
@@ -384,17 +390,19 @@ nav {
 }
 
 .terminal {
-  background: #0d0d12;
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  background: rgba(10, 10, 15, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 255, 224, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(59, 130, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .terminal-bar {
   padding: 0.9rem 1.2rem;
-  background: #111118;
-  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -428,7 +436,7 @@ nav {
 .terminal-body {
   padding: 1.5rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   line-height: 1.9;
 }
 
@@ -457,7 +465,7 @@ nav {
 }
 
 .t-num {
-  color: var(--amber)
+  color: var(--blue)
 }
 
 .t-cursor {
@@ -488,7 +496,7 @@ nav {
   position: absolute;
   top: -12px;
   right: 20px;
-  background: var(--pink);
+  background: var(--violet);
   color: #fff;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.62rem;
@@ -544,7 +552,7 @@ nav {
 }
 
 .h-stat-n {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: 2rem;
   line-height: 1;
   background: linear-gradient(135deg, var(--white), var(--cyan));
@@ -633,7 +641,7 @@ nav {
 }
 
 .s-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   letter-spacing: 0.02em;
   line-height: 1;
@@ -682,7 +690,7 @@ nav {
   top: 0;
   bottom: 0;
   width: 0;
-  background: linear-gradient(90deg, rgba(0, 255, 224, 0.06), transparent);
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.06), transparent);
   transition: width 0.4s ease;
 }
 
@@ -703,7 +711,7 @@ nav {
 }
 
 .si-name {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: 1.6rem;
   letter-spacing: 0.04em;
   flex: 1;
@@ -724,12 +732,15 @@ nav {
 }
 
 .service-detail {
-  background: #0d0d12;
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  background: rgba(10, 10, 15, 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
   padding: 2.5rem;
   position: sticky;
   top: 6rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 .sd-active-label {
@@ -755,15 +766,25 @@ nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
-  background: var(--border);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
   overflow: hidden;
 }
 
 .sc {
-  background: #111118;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 1.8rem 1.5rem;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.sc:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
+  transform: translateY(-2px);
 }
 
 .sc:hover {
@@ -776,7 +797,7 @@ nav {
 }
 
 .sc-name {
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
   margin-bottom: 0.5rem;
@@ -848,7 +869,7 @@ nav {
 }
 
 .m-num {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: 5rem;
   line-height: 1;
   color: rgba(255, 255, 255, 0.04);
@@ -861,7 +882,7 @@ nav {
 }
 
 .m-name {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: 1.8rem;
   letter-spacing: 0.04em;
   margin-bottom: 0.8rem;
@@ -881,7 +902,7 @@ nav {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--cyan);
-  border-bottom: 1px solid rgba(0, 255, 224, 0.3);
+  border-bottom: 1px solid rgba(6, 182, 212, 0.3);
   padding-bottom: 2px;
 }
 
@@ -908,10 +929,10 @@ nav {
 }
 
 .p-num {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: 4.5rem;
   line-height: 1;
-  color: rgba(0, 255, 224, 0.07);
+  color: rgba(6, 182, 212, 0.07);
   margin-bottom: 0.5rem;
 }
 
@@ -923,7 +944,7 @@ nav {
 }
 
 .p-title {
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-weight: 700;
   font-size: 1rem;
   margin-bottom: 0.6rem;
@@ -964,7 +985,7 @@ nav {
 }
 
 .tcard:hover {
-  border-color: rgba(0, 255, 224, 0.2);
+  border-color: rgba(6, 182, 212, 0.2);
   transform: translateY(-4px)
 }
 
@@ -973,9 +994,9 @@ nav {
   position: absolute;
   top: -0.5rem;
   left: 1.5rem;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: 7rem;
-  color: rgba(0, 255, 224, 0.06);
+  color: rgba(6, 182, 212, 0.06);
   line-height: 1;
 }
 
@@ -988,7 +1009,7 @@ nav {
 .star {
   width: 12px;
   height: 12px;
-  background: var(--amber);
+  background: var(--blue);
   clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 
@@ -1011,12 +1032,12 @@ nav {
   width: 38px;
   height: 38px;
   border-radius: 6px;
-  background: linear-gradient(135deg, rgba(0, 255, 224, 0.15), rgba(255, 45, 107, 0.1));
-  border: 1px solid rgba(0, 255, 224, 0.15);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(124, 58, 237, 0.1));
+  border: 1px solid rgba(6, 182, 212, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: 0.9rem;
   color: var(--cyan);
 }
@@ -1044,7 +1065,7 @@ nav {
 .cta-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0, 255, 224, 0.07), transparent);
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(6, 182, 212, 0.07), transparent);
   pointer-events: none;
 }
 
@@ -1056,7 +1077,7 @@ nav {
 }
 
 .cta-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: clamp(3rem, 7vw, 6.5rem);
   letter-spacing: 0.02em;
   line-height: 0.95;
@@ -1093,7 +1114,7 @@ nav {
   border-radius: 4px;
   padding: 0.95rem 1.4rem;
   color: var(--white);
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: 0.9rem;
   outline: none;
   transition: border-color 0.2s;
@@ -1126,7 +1147,7 @@ footer {
 }
 
 .f-logo {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
   font-size: 1.5rem;
   letter-spacing: 0.1em;
   background: linear-gradient(90deg, var(--white) 60%, var(--cyan));

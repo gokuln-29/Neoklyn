@@ -18,7 +18,7 @@ export default function InsightsPage() {
       date: "Sep 15, 2026",
       readTime: "5 min read",
       author: "Priti Sharma",
-      color: "var(--pink)"
+      color: "var(--violet)"
     },
     {
       title: "Optimizing AI Latency at the Edge",
@@ -26,7 +26,7 @@ export default function InsightsPage() {
       date: "Aug 02, 2026",
       readTime: "12 min read",
       author: "Rahul Nair",
-      color: "var(--amber)"
+      color: "var(--blue)"
     },
     {
       title: "Why Most Ecommerce Transitions to Shopify Fail",
@@ -42,7 +42,7 @@ export default function InsightsPage() {
       date: "Jun 30, 2026",
       readTime: "4 min read",
       author: "Elena Rostov",
-      color: "var(--pink)"
+      color: "var(--violet)"
     },
     {
       title: "The Future of WebGL vs WebGPU Performance",
@@ -50,7 +50,7 @@ export default function InsightsPage() {
       date: "May 12, 2026",
       readTime: "10 min read",
       author: "Michael Chang",
-      color: "var(--amber)"
+      color: "var(--blue)"
     }
   ];
 
