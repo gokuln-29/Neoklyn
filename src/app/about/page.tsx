@@ -1,5 +1,11 @@
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us | NeoKlyn Digital Studio",
+  description: "Meet the engineers and visionaries behind NeoKlyn. We are a globally distributed digital agency building high-performance web applications and enterprise platforms.",
+};
 
 export default function AboutPage() {
     return (
@@ -56,6 +62,53 @@ export default function AboutPage() {
                         <div className="m-num" style={{ color: 'rgba(6, 182, 212,0.05)', fontSize: '4rem', marginBottom: '1rem' }}>03</div>
                         <h3 className="p-title" style={{ fontSize: '1.2rem' }}>Component-Driven</h3>
                         <p className="p-desc">Building with strict design systems ensures technical debt remains low and UI remains aggressively consistent.</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* MEET THE TEAM */}
+            <section className="section" id="team">
+                <div className="reveal">
+                    <div className="s-label">Leadership</div>
+                    <h2 className="s-title">THE ENGINEERS & VISIONARIES</h2>
+                    <p className="s-sub">A tight-knit collective of elite developers, award-winning designers, and growth architects.</p>
+                </div>
+                
+                <div className="reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', marginTop: '4rem' }}>
+                    {/* Founder / Core Member 1 */}
+                    <div className="tcard" style={{ padding: '0', background: 'transparent', border: 'none' }}>
+                        <div style={{ width: '100%', aspectRatio: '1/1', background: 'var(--bg)', borderRadius: '16px', marginBottom: '1.5rem', border: '1px solid var(--border)', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {/* TODO: Replace this <span> with <Image src="/team/founder.jpg" fill style={{objectFit: 'cover'}} alt="Founder" /> */}
+                            <span style={{ color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem' }}>[IMG_PLACEHOLDER_1]</span>
+                            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)', zIndex: 1, opacity: 0.5 }}></div>
+                        </div>
+                        <h3 style={{ fontSize: '1.6rem', marginBottom: '0.3rem', color: 'var(--white)' }}>Founder Name</h3>
+                        <p style={{ color: 'var(--cyan)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.85rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Chief Executive Officer</p>
+                        <p style={{ lineHeight: 1.6, color: 'var(--muted)', fontSize: '0.95rem' }}>Leading the strategic vision and engineering operations. Formerly scaled enterprise architectures at tier-1 tech companies. Passionate about Next.js edge performance.</p>
+                    </div>
+
+                    {/* Core Member 2 */}
+                    <div className="tcard" style={{ padding: '0', background: 'transparent', border: 'none' }}>
+                        <div style={{ width: '100%', aspectRatio: '1/1', background: 'var(--bg)', borderRadius: '16px', marginBottom: '1.5rem', border: '1px solid var(--border)', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {/* TODO: Replace this with Image component */}
+                            <span style={{ color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem' }}>[IMG_PLACEHOLDER_2]</span>
+                            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)', zIndex: 1, opacity: 0.5 }}></div>
+                        </div>
+                        <h3 style={{ fontSize: '1.6rem', marginBottom: '0.3rem', color: 'var(--white)' }}>Co-Founder / CTO</h3>
+                        <p style={{ color: 'var(--violet)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.85rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Head of Engineering</p>
+                        <p style={{ lineHeight: 1.6, color: 'var(--muted)', fontSize: '0.95rem' }}>The architectural mind behind our headless systems and generative AI deployments. Obsessed with shipping zero-latency systems and perfect Lighthouse scores globally.</p>
+                    </div>
+
+                    {/* Core Member 3 */}
+                    <div className="tcard" style={{ padding: '0', background: 'transparent', border: 'none' }}>
+                        <div style={{ width: '100%', aspectRatio: '1/1', background: 'var(--bg)', borderRadius: '16px', marginBottom: '1.5rem', border: '1px solid var(--border)', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {/* TODO: Replace this with Image component */}
+                            <span style={{ color: 'var(--muted)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem' }}>[IMG_PLACEHOLDER_3]</span>
+                            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)', zIndex: 1, opacity: 0.5 }}></div>
+                        </div>
+                        <h3 style={{ fontSize: '1.6rem', marginBottom: '0.3rem', color: 'var(--white)' }}>Creative Director</h3>
+                        <p style={{ color: 'var(--blue)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.85rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Head of UI/UX</p>
+                        <p style={{ lineHeight: 1.6, color: 'var(--muted)', fontSize: '0.95rem' }}>Translates complex B2B brand requirements into stunning, award-winning visual interfaces. Specializes in Three.js, WebGL animations, and seamless interactive design.</p>
                     </div>
                 </div>
             </section>

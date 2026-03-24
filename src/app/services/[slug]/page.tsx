@@ -2,6 +2,7 @@ import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 // Local data for all services
 const servicesData = {
@@ -175,6 +176,55 @@ const servicesData = {
     }
 };
 
+const servicesMetadata: Record<string, { title: string; description: string }> = {
+    web: {
+        title: "Custom Web Development & Design Agency | NeoKlyn",
+        description: "Elevate your digital presence with NeoKlyn's fast, scalable, and secure custom web development services tailored for enterprises and growing startups.",
+    },
+    mobile: {
+        title: "iOS & Android Mobile App Development Services | NeoKlyn",
+        description: "Build intuitive, high-performing mobile applications for iOS and Android. NeoKlyn creates seamless mobile experiences that drive user engagement.",
+    },
+    ecommerce: {
+        title: "High-Converting eCommerce Development Agency | NeoKlyn",
+        description: "Launch scalable, high-converting eCommerce platforms with seamless payment integrations, premium UX design, and conversion rate optimization by NeoKlyn.",
+    },
+    marketing: {
+        title: "Data-Driven Digital Marketing & SEO Services | NeoKlyn",
+        description: "Grow your brand and maximize revenue with NeoKlyn's data-driven digital marketing, SEO, and performance-based marketing strategies.",
+    },
+    "3d": {
+        title: "Immersive 3D Modeling & Animation Studio | NeoKlyn",
+        description: "Bring your ideas to life with NeoKlyn’s stunning 3D modeling, product rendering, and interactive web animations that captivate your audience.",
+    },
+    branding: {
+        title: "Brand Identity, Strategy & Logo Design Services | NeoKlyn",
+        description: "Craft a memorable brand identity with NeoKlyn. From logo design to comprehensive brand strategy, we help you stand out in the crowded digital space.",
+    },
+    "ai-agents": {
+        title: "Custom AI Agents & Business Automation Services | NeoKlyn",
+        description: "Streamline operations and enhance customer experience with NeoKlyn’s intelligent, custom AI agents and advanced workflow automation solutions.",
+    },
+    "gen-ai": {
+        title: "Enterprise Generative AI Solutions & Integration | NeoKlyn",
+        description: "Harness the power of Generative AI. NeoKlyn develops custom LLMs and advanced machine learning solutions to completely transform your business processes.",
+    }
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const meta = servicesMetadata[slug];
+    
+    if (!meta) {
+        return { title: "Service | NeoKlyn" };
+    }
+
+    return {
+        title: meta.title,
+        description: meta.description,
+    };
+}
+
 export function generateStaticParams() {
     return Object.keys(servicesData).map((slug) => ({
         slug: slug,
@@ -189,8 +239,31 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         notFound();
     }
 
+    const meta = servicesMetadata[slug] || { title: service.titleSolid, description: service.description };
+
+    const serviceSchema = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": meta.title,
+        "provider": {
+            "@type": "Organization",
+            "name": "NeoKlyn",
+            "url": "https://neoklyn.com"
+        },
+        "description": meta.description,
+        "areaServed": [
+            { "@type": "City", "name": "Bangalore" },
+            { "@type": "City", "name": "Dubai" },
+            { "@type": "City", "name": "London" }
+        ]
+    };
+
     return (
         <PageWrapper>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+            />
             <section className="section">
                 <PageHeader
                     label={service.label}

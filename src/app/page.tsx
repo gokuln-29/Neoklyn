@@ -1,6 +1,13 @@
 import Link from "next/link";
 import TerminalCode from "@/components/TerminalCode";
 import CTASection from "@/components/CTASection";
+import MarketsHUD from "@/components/MarketsHUD";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NeoKlyn | Premium Web & App Development Agency",
+  description: "NeoKlyn is a leading digital agency delivering premium web development, mobile apps, AI solutions, and data-driven marketing strategies for global brands.",
+};
 
 export default function Home() {
   return (
@@ -30,11 +37,23 @@ export default function Home() {
         {/* hero stats */}
         <div className="hero-right">
           <TerminalCode />
-          <div className="hero-stats">
-            <div className="h-stat"><div className="h-stat-n">120+</div><div className="h-stat-l">Projects</div></div>
-            <div className="h-stat"><div className="h-stat-n">98%</div><div className="h-stat-l">Satisfaction</div></div>
-            <div className="h-stat"><div className="h-stat-n">5yr</div><div className="h-stat-l">Experience</div></div>
-            <div className="h-stat"><div className="h-stat-n">3</div><div className="h-stat-l">Markets</div></div>
+          <div className="hero-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', alignContent: 'center' }}>
+            <div className="h-stat">
+              <div className="h-stat-n" style={{ fontFamily: "'JetBrains Mono', monospace", color: 'var(--cyan)' }}>120+</div>
+              <div className="h-stat-l" style={{ lineHeight: '1.4' }}>Enterprise Deployments<br/><span style={{fontSize: '0.75rem', color: 'var(--muted)'}}>Successfully Delivered</span></div>
+            </div>
+            <div className="h-stat">
+              <div className="h-stat-n" style={{ fontFamily: "'JetBrains Mono', monospace", color: 'var(--violet)' }}>98%</div>
+              <div className="h-stat-l" style={{ lineHeight: '1.4' }}>Client Retention Rate<br/><span style={{fontSize: '0.75rem', color: 'var(--muted)'}}>Verified Long-Term</span></div>
+            </div>
+            <div className="h-stat">
+              <div className="h-stat-n" style={{ fontFamily: "'JetBrains Mono', monospace", color: 'var(--blue)' }}>5yr</div>
+              <div className="h-stat-l" style={{ lineHeight: '1.4' }}>Engineering Excellence<br/><span style={{fontSize: '0.75rem', color: 'var(--muted)'}}>Zero Compromise</span></div>
+            </div>
+            <div className="h-stat">
+              <div className="h-stat-n" style={{ fontFamily: "'JetBrains Mono', monospace", color: 'var(--cyan)' }}>3</div>
+              <div className="h-stat-l" style={{ lineHeight: '1.4' }}>Global Operating Hubs<br/><span style={{fontSize: '0.75rem', color: 'var(--muted)'}}>India, UAE, UK</span></div>
+            </div>
           </div>
         </div>
       </section>
@@ -173,67 +192,9 @@ export default function Home() {
       </section>
 
       {/* MARKETS */}
-      <section className="section" id="markets">
-        <div className="reveal">
-          <div className="s-label">Global Reach</div>
-          <h2 className="s-title">WHERE WE OPERATE</h2>
-          <p className="s-sub">Built to serve three of the world&apos;s most dynamic digital markets — fluently.</p>
-        </div>
-
-        <style>{`
-            .m-icon { margin-bottom: 1.5rem; display: inline-flex; align-items: center; justify-content: center; position: relative; }
-            .m-icon::after { content: ''; position: absolute; inset: -10px; background: radial-gradient(circle, var(--orb-color, rgba(255,255,255,0.1)), transparent 70%); border-radius: 50%; z-index: 0; pointer-events: none; opacity: 0.5; }
-            .m-icon svg { z-index: 1; position: relative; }
-        `}</style>
-
-        <div className="markets-layout reveal">
-          <div className="market" style={{ '--orb-color': 'rgba(6,182,212,0.15)' } as React.CSSProperties}>
-            {/* <div className="m-num">01</div> */}
-            <div className="m-icon">
-              <svg width="56" height="56" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="24" cy="24" r="20" stroke="#06B6D4" strokeOpacity="0.3" strokeWidth="1" strokeDasharray="3 3" />
-                <ellipse cx="24" cy="24" rx="20" ry="8" stroke="#06B6D4" strokeOpacity="0.5" strokeWidth="1.2" transform="rotate(25 24 24)" />
-                <ellipse cx="24" cy="24" rx="8" ry="20" stroke="#06B6D4" strokeOpacity="0.5" strokeWidth="1.2" transform="rotate(25 24 24)" />
-                <circle cx="16" cy="18" r="3" fill="#06B6D4" style={{ filter: 'drop-shadow(0 0 6px #06B6D4)' }} />
-                <circle cx="20" cy="30" r="1.5" fill="#06B6D4" />
-              </svg>
-            </div>
-            <div className="m-name">Americas</div>
-            <p className="m-desc">Serving clients globally with dedicated active hubs in the US. We align seamlessly with Western timelines, compliance standards, and product expectations.</p>
-            <span className="m-tag">Active Hubs: New York, LA, Toronto</span>
-          </div>
-          <div className="market" style={{ '--orb-color': 'rgba(124,58,237,0.15)' } as React.CSSProperties}>
-            {/* <div className="m-num">02</div> */}
-            <div className="m-icon">
-              <svg width="56" height="56" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="24" cy="24" r="20" stroke="#7C3AED" strokeOpacity="0.3" strokeWidth="1" strokeDasharray="3 3" />
-                <ellipse cx="24" cy="24" rx="20" ry="8" stroke="#7C3AED" strokeOpacity="0.5" strokeWidth="1.2" transform="rotate(85 24 24)" />
-                <ellipse cx="24" cy="24" rx="8" ry="20" stroke="#7C3AED" strokeOpacity="0.5" strokeWidth="1.2" transform="rotate(85 24 24)" />
-                <circle cx="24" cy="16" r="3" fill="#7C3AED" style={{ filter: 'drop-shadow(0 0 6px #7C3AED)' }} />
-                <circle cx="28" cy="26" r="2" fill="#7C3AED" />
-                <circle cx="18" cy="32" r="1.5" fill="#7C3AED" />
-              </svg>
-            </div>
-            <div className="m-name">EMEA</div>
-            <p className="m-desc">Complete worldwide coverage across Europe, Middle East, and Africa. Featuring active hubs with local compliances, RTL language support, and enterprise delivery.</p>
-            <span className="m-tag">Active Hubs: Dubai, London, Berlin</span>
-          </div>
-          <div className="market" style={{ '--orb-color': 'rgba(59,130,246,0.15)' } as React.CSSProperties}>
-            {/* <div className="m-num">03</div> */}
-            <div className="m-icon">
-              <svg width="56" height="56" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="24" cy="24" r="20" stroke="#3B82F6" strokeOpacity="0.3" strokeWidth="1" strokeDasharray="3 3" />
-                <ellipse cx="24" cy="24" rx="20" ry="8" stroke="#3B82F6" strokeOpacity="0.5" strokeWidth="1.2" transform="rotate(145 24 24)" />
-                <ellipse cx="24" cy="24" rx="8" ry="20" stroke="#3B82F6" strokeOpacity="0.5" strokeWidth="1.2" transform="rotate(145 24 24)" />
-                <circle cx="34" cy="20" r="3" fill="#3B82F6" style={{ filter: 'drop-shadow(0 0 6px #3B82F6)' }} />
-                <circle cx="28" cy="32" r="2" fill="#3B82F6" />
-                <circle cx="16" cy="24" r="1.5" fill="#3B82F6" />
-              </svg>
-            </div>
-            <div className="m-name">APAC</div>
-            <p className="m-desc">Providing premium worldwide execution and elite technical talent from our fast-growing hubs across India, Singapore, and the Asia-Pacific regions.</p>
-            <span className="m-tag">Active Hubs: Bangalore, Chennai, Mumbai, Singapore, Tokyo</span>
-          </div>
+      <section className="section" id="markets" style={{ padding: '0', marginBottom: '8rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
+          <MarketsHUD />
         </div>
       </section>
 
@@ -277,17 +238,32 @@ export default function Home() {
 
       {/* TESTIMONIALS */}
       <section className="section" id="testimonials">
-        <div className="reveal">
-          <div className="s-label">Client Stories</div>
-          <h2 className="s-title">REAL RESULTS</h2>
+        <div className="reveal" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '2rem' }}>
+          <div>
+            <div className="s-label">Client Trust</div>
+            <h2 className="s-title" style={{ marginBottom: 0 }}>REAL RESULTS</h2>
+          </div>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            {/* Badge Suggestion Placement */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', padding: '0.5rem 1rem', borderRadius: '30px' }}>
+              <div style={{ color: '#F87171', fontWeight: 'bold' }}>Clutch</div>
+              <div style={{ display: 'flex', color: '#FBBF24', fontSize: '0.8rem' }}>★★★★★</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>4.9/5</div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', padding: '0.5rem 1rem', borderRadius: '30px' }}>
+              <div style={{ color: '#60A5FA', fontWeight: 'bold' }}>Google</div>
+              <div style={{ display: 'flex', color: '#FBBF24', fontSize: '0.8rem' }}>★★★★★</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>5.0/5</div>
+            </div>
+          </div>
         </div>
-        <div className="test-grid reveal">
+        <div className="test-grid reveal" style={{ marginTop: '3rem' }}>
           
-          <div className="tcard">
-            <div className="t-stars"><div className="star"></div><div className="star"></div><div className="star"></div><div className="star"></div><div className="star"></div></div>
-            <p className="t-text">&quot;They built a fast, robust corporate site for our trading operations in the UAE. The scalable architecture and sleek design truly elevated our B2B presence.&quot;</p>
-            <div className="t-author">
-              <div className="t-av">DG</div>
+          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
+            <p className="t-text" style={{ flex: 1 }}>&quot;They didn't just rebuild our website; they re-architected our entire B2B trading platform. Our mobile engagement jumped 45% in the first quarter, and the Next.js headless setup means our content team deploys 5x faster.&quot;</p>
+            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
+              <div className="t-av" style={{ background: 'var(--cyan)', color: '#000' }}>DG</div>
               <div>
                 <a href="http://dwarkageneraltrading.ae/" target="_blank" rel="noopener noreferrer" className="t-name" style={{textDecoration: 'none', color: 'inherit'}}>Dwarka Gen. Trading <span style={{fontSize: '0.8em', color: 'var(--cyan)'}}>↗</span></a>
                 <div className="t-loc">Corporate Platform · UAE 🇦🇪</div>
@@ -295,35 +271,35 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="tcard">
-            <div className="t-stars"><div className="star"></div><div className="star"></div><div className="star"></div><div className="star"></div><div className="star"></div></div>
-            <p className="t-text">&quot;Our brand portal is now incredibly cohesive. NeoKlyn delivered a pixel-perfect, premium build that loads instantly and positions us flawlessly in our market.&quot;</p>
-            <div className="t-author">
-              <div className="t-av">AA</div>
+          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
+            <p className="t-text" style={{ flex: 1 }}>&quot;As a premium brand, we needed a portal that exuded luxury and functioned flawlessly. NeoKlyn delivered a pixel-perfect application that loads instantly and positions us as an undisputed leader in our market sector.&quot;</p>
+            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
+              <div className="t-av" style={{ background: 'var(--violet)', color: '#fff' }}>AA</div>
               <div>
-                <a href="https://aathithyan.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{textDecoration: 'none', color: 'inherit'}}>Aathithyan <span style={{fontSize: '0.8em', color: 'var(--cyan)'}}>↗</span></a>
+                <a href="https://aathithyan.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{textDecoration: 'none', color: 'inherit'}}>Aathithyan <span style={{fontSize: '0.8em', color: 'var(--violet)'}}>↗</span></a>
                 <div className="t-loc">Brand Website · India 🇮🇳</div>
               </div>
             </div>
           </div>
 
-          <div className="tcard">
-            <div className="t-stars"><div className="star"></div><div className="star"></div><div className="star"></div><div className="star"></div><div className="star"></div></div>
-            <p className="t-text">&quot;For an industrial concrete business, we needed a site showing strength and scale. They delivered a highly professional platform that drives immediate trust.&quot;</p>
-            <div className="t-author">
-              <div className="t-av">ZC</div>
+          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
+            <p className="t-text" style={{ flex: 1 }}>&quot;For an industrial supplier, digital trust is everything. NeoKlyn built an enterprise-grade platform that perfectly handles international RFPs and drives high-value B2B contractors straight into our funnel.&quot;</p>
+            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
+              <div className="t-av" style={{ background: 'var(--blue)', color: '#fff' }}>ZC</div>
               <div>
-                <a href="https://zinadconcreteworks.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{textDecoration: 'none', color: 'inherit'}}>Zinad Concrete Works <span style={{fontSize: '0.8em', color: 'var(--cyan)'}}>↗</span></a>
+                <a href="https://zinadconcreteworks.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{textDecoration: 'none', color: 'inherit'}}>Zinad Concrete Works <span style={{fontSize: '0.8em', color: 'var(--blue)'}}>↗</span></a>
                 <div className="t-loc">Industrial Web · UAE 🇦🇪</div>
               </div>
             </div>
           </div>
 
-          <div className="tcard">
-            <div className="t-stars"><div className="star"></div><div className="star"></div><div className="star"></div><div className="star"></div><div className="star"></div></div>
-            <p className="t-text">&quot;Our travel venture's metrics jumped significantly after our launch. The bespoke UI and striking visual aesthetic they built for us is absolutely world-class.&quot;</p>
-            <div className="t-author">
-              <div className="t-av">TV</div>
+          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
+            <p className="t-text" style={{ flex: 1 }}>&quot;The visual aesthetic is absolutely world-class. Taking our venture online with NeoKlyn resulted in an immediate 110% increase in luxury booking inquiries. Their GSAP 3D animations set us apart globally.&quot;</p>
+            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
+              <div className="t-av" style={{ background: 'var(--cyan)', color: '#000' }}>TV</div>
               <div>
                 <a href="https://travexventures.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{textDecoration: 'none', color: 'inherit'}}>Travex Ventures <span style={{fontSize: '0.8em', color: 'var(--cyan)'}}>↗</span></a>
                 <div className="t-loc">Travel Agency Site · India 🇮🇳</div>
@@ -331,13 +307,13 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="tcard">
-            <div className="t-stars"><div className="star"></div><div className="star"></div><div className="star"></div><div className="star"></div><div className="star"></div></div>
-            <p className="t-text">&quot;We demanded a total digital transformation. The resulting application is incredibly performant, fully responsive, and positions us as modern industry leaders.&quot;</p>
-            <div className="t-author">
-              <div className="t-av">LP</div>
+          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
+            <p className="t-text" style={{ flex: 1 }}>&quot;Total digital transformation. We moved from legacy monolithic systems to a highly performant, serverless Next.js edge network. The results? Zero downtime and an incredibly modern operational interface.&quot;</p>
+            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
+              <div className="t-av" style={{ background: 'var(--violet)', color: '#fff' }}>LP</div>
               <div>
-                <a href="http://lpsmpvtltd.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{textDecoration: 'none', color: 'inherit'}}>LPSM Pvt. Ltd. <span style={{fontSize: '0.8em', color: 'var(--cyan)'}}>↗</span></a>
+                <a href="http://lpsmpvtltd.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{textDecoration: 'none', color: 'inherit'}}>LPSM Pvt. Ltd. <span style={{fontSize: '0.8em', color: 'var(--violet)'}}>↗</span></a>
                 <div className="t-loc">Manufacturing Hub · India 🇮🇳</div>
               </div>
             </div>

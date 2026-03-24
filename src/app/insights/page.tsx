@@ -5,7 +5,8 @@ import PageHeader from "@/components/ui/PageHeader";
 export default function InsightsPage() {
   const posts = [
     {
-      title: "The Architecture of High-Converting 3D Next.js Sites",
+      title: "Scaling Enterprise SaaS: Playbook of a Top Web Development Agency in India",
+      slug: "web-development-agency-india",
       category: "Engineering",
       date: "Oct 24, 2026",
       readTime: "8 min read",
@@ -13,40 +14,45 @@ export default function InsightsPage() {
       color: "var(--cyan)"
     },
     {
-      title: "Startup Product Strategy: Winning In Silicon Valley",
-      category: "Strategy",
+      title: "Deploying AI Agents for Business: Automating Complex Workflows",
+      slug: "ai-agents-for-business",
+      category: "AI & Data",
       date: "Sep 15, 2026",
-      readTime: "5 min read",
-      author: "Priti Sharma",
+      readTime: "6 min read",
+      author: "Rahul Nair",
       color: "var(--violet)"
     },
     {
-      title: "Optimizing AI Latency at the Edge",
-      category: "AI & Data",
+      title: "The Next-Gen Blueprint for Headless Ecommerce Development in the UAE",
+      slug: "ecommerce-development-uae",
+      category: "Ecommerce",
       date: "Aug 02, 2026",
       readTime: "12 min read",
-      author: "Rahul Nair",
+      author: "Priti Sharma",
       color: "var(--blue)"
     },
     {
-      title: "Why Most Ecommerce Transitions to Shopify Fail",
-      category: "Ecommerce",
+      title: "Generative AI Integration: Transforming Legacy Systems in 2026",
+      slug: "generative-ai-integration",
+      category: "AI & Data",
       date: "Jul 18, 2026",
-      readTime: "6 min read",
-      author: "Sarah Davis",
+      readTime: "7 min read",
+      author: "Elena Rostov",
       color: "var(--cyan)"
     },
     {
-      title: "Building Micro-Animations in Framer Motion",
-      category: "Design Systems",
+      title: "Next.js Performance: Why Leading B2B Digital Agencies Switched",
+      slug: "b2b-digital-marketing-agency",
+      category: "Engineering",
       date: "Jun 30, 2026",
-      readTime: "4 min read",
-      author: "Elena Rostov",
+      readTime: "5 min read",
+      author: "Sarah Davis",
       color: "var(--violet)"
     },
     {
-      title: "The Future of WebGL vs WebGPU Performance",
-      category: "Engineering",
+      title: "Global IT Delivery: Synchronizing Hubs Across Dubai, London, and Bangalore",
+      slug: "global-it-hubs",
+      category: "Strategy",
       date: "May 12, 2026",
       readTime: "10 min read",
       author: "Michael Chang",
@@ -67,7 +73,7 @@ export default function InsightsPage() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2.5rem', marginTop: '4rem' }}>
           {posts.map((post, idx) => (
-            <Link href="/insights" key={idx} className="tcard reveal group" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', padding: '3rem 2.5rem', border: '1px solid var(--border)', borderRadius: '16px', background: 'rgba(255,255,255,0.01)', backdropFilter: 'blur(10px)' }}>
+            <Link href={`/insights/${post.slug}`} key={idx} className="tcard reveal group" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', padding: '3rem 2.5rem', border: '1px solid var(--border)', borderRadius: '16px', background: 'rgba(255,255,255,0.01)', backdropFilter: 'blur(10px)' }}>
               {/* Glowing hover effect */}
               <div style={{ position: 'absolute', inset: 0, opacity: 0, background: `radial-gradient(100% 100% at 50% 100%, ${post.color}22 0%, transparent 80%)`, transition: 'opacity 0.3s' }} className="hover-glow"></div>
 
