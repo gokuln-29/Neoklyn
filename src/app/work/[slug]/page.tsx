@@ -6,12 +6,12 @@ import type { Metadata } from "next";
 const caseStudies: Record<string, any> = {
   "dwarka-general-trading": {
     client: "Dwarka General Trading",
-    title: "Digitizing B2B Trade Operations in the UAE",
+    title: "Digitizing B2B Trade Operations in the Middle East",
     category: "B2B Corporate",
-    location: "Dubai, UAE",
+    location: "Middle East",
     color: "var(--cyan)",
     image: "/assets/work/dwarka.jpg",
-    problem: "Dwarka General Trading, a legacy B2B trading house in the UAE, relied on outdated platforms that couldn't scale with their rapidly expanding catalog. Their existing digital infrastructure suffered from poor mobile responsiveness, high latency, and an antiquated user experience that failed to capture high-value enterprise leads.",
+    problem: "Dwarka General Trading, a legacy B2B trading house in the Middle East, relied on outdated platforms that couldn't scale with their rapidly expanding catalog. Their existing digital infrastructure suffered from poor mobile responsiveness, high latency, and an antiquated user experience that failed to capture high-value enterprise leads.",
     solution: "NeoKlyn completely architected a high-performance corporate platform. We mapped out a new UX that prioritized immediate product discovery and corporate credibility. The UI was designed with premium, minimalist aesthetics to establish immediate trust. We migrated their legacy content into a modern headless CMS for instant content delivery.",
     techStack: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Sanity CMS"],
     results: [
@@ -40,7 +40,7 @@ const caseStudies: Record<string, any> = {
     client: "Zinad Concrete Works",
     title: "Establishing Industrial Authority in the Middle East",
     category: "Industrial Web",
-    location: "UAE",
+    location: "Middle East",
     color: "var(--blue)",
     image: "/assets/work/zinad.jpg",
     problem: "Zinad Concrete Works had an invisible digital footprint. Serving massive industrial projects, they needed a platform that projected strength, massive scale, and elite engineering capability to international contractors and government entities.",

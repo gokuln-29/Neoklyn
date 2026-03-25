@@ -12,10 +12,8 @@ export default function MarketsHUD() {
     // Clock
     const updateClock = () => {
       const now = new Date();
-      const h = String(now.getUTCHours()).padStart(2, '0');
-      const m = String(now.getUTCMinutes()).padStart(2, '0');
-      const s = String(now.getUTCSeconds()).padStart(2, '0');
-      setTime(`${h}:${m}:${s}`);
+      const ist = now.toLocaleString('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+      setTime(ist);
     };
     const timer = setInterval(updateClock, 1000);
     updateClock();
@@ -198,7 +196,7 @@ export default function MarketsHUD() {
           <div className="sys-status">
             <div className="status-dot"></div>
             ALL SYSTEMS NOMINAL &nbsp;|&nbsp;
-            <span>{time}</span> &nbsp;UTC
+            <span>{time}</span> &nbsp;IST
           </div>
         </div>
 
@@ -212,11 +210,11 @@ export default function MarketsHUD() {
             </div>
             <div className="radar-region">WORLDWIDE</div>
             <div className="radar-hubs">
-              ◆ New York &nbsp;·&nbsp; ACTIVE<br />
-              ◆ Los Angeles &nbsp;·&nbsp; ACTIVE<br />
               ◆ Toronto &nbsp;·&nbsp; ACTIVE<br />
-              ◆ London &nbsp;·&nbsp; ACTIVE<br />
-              ◆ Berlin &nbsp;·&nbsp; ACTIVE
+              ◆ Mexico City &nbsp;·&nbsp; ACTIVE<br />
+              ◆ Sao Paulo &nbsp;·&nbsp; ACTIVE<br />
+              ◆ Santiago &nbsp;·&nbsp; ACTIVE<br />
+              ◆ Bogota &nbsp;·&nbsp; ACTIVE
             </div>
             <div className="signal-bars">
               {getSignalBarsStyles(8, '#00d4ff').map((style, i) => (
@@ -228,19 +226,19 @@ export default function MarketsHUD() {
             </div>
           </div>
 
-          {/* Middle East */}
+          {/* EMEA */}
           <div className="hud-box radar-panel">
             <div className="hud-label">REGION 02</div>
-            <div className="region-tag tag-me">MIDDLE EAST</div>
+            <div className="region-tag tag-me">EMEA CORE</div>
             <div className="radar-wrap">
               <canvas className="radar-canvas" ref={radarMeRef} width={160} height={160}></canvas>
             </div>
-            <div className="radar-region">DUBAI</div>
+            <div className="radar-region">LONDON</div>
             <div className="radar-hubs">
-              ◆ Dubai &nbsp;·&nbsp; ACTIVE<br />
-              ◆ Abu Dhabi &nbsp;·&nbsp; ACTIVE<br />
-              ◆ Sharjah &nbsp;·&nbsp; ACTIVE<br />
-              ◆ Riyadh &nbsp;·&nbsp; ACTIVE
+              ◆ London &nbsp;·&nbsp; ACTIVE<br />
+              ◆ Berlin &nbsp;·&nbsp; ACTIVE<br />
+              ◆ Paris &nbsp;·&nbsp; ACTIVE<br />
+              ◆ Amsterdam &nbsp;·&nbsp; ACTIVE
             </div>
             <div className="signal-bars">
               {getSignalBarsStyles(7, '#a78bfa').map((style, i) => (

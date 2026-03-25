@@ -8,7 +8,7 @@ export default function WorkPage() {
       title: "Dwarka Gen. Trading",
       slug: "dwarka-general-trading",
       category: "B2B Corporate",
-      location: "UAE",
+      location: "Middle East",
       image: "/assets/work/dwarka.jpg",
       description: "A fast, robust corporate site for trading operations in the Middle East. Scalable architecture with sleek design.",
       color: "var(--cyan)"
@@ -18,7 +18,7 @@ export default function WorkPage() {
       slug: "travex-ventures",
       category: "Travel Agency",
       location: "India",
-      image: "/assets/work/travex.jpg",
+      image: "/assets/work/travex.png",
       description: "A bespoke UI and striking visual aesthetic that jumped metrics significantly post-launch.",
       color: "var(--violet)"
     },
@@ -26,7 +26,7 @@ export default function WorkPage() {
       title: "Zinad Concrete Works",
       slug: "zinad-concrete-works",
       category: "Industrial Web",
-      location: "UAE",
+      location: "Middle East",
       image: "/assets/work/zinad.jpg",
       description: "A highly professional platform showing strength and scale that drives immediate trust for B2B industrial clients.",
       color: "var(--blue)"

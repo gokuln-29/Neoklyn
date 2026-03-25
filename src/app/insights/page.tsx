@@ -1,64 +1,10 @@
 import Link from 'next/link';
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
+import { blogPosts } from '@/data/blogPosts';
 
 export default function InsightsPage() {
-  const posts = [
-    {
-      title: "Scaling Enterprise SaaS: Playbook of a Top Web Development Agency in India",
-      slug: "web-development-agency-india",
-      category: "Engineering",
-      date: "Oct 24, 2026",
-      readTime: "8 min read",
-      author: "Vikaas Dev",
-      color: "var(--cyan)"
-    },
-    {
-      title: "Deploying AI Agents for Business: Automating Complex Workflows",
-      slug: "ai-agents-for-business",
-      category: "AI & Data",
-      date: "Sep 15, 2026",
-      readTime: "6 min read",
-      author: "Rahul Nair",
-      color: "var(--violet)"
-    },
-    {
-      title: "The Next-Gen Blueprint for Headless Ecommerce Development in the UAE",
-      slug: "ecommerce-development-uae",
-      category: "Ecommerce",
-      date: "Aug 02, 2026",
-      readTime: "12 min read",
-      author: "Priti Sharma",
-      color: "var(--blue)"
-    },
-    {
-      title: "Generative AI Integration: Transforming Legacy Systems in 2026",
-      slug: "generative-ai-integration",
-      category: "AI & Data",
-      date: "Jul 18, 2026",
-      readTime: "7 min read",
-      author: "Elena Rostov",
-      color: "var(--cyan)"
-    },
-    {
-      title: "Next.js Performance: Why Leading B2B Digital Agencies Switched",
-      slug: "b2b-digital-marketing-agency",
-      category: "Engineering",
-      date: "Jun 30, 2026",
-      readTime: "5 min read",
-      author: "Sarah Davis",
-      color: "var(--violet)"
-    },
-    {
-      title: "Global IT Delivery: Synchronizing Hubs Across Dubai, London, and Bangalore",
-      slug: "global-it-hubs",
-      category: "Strategy",
-      date: "May 12, 2026",
-      readTime: "10 min read",
-      author: "Michael Chang",
-      color: "var(--blue)"
-    }
-  ];
+  const posts = blogPosts;
 
   return (
     <PageWrapper>

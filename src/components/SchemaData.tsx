@@ -32,12 +32,12 @@ export default function SchemaData() {
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": "NeoKlyn Dubai",
+      "name": "NeoKlyn Singapore",
       "url": "https://neoklyn.com",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Dubai",
-        "addressCountry": "AE"
+        "addressLocality": "Singapore",
+        "addressCountry": "SG"
       }
     },
     {
