@@ -2,15 +2,34 @@ import Link from "next/link";
 import TerminalCode from "@/components/TerminalCode";
 import CTASection from "@/components/CTASection";
 import type { Metadata } from "next";
+import { aggregateRatingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "NeoKlyn | Premium Web & App Development Agency",
-  description: "NeoKlyn is a leading digital agency delivering premium web development, mobile apps, AI solutions, and data-driven marketing strategies for global brands.",
+  title: {
+    absolute: "AI Agency & Web Development Studio — NeoKlyn",
+  },
+  description:
+    "Premium AI agents, web apps, mobile & ecommerce from Bengaluru. Trusted by 100+ global brands. Get a free consultation.",
+  openGraph: {
+    title: "AI Agency & Web Development Studio — NeoKlyn",
+    description:
+      "Premium AI agents, web apps, mobile & ecommerce from Bengaluru. Trusted by 100+ global brands. Get a free consultation.",
+    url: "https://neoklyn.com",
+    siteName: "NeoKlyn",
+    type: "website",
+  },
 };
 
 export default function Home() {
+  const ratingSchema = aggregateRatingSchema();
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ratingSchema) }}
+      />
+
       {/* HERO */}
       <section className="hero">
         <div className="orb orb-1"></div>
@@ -417,7 +436,7 @@ export default function Home() {
 
           <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
             <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
-            <p className="t-text" style={{ flex: 1 }}>&quot;They didn't just rebuild our website; they re-architected our entire B2B trading platform. Our mobile engagement jumped 45% in the first quarter, and the Next.js headless setup means our content team deploys 5x faster.&quot;</p>
+            <p className="t-text" style={{ flex: 1 }}>&quot;They didn&apos;t just rebuild our website; they re-architected our entire B2B trading platform. Our mobile engagement jumped 45% in the first quarter, and the Next.js headless setup means our content team deploys 5x faster.&quot;</p>
             <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
               <div className="t-av" style={{ background: 'var(--cyan)', color: '#000' }}>DG</div>
               <div>

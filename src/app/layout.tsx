@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Effects from "@/components/Effects";
 import SchemaData from "@/components/SchemaData";
+import ChatWidget from "@/components/ChatWidget";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -19,31 +20,27 @@ const jetBrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://neoklyn.com"),
   title: {
-    default: "NeoKlyn — Premium Digital Studio",
+    default: "AI Agency & Web Development Studio — NeoKlyn",
     template: "%s | NeoKlyn",
   },
-  description: "Web apps, mobile, ecommerce, AI Agents, 3D experiences & performance marketing.",
+  description:
+    "Premium AI agents, web apps, mobile & ecommerce from Bengaluru. Trusted by 100+ global brands. Get a free consultation.",
   openGraph: {
-    title: "NeoKlyn | Premium Digital Studio",
-    description: "Web apps, mobile, ecommerce, AI Agents, 3D experiences & performance marketing engineered for scale and growth.",
+    title: "AI Agency & Web Development Studio — NeoKlyn",
+    description:
+      "Premium AI agents, web apps, mobile & ecommerce from Bengaluru. Trusted by 100+ global brands. Get a free consultation.",
     url: "https://neoklyn.com",
     siteName: "NeoKlyn",
-    images: [
-      {
-        url: "/og-image.jpg", // Create a 1200x630 image in public/og-image.jpg
-        width: 1200,
-        height: 630,
-        alt: "NeoKlyn Digital Agency",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "NeoKlyn | Premium Digital Studio",
-    description: "Web apps, mobile, ecommerce, AI Agents, 3D experiences & performance marketing engineered for scale.",
-    images: ["/og-image.jpg"],
+    site: "@neoklyn",
+    creator: "@neoklyn",
+    title: "AI Agency & Web Development Studio — NeoKlyn",
+    description:
+      "Premium AI agents, web apps, mobile & ecommerce from Bengaluru. Trusted by 100+ global brands. Get a free consultation.",
   },
 };
 
@@ -60,6 +57,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <ChatWidget />
       </body>
     </html>
   );

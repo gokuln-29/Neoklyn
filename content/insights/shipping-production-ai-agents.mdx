@@ -1,0 +1,74 @@
+---
+title: "Shipping Production AI Agents with Human-in-the-Loop Controls"
+slug: "shipping-production-ai-agents"
+category: "AI Agents"
+categorySlug: "ai-agents"
+date: "Mar 24, 2026"
+readTime: "9 min read"
+author: "Gokulnath"
+color: "var(--cyan)"
+excerpt: "A practical field guide for moving agent prototypes into reliable production systems with observability, guardrails, and human approvals."
+metaDescription: "Learn how to ship production AI agents with guardrails, observability, and human-in-the-loop approvals using a practical architecture from NeoKlyn."
+primaryKeyword: "production ai agents"
+secondaryKeywords:
+  - "ai agent observability"
+  - "human in the loop ai"
+  - "langchain production"
+outline:
+  - "Prototype vs Production"
+  - "Reference Architecture"
+  - "Guardrails and Safety"
+  - "Human Approval Workflows"
+  - "Observability and Evaluation"
+  - "Rollout Strategy"
+---
+
+Teams usually build a promising demo quickly, then hit a wall when moving to production. The gap is rarely model quality alone. It is usually about safety, reliability, ownership, and operating discipline.
+
+At NeoKlyn, we treat AI agents as operational systems, not demo scripts. That means traceability, deterministic fallbacks, clear escalation paths, and measurable business outcomes.
+
+## Prototype vs Production
+
+Prototype agents optimize for speed. Production agents optimize for trust and control. The shift requires stronger contracts around inputs, outputs, and side effects.
+
+In practice, this means replacing best-effort prompts with typed workflows, introducing state persistence, and adding failure modes that preserve business continuity.
+
+## A Reference Architecture for Agent Workflows
+
+A robust architecture usually includes orchestrator, memory layer, tools, and policy layer. We separate retrieval from action execution so user-facing answers can stay helpful even when action APIs degrade.
+
+```ts
+type AgentDecision = {
+  intent: "answer" | "action" | "escalate";
+  confidence: number;
+  requiredApproval: boolean;
+};
+
+function shouldEscalate(decision: AgentDecision) {
+  return decision.confidence < 0.72 || decision.requiredApproval;
+}
+```
+
+## Guardrails and Safety Controls
+
+Guardrails should exist before, during, and after generation. Input policies block unsafe instructions, runtime policies enforce tool boundaries, and output policies verify formatting, pii rules, and compliance checks.
+
+We also maintain allowlists for mutation actions and require signed intent for sensitive operations such as refunds, pricing updates, or policy overrides.
+
+## Human-in-the-Loop Approvals
+
+For high-impact workflows, approvals are not optional. We route low-confidence or high-risk tasks to domain owners through lightweight review queues.
+
+This keeps throughput high while preserving accountability. Human reviewers should see context, proposed action, and risk reason in one pane, then approve or reject in one click.
+
+## Observability and Evaluation
+
+Without observability, teams cannot debug agent behavior. We capture traces, tool call timelines, latency, token spend, and business outcome tags for every run.
+
+Evaluation should combine offline test sets and online guardrail metrics. A healthy production loop tracks hallucination rate, escalation rate, resolution quality, and cost per successful task.
+
+## Rollout Strategy
+
+We roll out in phases: shadow mode, restricted pilot, controlled expansion, then default path. Each phase has explicit success criteria and rollback conditions.
+
+If you are planning an AI agent rollout, our AI team can help you design an architecture that scales without compromising reliability. Explore our [AI Agents service](/services/ai-agents) and [Generative AI offering](/services/gen-ai).

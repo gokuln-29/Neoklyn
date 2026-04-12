@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-
 // ─── SHARED STYLES ─────────────────────────────────────────────
 const containerStyle: React.CSSProperties = {
   position: 'relative',

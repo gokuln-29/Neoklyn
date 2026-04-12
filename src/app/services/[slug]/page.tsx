@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ServiceHeroAnimation from "@/components/ServiceHeroAnimation";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
 // Local data for all services
 const servicesData = {
@@ -311,50 +312,71 @@ function CapabilityIcon({ name }: { name: string }) {
 
 const servicesMetadata: Record<string, { title: string; description: string }> = {
     web: {
-        title: "Custom Web Development & Design Agency | NeoKlyn",
-        description: "Elevate your digital presence with NeoKlyn's fast, scalable, and secure custom web development services tailored for enterprises and growing startups.",
+        title: "Web Development Agency — React & Next.js",
+        description: "Fast, scalable web apps built with React, Next.js & TypeScript. 99/100 Lighthouse scores guaranteed. Request a free audit.",
     },
     mobile: {
-        title: "iOS & Android Mobile App Development Services | NeoKlyn",
-        description: "Build intuitive, high-performing mobile applications for iOS and Android. NeoKlyn creates seamless mobile experiences that drive user engagement.",
+        title: "Mobile App Development — iOS & Android",
+        description: "Cross-platform & native mobile apps with Flutter, React Native & Swift. From MVP to enterprise scale. Start your project.",
     },
     ecommerce: {
-        title: "High-Converting eCommerce Development Agency | NeoKlyn",
-        description: "Launch scalable, high-converting eCommerce platforms with seamless payment integrations, premium UX design, and conversion rate optimization by NeoKlyn.",
+        title: "Ecommerce Development — Shopify & Headless",
+        description: "High-converting Shopify Plus, WooCommerce & headless commerce stores. 35% avg CR increase. Launch your store with NeoKlyn.",
     },
     marketing: {
-        title: "Data-Driven Digital Marketing & SEO Services | NeoKlyn",
-        description: "Grow your brand and maximize revenue with NeoKlyn's data-driven digital marketing, SEO, and performance-based marketing strategies.",
+        title: "Digital Marketing & SEO Services — NeoKlyn",
+        description: "Data-driven SEO, Google Ads & Meta campaigns with 5x avg ROAS. Grow traffic 300% with NeoKlyn's performance marketing team.",
     },
     "3d": {
-        title: "Immersive 3D Modeling & Animation Studio | NeoKlyn",
-        description: "Bring your ideas to life with NeoKlyn's stunning 3D modeling, product rendering, and interactive web animations that captivate your audience.",
+        title: "3D Websites & WebGL Experiences — NeoKlyn",
+        description: "Immersive 3D product viewers, WebGL animations & scroll-driven storytelling. 60fps on all devices. Explore our 3D portfolio.",
     },
     branding: {
-        title: "Brand Identity, Strategy & Logo Design Services | NeoKlyn",
-        description: "Craft a memorable brand identity with NeoKlyn. From logo design to comprehensive brand strategy, we help you stand out in the crowded digital space.",
+        title: "UI/UX Design & Branding Agency — NeoKlyn",
+        description: "Premium brand identity, Figma design systems & conversion-focused UX. 95% client approval rate. Book a design consultation.",
     },
     "ai-agents": {
-        title: "Custom AI Agents & Business Automation Services | NeoKlyn",
-        description: "Streamline operations and enhance customer experience with NeoKlyn's intelligent, custom AI agents and advanced workflow automation solutions.",
+        title: "Custom AI Agents & Automation — NeoKlyn",
+        description: "Deploy autonomous AI agents to automate workflows, CRM ops & data pipelines. Built with LangChain & GPT. Talk to our AI team.",
     },
     "gen-ai": {
-        title: "Enterprise Generative AI Solutions & Integration | NeoKlyn",
-        description: "Harness the power of Generative AI. NeoKlyn develops custom LLMs and advanced machine learning solutions to completely transform your business processes.",
+        title: "Generative AI Solutions & LLM Integration",
+        description: "Custom LLM integration, generative UI, and predictive AI marketing. Enterprise-grade Gen AI solutions from NeoKlyn. Book a demo.",
     }
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
     const meta = servicesMetadata[slug];
+    const url = `https://neoklyn.com/services/${slug}`;
 
     if (!meta) {
-        return { title: "Service | NeoKlyn" };
+        return {
+            title: {
+                absolute: "Service — NeoKlyn",
+            },
+            openGraph: {
+                title: "Service — NeoKlyn",
+                description: "Explore NeoKlyn's digital services for web, mobile, AI, and growth.",
+                url,
+                siteName: "NeoKlyn",
+                type: "website",
+            },
+        };
     }
 
     return {
-        title: meta.title,
+        title: {
+            absolute: meta.title,
+        },
         description: meta.description,
+        openGraph: {
+            title: meta.title,
+            description: meta.description,
+            url,
+            siteName: "NeoKlyn",
+            type: "website",
+        },
     };
 }
 
@@ -373,29 +395,23 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     }
 
     const meta = servicesMetadata[slug] || { title: service.titleSolid, description: service.description };
-
-    const serviceSchema = {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": meta.title,
-        "provider": {
-            "@type": "Organization",
-            "name": "NeoKlyn",
-            "url": "https://neoklyn.com"
-        },
-        "description": meta.description,
-        "areaServed": [
-            { "@type": "City", "name": "Bangalore" },
-            { "@type": "City", "name": "Singapore" },
-            { "@type": "City", "name": "London" }
-        ]
-    };
+    const serviceName = meta.title.replace(/\s+—\s+NeoKlyn$/, "");
+    const serviceStructuredData = serviceSchema(serviceName, meta.description);
+    const breadcrumbStructuredData = breadcrumbSchema([
+        { name: "Home", url: "https://neoklyn.com" },
+        { name: "Services", url: "https://neoklyn.com/services" },
+        { name: serviceName, url: `https://neoklyn.com/services/${slug}` },
+    ]);
 
     return (
         <PageWrapper>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceStructuredData) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
             />
 
             {/* ─── HERO SECTION ─── */}

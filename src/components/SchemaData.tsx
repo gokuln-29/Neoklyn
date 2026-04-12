@@ -1,69 +1,28 @@
+import { organizationSchema } from "@/lib/schema";
+
 export default function SchemaData() {
-  const organizationSchema = {
+  const websiteSchema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "NeoKlyn",
-    "url": "https://neoklyn.com",
-    "logo": "https://neoklyn.com/logo.png",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "hello@neoklyn.com",
-      "contactType": "customer inquiries"
+    "@type": "WebSite",
+    "@id": "https://neoklyn.com/#website",
+    name: "NeoKlyn",
+    url: "https://neoklyn.com",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://neoklyn.com/insights?query={search_term_string}",
+      "query-input": "required name=search_term_string",
     },
-    "sameAs": [
-      // Add real links later
-      "https://www.linkedin.com/company/neoklyn",
-      "https://twitter.com/neoklyn"
-    ]
   };
 
-  const localBusinessHubs = [
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "NeoKlyn Bangalore",
-      "url": "https://neoklyn.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Bangalore",
-        "addressCountry": "IN"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "NeoKlyn Singapore",
-      "url": "https://neoklyn.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Singapore",
-        "addressCountry": "SG"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "NeoKlyn London",
-      "url": "https://neoklyn.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "London",
-        "addressCountry": "GB"
-      }
-    }
-  ];
+  const schemas = [organizationSchema(), websiteSchema];
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      {localBusinessHubs.map((hub, i) => (
+      {schemas.map((schema, index) => (
         <script
-          key={i}
+          key={index}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(hub) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
     </>

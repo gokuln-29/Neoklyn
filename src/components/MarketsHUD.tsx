@@ -19,7 +19,7 @@ export default function MarketsHUD() {
     updateClock();
 
     // Radar Logic
-    let animationFrames: number[] = [];
+    const animationFrames: number[] = [];
 
     const buildRadar = (
       canvas: HTMLCanvasElement, 

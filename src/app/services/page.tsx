@@ -1,6 +1,21 @@
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Digital Services — AI, Web, Mobile & More",
+    description:
+        "Explore NeoKlyn's full-stack services: AI agents, web dev, mobile apps, ecommerce, 3D, marketing & UI/UX. Start your project today.",
+    openGraph: {
+        title: "Digital Services — AI, Web, Mobile & More | NeoKlyn",
+        description:
+            "Explore NeoKlyn's full-stack services: AI agents, web dev, mobile apps, ecommerce, 3D, marketing & UI/UX. Start your project today.",
+        url: "https://neoklyn.com/services",
+        siteName: "NeoKlyn",
+        type: "website",
+    },
+};
 
 export default function ServicesPage() {
     return (

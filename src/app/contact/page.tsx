@@ -85,7 +85,7 @@ const CONTACT_CHANNELS = [
         label: 'Email',
         value: 'hello.neoklyn@gmail.com',
         href: 'mailto:hello.neoklyn@gmail.com',
-        badge: '< 24 hr Reply',
+        badge: '< 4 hr Reply',
         badgeColor: '#a78bfa',
         icon: (
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -98,6 +98,139 @@ const CONTACT_CHANNELS = [
         border: 'rgba(167, 139, 250, 0.2)',
     },
 ];
+
+type CurrencyCode = 'USD' | 'INR' | 'GBP' | 'AED' | 'SGD';
+
+type CurrencyOption = {
+    value: string;
+    label: string;
+};
+
+const SERVICE_OPTIONS = [
+    'Web Dev',
+    'Mobile App',
+    'AI Agents',
+    'Gen AI',
+    'Ecommerce',
+    '3D/WebGL',
+    'Digital Marketing',
+    'UI/UX Design',
+];
+
+const CURRENCY_OPTIONS: Record<CurrencyCode, { label: string; flag: string; ranges: CurrencyOption[] }> = {
+    USD: {
+        label: 'USD',
+        flag: '🇺🇸',
+        ranges: [
+            { value: 'not-sure', label: "Not sure yet — let's talk" },
+            { value: '$5K-$15K', label: '$5K - $15K' },
+            { value: '$15K-$30K', label: '$15K - $30K' },
+            { value: '$30K-$50K', label: '$30K - $50K' },
+            { value: '$50K+', label: '$50K+' },
+        ],
+    },
+    INR: {
+        label: 'INR',
+        flag: '🇮🇳',
+        ranges: [
+            { value: 'not-sure', label: "Not sure yet — let's talk" },
+            { value: '₹5L-₹15L', label: '₹5L - ₹15L' },
+            { value: '₹15L-₹30L', label: '₹15L - ₹30L' },
+            { value: '₹30L-₹50L', label: '₹30L - ₹50L' },
+            { value: '₹50L+', label: '₹50L+' },
+        ],
+    },
+    GBP: {
+        label: 'GBP',
+        flag: '🇬🇧',
+        ranges: [
+            { value: 'not-sure', label: "Not sure yet — let's talk" },
+            { value: '£5K-£15K', label: '£5K - £15K' },
+            { value: '£15K-£30K', label: '£15K - £30K' },
+            { value: '£30K-£50K', label: '£30K - £50K' },
+            { value: '£50K+', label: '£50K+' },
+        ],
+    },
+    AED: {
+        label: 'AED',
+        flag: '🇦🇪',
+        ranges: [
+            { value: 'not-sure', label: "Not sure yet — let's talk" },
+            { value: 'AED 20K-50K', label: 'AED 20K - 50K' },
+            { value: 'AED 50K-100K', label: 'AED 50K - 100K' },
+            { value: 'AED 100K-200K', label: 'AED 100K - 200K' },
+            { value: 'AED 200K+', label: 'AED 200K+' },
+        ],
+    },
+    SGD: {
+        label: 'SGD',
+        flag: '🇸🇬',
+        ranges: [
+            { value: 'not-sure', label: "Not sure yet — let's talk" },
+            { value: 'S$7K-S$20K', label: 'S$7K - S$20K' },
+            { value: 'S$20K-S$40K', label: 'S$20K - S$40K' },
+            { value: 'S$40K-S$70K', label: 'S$40K - S$70K' },
+            { value: 'S$70K+', label: 'S$70K+' },
+        ],
+    },
+};
+
+function detectCurrencyFromCountry(countryCode: string): CurrencyCode {
+    switch (countryCode) {
+        case 'IN':
+            return 'INR';
+        case 'GB':
+            return 'GBP';
+        case 'AE':
+            return 'AED';
+        case 'SG':
+            return 'SGD';
+        default:
+            return 'USD';
+    }
+}
+
+function countryCodeToFlag(code: string) {
+    if (!code || code.length !== 2) return '🌍';
+    return code
+        .toUpperCase()
+        .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)));
+}
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const ALLOWED_FILE_TYPES = [
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+];
+
+function validateName(name: string) {
+    if (!name.trim()) return 'Name is required.';
+    if (name.trim().length < 2) return 'Name should be at least 2 characters.';
+    return '';
+}
+
+function validateEmail(email: string) {
+    if (!email.trim()) return 'Business email is required.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return 'Enter a valid email address.';
+    return '';
+}
+
+function validateDetails(details: string) {
+    if (!details.trim()) return 'Project details are required.';
+    if (details.trim().length < 20) return 'Please share at least 20 characters about your project.';
+    return '';
+}
+
+function validateBriefFile(file: File) {
+    if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+        return 'Only PDF, DOC, or DOCX files are allowed.';
+    }
+    if (file.size > MAX_FILE_SIZE) {
+        return 'File size should be 5MB or less.';
+    }
+    return '';
+}
 
 /* ───────────────────────────────────────────
    Canvas animated background
@@ -264,39 +397,153 @@ function AnimatedBackground() {
 export default function ContactPage() {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [formData, setFormData] = useState({
-        name: '', email: '', company: '', budget: '', service: '', details: ''
+        name: '', email: '', company: '', budget: '', services: [] as string[], details: ''
     });
+    const [submittedEmail, setSubmittedEmail] = useState('');
     const [focusedField, setFocusedField] = useState<string | null>(null);
+    const [currency, setCurrency] = useState<CurrencyCode>('USD');
+    const [detectedCountry, setDetectedCountry] = useState({ code: 'US', name: 'United States', flag: '🇺🇸' });
+    const [isGeoLoading, setIsGeoLoading] = useState(true);
+    const [briefFile, setBriefFile] = useState<File | null>(null);
+    const [fileError, setFileError] = useState('');
+    const [isDragOver, setIsDragOver] = useState(false);
+    const [touched, setTouched] = useState({ name: false, email: false, details: false });
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        async function detectGeo() {
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                if (!res.ok) throw new Error('Geo lookup failed');
+                const data = await res.json() as { country_code?: string; country_name?: string };
+                if (!isMounted) return;
+                const countryCode = (data.country_code || 'US').toUpperCase();
+                const nextCurrency = detectCurrencyFromCountry(countryCode);
+                setCurrency(nextCurrency);
+                setDetectedCountry({
+                    code: countryCode,
+                    name: data.country_name || 'Detected Region',
+                    flag: countryCodeToFlag(countryCode),
+                });
+            } catch {
+                if (!isMounted) return;
+                setCurrency('USD');
+                setDetectedCountry({ code: 'US', name: 'Global', flag: '🌍' });
+            } finally {
+                if (isMounted) setIsGeoLoading(false);
+            }
+        }
+
+        detectGeo();
+        return () => {
+            isMounted = false;
+        };
+    }, []);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
 
+    function handleCurrencyChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        const nextCurrency = e.target.value as CurrencyCode;
+        setCurrency(nextCurrency);
+        setFormData(prev => ({ ...prev, budget: '' }));
+    }
+
+    function handleServiceToggle(service: string) {
+        setFormData(prev => {
+            const isSelected = prev.services.includes(service);
+            return {
+                ...prev,
+                services: isSelected
+                    ? prev.services.filter((item) => item !== service)
+                    : [...prev.services, service],
+            };
+        });
+    }
+
+    function setTouchedField(field: 'name' | 'email' | 'details') {
+        setTouched(prev => ({ ...prev, [field]: true }));
+    }
+
+    function handleBriefFile(file: File | null) {
+        if (!file) {
+            setBriefFile(null);
+            setFileError('');
+            return;
+        }
+
+        const validationError = validateBriefFile(file);
+        if (validationError) {
+            setBriefFile(null);
+            setFileError(validationError);
+            return;
+        }
+
+        setBriefFile(file);
+        setFileError('');
+    }
+
+    const validationErrors = {
+        name: validateName(formData.name),
+        email: validateEmail(formData.email),
+        details: validateDetails(formData.details),
+    };
+
+    const isFormValid = !validationErrors.name && !validationErrors.email && !validationErrors.details;
+
+    function resetInquiryForm() {
+        setStatus('idle');
+        setFormData({ name: '', email: '', company: '', budget: '', services: [], details: '' });
+        setBriefFile(null);
+        setFileError('');
+        setTouched({ name: false, email: false, details: false });
+    }
+
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        setTouched({ name: true, email: true, details: true });
+        if (!isFormValid || fileError) return;
+
         setStatus('loading');
+
         try {
-            // Sending form data directly to the requested email without touching a node server
+            const selectedBudget = CURRENCY_OPTIONS[currency].ranges.find((range) => range.value === formData.budget)?.label;
+            const payload = new FormData();
+            payload.append('_subject', `New Enterprise Inquiry from ${formData.name}`);
+            payload.append('name', formData.name.trim());
+            payload.append('email', formData.email.trim());
+            payload.append('company', formData.company.trim() || 'Not specified');
+            payload.append('country', `${detectedCountry.flag} ${detectedCountry.name} (${detectedCountry.code})`);
+            payload.append('currency', currency);
+            payload.append('budget', selectedBudget || 'Not specified');
+            payload.append('services', formData.services.length ? formData.services.join(', ') : 'Not specified');
+            payload.append('details', formData.details.trim());
+            payload.append('_template', 'box');
+            payload.append('_captcha', 'false');
+
+            if (briefFile) {
+                payload.append('attachment', briefFile);
+                payload.append('attachment_note', 'File attached via contact intake form');
+            }
+
             const res = await fetch('https://formsubmit.co/ajax/hello.neoklyn@gmail.com', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify({
-                    _subject: `New Enterprise Inquiry from ${formData.name}`,
-                    name: formData.name,
-                    email: formData.email,
-                    company: formData.company || 'Not specified',
-                    budget: formData.budget || 'Not specified',
-                    service: formData.service || 'Not specified',
-                    details: formData.details,
-                    _template: 'box' // Beautiful email template
-                }),
+                body: payload,
             });
+
             if (res.ok) {
+                setSubmittedEmail(formData.email.trim());
                 setStatus('success');
-                setFormData({ name: '', email: '', company: '', budget: '', service: '', details: '' });
+                setFormData({ name: '', email: '', company: '', budget: '', services: [], details: '' });
+                setBriefFile(null);
+                setFileError('');
+                setTouched({ name: false, email: false, details: false });
             } else {
                 setStatus('error');
             }
@@ -320,7 +567,7 @@ export default function ContactPage() {
                     titleOutline="LET'S"
                     titleSolid="BUILD"
                     titleColorClass="title-cyan"
-                    description="We partner with ambitious companies to solve complex engineering and design problems. Fill out the intake form and a partner will reach out within 24 hours."
+                    description="We partner with ambitious companies to solve complex engineering and design problems. Fill out the intake form and a partner will reach out within 4 hours."
                 />
 
                 <div className="reveal contact-root">
@@ -330,7 +577,7 @@ export default function ContactPage() {
 
                         {/* Quick-connect channels */}
                         <div className="channels-section">
-                            <p className="section-eyebrow">// reach us directly</p>
+                            <p className="section-eyebrow">{"// reach us directly"}</p>
                             <div className="channels-grid">
                                 {CONTACT_CHANNELS.map(ch => (
                                     <a
@@ -361,7 +608,7 @@ export default function ContactPage() {
 
                         {/* Social links */}
                         <div className="social-section">
-                            <p className="section-eyebrow">// follow our work</p>
+                            <p className="section-eyebrow">{"// follow our work"}</p>
                             <div className="social-grid">
                                 {SOCIAL_LINKS.map(s => (
                                     <a key={s.label} href={s.href} target="_blank" rel="noreferrer"
@@ -392,25 +639,51 @@ export default function ContactPage() {
                         <div style={{ position: 'relative', zIndex: 1 }}>
                             {status === 'success' ? (
                                 <div className="success-state">
+                                    <div className="success-confetti" aria-hidden="true">
+                                        {Array.from({ length: 14 }).map((_, i) => (
+                                            <span
+                                                key={i}
+                                                className="confetti-piece"
+                                                style={{
+                                                    left: `${6 + i * 6.4}%`,
+                                                    animationDelay: `${i * 0.09}s`,
+                                                    background: i % 3 === 0 ? 'var(--cyan)' : i % 3 === 1 ? '#8b5cf6' : '#3b82f6',
+                                                } as React.CSSProperties}
+                                            />
+                                        ))}
+                                    </div>
+
                                     <div className="success-icon">
                                         <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                             <polyline points="20 6 9 17 4 12" />
                                         </svg>
                                     </div>
+
                                     <h3 className="success-title">Inquiry <span className="title-cyan">Received</span></h3>
                                     <p className="success-body">
                                         Project details logged. A partner will contact{' '}
-                                        <strong style={{ color: 'var(--white)' }}>{formData.email || 'your email'}</strong>{' '}
-                                        within 24 hours.
+                                        <strong style={{ color: 'var(--white)' }}>{submittedEmail || 'your email'}</strong>{' '}
+                                        within 4 hours.
                                     </p>
-                                    <button className="btn-main submit-btn" onClick={() => setStatus('idle')}>
-                                        New Inquiry ↗
-                                    </button>
+
+                                    <div className="success-actions">
+                                        <a
+                                            href="https://wa.me/916380202766?text=Hi%20NeoKlyn%2C%20I%20just%20submitted%20the%20inquiry%20form"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="btn-ghost success-wa"
+                                        >
+                                            Continue on WhatsApp ↗
+                                        </a>
+                                        <button className="btn-main submit-btn" onClick={resetInquiryForm}>
+                                            Start New Inquiry ↗
+                                        </button>
+                                    </div>
                                 </div>
                             ) : (
                                 <>
                                     <div className="form-header">
-                                        <span className="form-tag">// intake_form.tsx</span>
+                                        <span className="form-tag">{"// intake_form.tsx"}</span>
                                         <h3 className="form-title">Start a Conversation</h3>
                                         <p className="form-subtitle">Discuss your project directly with our technical leadership.</p>
                                     </div>
@@ -420,22 +693,41 @@ export default function ContactPage() {
                                             <div className={`form-group ${focusedField === 'name' ? 'focused' : ''}`}>
                                                 <label>Full Name <span className="req">*</span></label>
                                                 <input
-                                                    type="text" name="name" placeholder="John Doe"
-                                                    value={formData.name} onChange={handleChange} className="c-input"
-                                                    required disabled={status === 'loading'}
+                                                    type="text"
+                                                    name="name"
+                                                    placeholder="John Doe"
+                                                    value={formData.name}
+                                                    onChange={handleChange}
+                                                    className={`c-input ${touched.name && validationErrors.name ? 'c-input-invalid' : ''}`}
+                                                    required
+                                                    disabled={status === 'loading'}
                                                     onFocus={() => setFocusedField('name')}
-                                                    onBlur={() => setFocusedField(null)}
+                                                    onBlur={() => {
+                                                        setFocusedField(null);
+                                                        setTouchedField('name');
+                                                    }}
                                                 />
+                                                {touched.name && validationErrors.name && <span className="field-error">{validationErrors.name}</span>}
                                             </div>
+
                                             <div className={`form-group ${focusedField === 'email' ? 'focused' : ''}`}>
                                                 <label>Business Email <span className="req">*</span></label>
                                                 <input
-                                                    type="email" name="email" placeholder="john@company.com"
-                                                    value={formData.email} onChange={handleChange} className="c-input"
-                                                    required disabled={status === 'loading'}
+                                                    type="email"
+                                                    name="email"
+                                                    placeholder="john@company.com"
+                                                    value={formData.email}
+                                                    onChange={handleChange}
+                                                    className={`c-input ${touched.email && validationErrors.email ? 'c-input-invalid' : ''}`}
+                                                    required
+                                                    disabled={status === 'loading'}
                                                     onFocus={() => setFocusedField('email')}
-                                                    onBlur={() => setFocusedField(null)}
+                                                    onBlur={() => {
+                                                        setFocusedField(null);
+                                                        setTouchedField('email');
+                                                    }}
                                                 />
+                                                {touched.email && validationErrors.email && <span className="field-error">{validationErrors.email}</span>}
                                             </div>
                                         </div>
 
@@ -443,59 +735,156 @@ export default function ContactPage() {
                                             <div className={`form-group ${focusedField === 'company' ? 'focused' : ''}`}>
                                                 <label>Company</label>
                                                 <input
-                                                    type="text" name="company" placeholder="Acme Corp"
-                                                    value={formData.company} onChange={handleChange} className="c-input"
+                                                    type="text"
+                                                    name="company"
+                                                    placeholder="Acme Corp"
+                                                    value={formData.company}
+                                                    onChange={handleChange}
+                                                    className="c-input"
                                                     disabled={status === 'loading'}
                                                     onFocus={() => setFocusedField('company')}
                                                     onBlur={() => setFocusedField(null)}
                                                 />
                                             </div>
+
                                             <div className={`form-group ${focusedField === 'budget' ? 'focused' : ''}`}>
-                                                <label>Budget Range</label>
-                                                <div className="select-wrapper">
-                                                    <select
-                                                        name="budget" value={formData.budget} onChange={handleChange}
-                                                        className="c-input c-select" disabled={status === 'loading'}
-                                                        onFocus={() => setFocusedField('budget')}
-                                                        onBlur={() => setFocusedField(null)}
-                                                    >
-                                                        <option value="">Select Range</option>
-                                                        <option value="5L-15L">₹50K – ₹1.5L</option>
-                                                        <option value="15L-30L">₹1.5L – ₹3L</option>
-                                                        <option value="30L-50L">₹3L – ₹5L</option>
-                                                        <option value="50L+">₹5L+</option>
-                                                    </select>
-                                                    <svg className="select-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
+                                                <label>
+                                                    Budget Range
+                                                    <span className="geo-badge" title={detectedCountry.name}>
+                                                        {isGeoLoading ? 'Detecting region…' : `${detectedCountry.flag} ${detectedCountry.code}`}
+                                                    </span>
+                                                </label>
+
+                                                <div className="budget-controls">
+                                                    <div className="select-wrapper currency-select-wrap">
+                                                        <select
+                                                            className="c-input c-select currency-select"
+                                                            value={currency}
+                                                            onChange={handleCurrencyChange}
+                                                            disabled={status === 'loading'}
+                                                        >
+                                                            {(Object.keys(CURRENCY_OPTIONS) as CurrencyCode[]).map((code) => (
+                                                                <option key={code} value={code}>
+                                                                    {CURRENCY_OPTIONS[code].flag} {CURRENCY_OPTIONS[code].label}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                        <svg className="select-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
+                                                    </div>
+
+                                                    <div className="select-wrapper budget-select-wrap">
+                                                        <select
+                                                            name="budget"
+                                                            value={formData.budget}
+                                                            onChange={handleChange}
+                                                            className="c-input c-select"
+                                                            disabled={status === 'loading'}
+                                                            onFocus={() => setFocusedField('budget')}
+                                                            onBlur={() => setFocusedField(null)}
+                                                        >
+                                                            <option value="">Select Range</option>
+                                                            {CURRENCY_OPTIONS[currency].ranges.map((range) => (
+                                                                <option key={range.value} value={range.value}>
+                                                                    {range.label}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                        <svg className="select-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div className="form-group">
-                                            <label>Service Type</label>
+                                            <label>Service Type (Multi-select)</label>
                                             <div className="chip-group">
-                                                {['Web Dev', 'Mobile App', 'UI/UX Design', 'System Architecture', 'AI Integration', 'Consulting'].map(s => (
+                                                {SERVICE_OPTIONS.map((service) => (
                                                     <button
-                                                        key={s} type="button"
-                                                        className={`chip ${formData.service === s ? 'chip-active' : ''}`}
-                                                        onClick={() => setFormData(p => ({ ...p, service: p.service === s ? '' : s }))}
+                                                        key={service}
+                                                        type="button"
+                                                        className={`chip ${formData.services.includes(service) ? 'chip-active' : ''}`}
+                                                        onClick={() => handleServiceToggle(service)}
                                                         disabled={status === 'loading'}
                                                     >
-                                                        {s}
+                                                        {service}
                                                     </button>
                                                 ))}
                                             </div>
                                         </div>
 
+                                        <div className="form-group">
+                                            <label>Attach Brief (PDF/DOC, max 5MB)</label>
+                                            <input
+                                                ref={fileInputRef}
+                                                type="file"
+                                                accept=".pdf,.doc,.docx"
+                                                style={{ display: 'none' }}
+                                                onChange={(e) => handleBriefFile(e.target.files?.[0] || null)}
+                                                disabled={status === 'loading'}
+                                            />
+
+                                            <div
+                                                className={`file-dropzone ${isDragOver ? 'drag-over' : ''} ${briefFile ? 'has-file' : ''}`}
+                                                onDragOver={(e) => {
+                                                    e.preventDefault();
+                                                    setIsDragOver(true);
+                                                }}
+                                                onDragLeave={(e) => {
+                                                    e.preventDefault();
+                                                    setIsDragOver(false);
+                                                }}
+                                                onDrop={(e) => {
+                                                    e.preventDefault();
+                                                    setIsDragOver(false);
+                                                    const droppedFile = e.dataTransfer.files?.[0] || null;
+                                                    handleBriefFile(droppedFile);
+                                                }}
+                                                onClick={() => fileInputRef.current?.click()}
+                                            >
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><path d="M12 18v-6" /><path d="M9 15l3-3 3 3" /></svg>
+                                                <div>
+                                                    <p>{briefFile ? 'Replace your attached file' : 'Drag & drop your brief here, or click to upload'}</p>
+                                                    <span>PDF, DOC, DOCX up to 5MB</span>
+                                                </div>
+                                            </div>
+
+                                            {briefFile && (
+                                                <div className="file-chip">
+                                                    <span>{briefFile.name}</span>
+                                                    <button
+                                                        type="button"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleBriefFile(null);
+                                                            if (fileInputRef.current) fileInputRef.current.value = '';
+                                                        }}
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            )}
+                                            {fileError && <span className="field-error">{fileError}</span>}
+                                        </div>
+
                                         <div className={`form-group ${focusedField === 'details' ? 'focused' : ''}`}>
                                             <label>Project Details <span className="req">*</span></label>
                                             <textarea
-                                                name="details" placeholder="Scope, timeline, core objectives, tech stack preferences..."
-                                                value={formData.details} onChange={handleChange} className="c-input"
-                                                style={{ minHeight: '150px', resize: 'vertical' }} required disabled={status === 'loading'}
+                                                name="details"
+                                                placeholder="Scope, timeline, core objectives, tech stack preferences..."
+                                                value={formData.details}
+                                                onChange={handleChange}
+                                                className={`c-input ${touched.details && validationErrors.details ? 'c-input-invalid' : ''}`}
+                                                style={{ minHeight: '150px', resize: 'vertical' }}
+                                                required
+                                                disabled={status === 'loading'}
                                                 onFocus={() => setFocusedField('details')}
-                                                onBlur={() => setFocusedField(null)}
+                                                onBlur={() => {
+                                                    setFocusedField(null);
+                                                    setTouchedField('details');
+                                                }}
                                             />
                                             <span className="char-count">{formData.details.length} chars</span>
+                                            {touched.details && validationErrors.details && <span className="field-error">{validationErrors.details}</span>}
                                         </div>
 
                                         {status === 'error' && (
@@ -506,7 +895,7 @@ export default function ContactPage() {
                                             </div>
                                         )}
 
-                                        <button type="submit" className="btn-main submit-btn" disabled={status === 'loading'}>
+                                        <button type="submit" className="btn-main submit-btn" disabled={status === 'loading' || !isFormValid || !!fileError}>
                                             {status === 'loading' ? (
                                                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ animation: 'spin 0.8s linear infinite' }}>
@@ -722,9 +1111,27 @@ export default function ContactPage() {
                 font-size: 0.67rem; color: var(--muted);
                 text-transform: uppercase; letter-spacing: 0.07em;
                 transition: color 0.2s ease;
+                display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
             }
             .form-group.focused label { color: var(--cyan); }
             .req { color: var(--cyan); }
+
+            .geo-badge {
+                font-size: 0.57rem;
+                color: var(--cyan);
+                border: 1px solid rgba(6,182,212,0.3);
+                border-radius: 999px;
+                padding: 0.18rem 0.45rem;
+                text-transform: none;
+                letter-spacing: 0.02em;
+                white-space: nowrap;
+            }
+
+            .field-error {
+                color: #f87171;
+                font-size: 0.73rem;
+                line-height: 1.45;
+            }
 
             .c-input {
                 background: rgba(255,255,255,0.03);
@@ -741,10 +1148,27 @@ export default function ContactPage() {
                 background: rgba(6,182,212,0.03);
                 box-shadow: 0 0 0 3px rgba(6,182,212,0.07);
             }
+            .c-input-invalid {
+                border-color: rgba(248,113,113,0.6) !important;
+                box-shadow: 0 0 0 3px rgba(248,113,113,0.12) !important;
+            }
             .select-wrapper { position: relative; display: flex; align-items: center; }
             .c-select { appearance: none; width: 100%; color: var(--dim); cursor: pointer; }
             .c-select option { background: var(--bg); color: var(--white); }
             .select-icon { position: absolute; right: 1rem; pointer-events: none; color: var(--muted); }
+
+            .budget-controls {
+                display: grid;
+                grid-template-columns: 150px 1fr;
+                gap: 0.65rem;
+            }
+            .currency-select-wrap .currency-select {
+                font-size: 0.8rem;
+                padding-right: 2rem;
+            }
+            .budget-select-wrap .c-select {
+                font-size: 0.85rem;
+            }
 
             /* ── Chips ── */
             .chip-group { display: flex; flex-wrap: wrap; gap: 0.45rem; }
@@ -760,6 +1184,65 @@ export default function ContactPage() {
                 border-color: var(--cyan) !important;
                 background: rgba(6,182,212,0.1) !important;
                 color: var(--cyan) !important;
+            }
+
+            .file-dropzone {
+                border: 1px dashed rgba(255,255,255,0.2);
+                border-radius: 11px;
+                padding: 0.95rem 1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                color: var(--muted);
+                cursor: pointer;
+                background: rgba(255,255,255,0.015);
+                transition: all 0.22s ease;
+            }
+            .file-dropzone p {
+                margin: 0;
+                color: rgba(255,255,255,0.78);
+                font-size: 0.84rem;
+            }
+            .file-dropzone span {
+                font-size: 0.71rem;
+                color: var(--dim);
+            }
+            .file-dropzone:hover,
+            .file-dropzone.drag-over {
+                border-color: rgba(6,182,212,0.55);
+                background: rgba(6,182,212,0.06);
+            }
+            .file-dropzone.has-file {
+                border-style: solid;
+                border-color: rgba(6,182,212,0.45);
+            }
+
+            .file-chip {
+                margin-top: 0.6rem;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.35rem 0.65rem;
+                border-radius: 999px;
+                border: 1px solid rgba(6,182,212,0.26);
+                background: rgba(6,182,212,0.08);
+                font-size: 0.72rem;
+                color: var(--white);
+                max-width: 100%;
+            }
+            .file-chip span {
+                max-width: 320px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .file-chip button {
+                border: none;
+                background: transparent;
+                color: #fca5a5;
+                font-size: 0.7rem;
+                cursor: pointer;
+                padding: 0;
             }
 
             .char-count {
@@ -796,6 +1279,27 @@ export default function ContactPage() {
             .success-state {
                 display: flex; flex-direction: column; align-items: center;
                 text-align: center; padding: 4rem 1rem; gap: 1.5rem;
+                position: relative;
+                overflow: hidden;
+            }
+            .success-confetti {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+            }
+            .confetti-piece {
+                position: absolute;
+                top: -8px;
+                width: 8px;
+                height: 16px;
+                border-radius: 2px;
+                opacity: 0;
+                animation: confetti-fall 1.9s ease-in forwards;
+            }
+            @keyframes confetti-fall {
+                0% { transform: translateY(-12px) rotate(0deg); opacity: 0; }
+                15% { opacity: 0.95; }
+                100% { transform: translateY(220px) rotate(220deg); opacity: 0; }
             }
             .success-icon {
                 width: 70px; height: 70px; border-radius: 50%;
@@ -810,6 +1314,32 @@ export default function ContactPage() {
             }
             .success-title { font-size: 2rem; font-weight: 500; margin: 0; }
             .success-body  { color: var(--muted); font-size: 0.92rem; line-height: 1.7; max-width: 350px; margin: 0; }
+            .success-actions {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.7rem;
+            }
+            .success-actions .submit-btn {
+                width: auto;
+                min-width: 210px;
+            }
+            .success-wa {
+                border: 1px solid rgba(6,182,212,0.35);
+                background: rgba(6,182,212,0.06);
+                color: var(--cyan);
+                border-radius: 10px;
+                padding: 0.88rem 1.1rem;
+                text-decoration: none;
+                font-size: 0.84rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .success-wa:hover {
+                border-color: rgba(6,182,212,0.7);
+                transform: translateY(-1px);
+            }
 
             @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -823,6 +1353,7 @@ export default function ContactPage() {
                 .contact-left { grid-template-columns: 1fr; }
                 .contact-form-container { padding: 2.5rem 1.5rem; }
                 .form-row { flex-direction: column; gap: 1.7rem; }
+                .budget-controls { grid-template-columns: 1fr; }
             }
             @media(max-width: 480px) {
                 .channel-badge { display: none; }
