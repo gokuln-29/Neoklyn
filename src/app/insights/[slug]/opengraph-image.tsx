@@ -37,7 +37,7 @@ export async function generateImageMetadata({ params }: Props) {
   ];
 }
 
-export default async function OpenGraphImage({ params }: Props) {
+export default async function OpenGraphImage({ id, params }: { id: string } & Props) {
   const { slug } = await params;
   const insight = await getInsightBySlug(slug);
   const post = insight?.post;

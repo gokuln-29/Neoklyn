@@ -80,6 +80,7 @@ export async function generateImageMetadata({ params }: Props) {
 
   return [
     {
+      id: "main",
       alt: `${data.name} by NeoKlyn`,
       size,
       contentType,
@@ -87,7 +88,7 @@ export async function generateImageMetadata({ params }: Props) {
   ];
 }
 
-export default async function OpenGraphImage({ params }: Props) {
+export default async function OpenGraphImage({ id, params }: { id: string } & Props) {
   const { slug } = await params;
   const data = serviceOgData[slug] ?? {
     name: "DIGITAL SERVICE",
