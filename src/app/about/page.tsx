@@ -69,37 +69,39 @@ const values = [
   },
 ];
 
-const teamMembers = [
+type TeamMember = {
+  name: string;
+  role: string;
+  bio: string;
+  photo?: string | null;
+  linkedin?: string | null;
+  x?: string | null;
+};
+
+const teamMembers: TeamMember[] = [
   {
-    name: "Aarav Menon",
-    role: "Engineering Lead",
-    bio: "Owns architecture and delivery quality across platform engagements.",
-    linkedin: "https://linkedin.com",
+    name: "Monisha",
+    role: "Founder & CEO",
+    bio: "Monisha is the Founder & CEO of NeoKlyn, a digital product studio focused on building high-performance websites, scalable applications, and conversion-driven platforms. She combines design thinking with modern development to create digital systems that not only look premium but also deliver measurable business results.",
+    photo: "/assets/monisha.png",
+    linkedin: "https://www.linkedin.com/in/gokul-n-1b60713a9/",
+    x: "https://x.com/neoklyn",
   },
   {
-    name: "Maya Krishnan",
-    role: "Product Designer",
-    bio: "Designs conversion-focused user journeys for complex digital products.",
-    linkedin: "https://linkedin.com",
-  },
-  {
-    name: "Ishaan Roy",
-    role: "AI Solutions Engineer",
-    bio: "Builds agentic workflows, RAG systems, and enterprise AI interfaces.",
-    linkedin: "https://linkedin.com",
-  },
-  {
-    name: "Neha Das",
-    role: "Client Strategy Manager",
-    bio: "Translates business goals into execution plans and measurable outcomes.",
-    linkedin: "https://linkedin.com",
+    name: "Gokulnath",
+    role: "Senior Developer",
+    bio: "Gokul is a Senior Developer at NeoKlyn with expertise in building scalable web architectures and AI-integrated systems. He leads the engineering efforts to ensure every product is built with performance, security, and enterprise-grade reliability.",
+    photo: "/assets/gokulnath.png",
+    linkedin: "https://www.linkedin.com/in/gokul-n-1b60713a9/",
+    x: "https://x.com/neoklyn",
   },
 ];
 
+
 const globalPresence = [
   { city: "Bengaluru", flag: "🇮🇳", label: "Headquarters" },
-  { city: "United Kingdom", flag: "🇬🇧", label: "Europe Operations" },
-  { city: "Singapore", flag: "🇸🇬", label: "APAC Operations" },
+  { city: "World Wide", flag: "🌎", label: "Global Operations" },
+  { city: "Anywhere", flag: "✨", label: "Perfect Execution" },
 ];
 
 export default function AboutPage() {
@@ -117,7 +119,16 @@ export default function AboutPage() {
         <div className="about-story reveal">
           <h3>Founding Story</h3>
           <p>
-            NeoKlyn started in Bengaluru with one simple belief: ambitious businesses deserve digital partners who care as much about execution quality as they do about ideas. Replace this placeholder with your founding journey, key inflection points, and what shaped your approach to engineering, design, and client partnerships.
+            NeoKlyn was founded with a clear vision — to bridge the gap between design, technology, and business performance.
+          </p>
+          <p style={{ marginTop: "1rem" }}>
+            What started as a small initiative focused on building modern websites quickly evolved into a full-service digital studio. Early projects revealed a common problem: most businesses had either good design or good development, but rarely both working together effectively.
+          </p>
+          <p style={{ marginTop: "1rem" }}>
+            NeoKlyn was built to solve that. By combining user experience, scalable engineering, and performance-driven marketing, NeoKlyn helps brands create digital products that are not just visually impressive, but also engineered for growth.
+          </p>
+          <p style={{ marginTop: "1rem" }}>
+            Today, NeoKlyn works across global markets including the United States, UAE, and India, delivering high-quality digital solutions for startups, SMEs, and enterprise clients.
           </p>
         </div>
 
@@ -146,23 +157,64 @@ export default function AboutPage() {
         <div className="reveal">
           <div className="s-label">People</div>
           <h2 className="s-title">TEAM NEOKLYN</h2>
-          <p className="s-sub">Placeholder profiles for core team members. Replace with your real team details and links.</p>
+          <p className="s-sub">The founders and builders behind NeoKlyn&apos;s engineering and business vision.</p>
         </div>
 
         <div className="about-team-grid reveal">
           {teamMembers.map((member) => (
             <article key={member.name} className="about-team-card">
-              <div className="about-avatar">{member.name.charAt(0)}</div>
-              <h3>{member.name}</h3>
-              <p className="about-role">{member.role}</p>
-              <p className="about-bio">{member.bio}</p>
-              <a href={member.linkedin} target="_blank" rel="noreferrer" className="about-linkedin" aria-label={`${member.name} LinkedIn`}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.447 20.452H16.89v-5.569c0-1.328-.028-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.348V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.369-1.85 3.602 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.063 2.063 0 11.001-4.126 2.063 2.063 0 010 4.126zM7.119 20.452H3.555V9h3.564v11.452z" />
-                </svg>
-              </a>
+              <div className="about-avatar">
+                {member.photo ? (
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    width={800}
+                    height={800}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", borderRadius: "10px" }}
+                  />
+                ) : (
+                  <span style={{ opacity: 0.3 }}>{member.name.charAt(0)}</span>
+                )}
+              </div>
+              <div className="about-member-info">
+                <h3>{member.name}</h3>
+                <p className="about-role">{member.role}</p>
+                <p className="about-bio">{member.bio}</p>
+                <div className="about-socials">
+                  {member.linkedin && (
+                    <a href={member.linkedin} target="_blank" rel="noreferrer" className="about-social-link" aria-label={`${member.name} LinkedIn`}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452H16.89v-5.569c0-1.328-.028-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.348V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.369-1.85 3.602 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.063 2.063 0 11.001-4.126 2.063 2.063 0 010 4.126zM7.119 20.452H3.555V9h3.564v11.452z" />
+                      </svg>
+                    </a>
+                  )}
+                  {member.x && (
+                    <a href={member.x} target="_blank" rel="noreferrer" className="about-social-link" aria-label={`${member.name} X`}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
             </article>
           ))}
+          <article className="about-team-card about-hiring-card">
+            <div className="about-avatar about-hiring-avatar">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <line x1="19" y1="8" x2="19" y2="14" />
+                <line x1="22" y1="11" x2="16" y2="11" />
+              </svg>
+            </div>
+            <h3>We're Hiring</h3>
+            <p className="about-role">JOIN OUR TEAM</p>
+            <p className="about-bio">We're always looking for talented designers, developers, and strategists who care about craft and results.</p>
+            <Link href="/contact" className="about-hiring-btn">
+              Get in Touch →
+            </Link>
+          </article>
         </div>
       </section>
 
@@ -188,14 +240,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section">
+      {/* <section className="section">
         <div className="about-work-cta reveal">
           <h3>Want to build with NeoKlyn?</h3>
           <Link href="/contact" className="btn-main">
             Work With Us →
           </Link>
         </div>
-      </section>
+      </section> */}
 
       <style>{`
         .about-story {
@@ -264,7 +316,7 @@ export default function AboutPage() {
         .about-team-grid {
           margin-top: 2.8rem;
           display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 0.9rem;
         }
 
@@ -272,7 +324,7 @@ export default function AboutPage() {
           border: 1px solid rgba(255,255,255,0.08);
           border-radius: 14px;
           background: rgba(255,255,255,0.02);
-          padding: 1rem;
+          padding: 2.2rem;
           transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -283,18 +335,27 @@ export default function AboutPage() {
         }
 
         .about-avatar {
-          width: 52px;
-          height: 52px;
-          border-radius: 999px;
+          width: 100%;
+          aspect-ratio: 4/5;
+          height: auto;
+          border-radius: 10px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(140deg, rgba(6,182,212,0.45), rgba(139,92,246,0.45));
+          background: rgba(255,255,255,0.03);
           color: var(--white);
           font-family: 'JetBrains Mono', monospace;
-          font-size: 1.1rem;
-          margin-bottom: 0.75rem;
+          font-size: 2rem;
+          margin-bottom: 1.5rem;
+          overflow: hidden;
+          padding: 0;
+          border: 1px solid rgba(255,255,255,0.05);
         }
+
+        .about-member-info {
+          padding: 0 0.2rem;
+        }
+
 
         .about-team-card h3 {
           margin: 0;
@@ -314,14 +375,18 @@ export default function AboutPage() {
 
         .about-bio {
           margin: 0;
-          color: rgba(255,255,255,0.72);
+          color: rgba(255,255,255,0.65);
           line-height: 1.6;
-          font-size: 0.84rem;
-          min-height: 2.6rem;
+          font-size: 0.88rem;
         }
 
-        .about-linkedin {
+        .about-socials {
           margin-top: 0.7rem;
+          display: flex;
+          gap: 0.5rem;
+        }
+
+        .about-social-link {
           width: 30px;
           height: 30px;
           border-radius: 8px;
@@ -334,9 +399,46 @@ export default function AboutPage() {
           transition: all 0.18s;
         }
 
-        .about-linkedin:hover {
+        .about-social-link:hover {
           border-color: rgba(6,182,212,0.42);
           color: var(--cyan);
+        }
+
+        .about-hiring-card {
+          background: linear-gradient(135deg, rgba(6,182,212,0.06), rgba(139,92,246,0.06));
+        }
+
+        .about-hiring-avatar {
+          background: linear-gradient(140deg, rgba(6,182,212,0.15), rgba(139,92,246,0.15));
+          height: 200px;
+        }
+
+        .about-hiring-btn {
+          margin-top: 0.8rem;
+          display: inline-flex;
+          align-items: center;
+          padding: 0.6rem 1rem;
+          border-radius: 8px;
+          background: var(--cyan);
+          color: var(--black);
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-decoration: none;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          transition: all 0.2s;
+        }
+
+        .about-hiring-btn:hover {
+          background: var(--white);
+          transform: translateY(-2px);
+        }
+
+        @media (max-width: 640px) {
+          .about-team-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         .about-presence-wrap {
@@ -402,8 +504,7 @@ export default function AboutPage() {
         }
 
         @media (max-width: 980px) {
-          .about-values-grid,
-          .about-team-grid {
+          .about-values-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }

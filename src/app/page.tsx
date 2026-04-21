@@ -3,6 +3,7 @@ import TerminalCode from "@/components/TerminalCode";
 import CTASection from "@/components/CTASection";
 import type { Metadata } from "next";
 import { aggregateRatingSchema } from "@/lib/schema";
+import { siteStats } from "@/data/siteStats";
 
 export const metadata: Metadata = {
   title: {
@@ -56,22 +57,19 @@ export default function Home() {
         <div className="hero-right">
           <TerminalCode />
           <div className="hero-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', alignContent: 'center' }}>
-            <div className="h-stat">
-              <div className="h-stat-n" style={{ fontFamily: "'JetBrains Mono', monospace", color: 'var(--cyan)' }}>120+</div>
-              <div className="h-stat-l" style={{ lineHeight: '1.4' }}>Enterprise Deployments<br /><span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>Successfully Delivered</span></div>
-            </div>
-            <div className="h-stat">
-              <div className="h-stat-n" style={{ fontFamily: "'JetBrains Mono', monospace", color: 'var(--violet)' }}>98%</div>
-              <div className="h-stat-l" style={{ lineHeight: '1.4' }}>Client Retention Rate<br /><span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>Verified Long-Term</span></div>
-            </div>
-            <div className="h-stat">
-              <div className="h-stat-n" style={{ fontFamily: "'JetBrains Mono', monospace", color: 'var(--blue)' }}>5yr</div>
-              <div className="h-stat-l" style={{ lineHeight: '1.4' }}>Engineering Excellence<br /><span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>Zero Compromise</span></div>
-            </div>
-            <div className="h-stat">
-              <div className="h-stat-n" style={{ fontFamily: "'JetBrains Mono', monospace", color: 'var(--cyan)' }}>3</div>
-              <div className="h-stat-l" style={{ lineHeight: '1.4' }}>Global Operating Hubs<br /><span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>India, UK, Singapore</span></div>
-            </div>
+            {siteStats.map((stat) => (
+              <div className="h-stat" key={stat.key}>
+                <div className="h-stat-n" style={{ fontFamily: "'JetBrains Mono', monospace", color: stat.homeColor }}>
+                  {stat.value}
+                  {stat.suffix}
+                </div>
+                <div className="h-stat-l" style={{ lineHeight: '1.4' }}>
+                  {stat.homeLabel}
+                  <br />
+                  <span style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>{stat.homeSubLabel}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

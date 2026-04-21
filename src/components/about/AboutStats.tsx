@@ -1,57 +1,15 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
-type StatItem = {
-  label: string;
-  value: number;
-  suffix: string;
-};
-
-const stats: StatItem[] = [
-  { value: 120, suffix: "+", label: "Enterprise Projects" },
-  { value: 98, suffix: "%", label: "Client Retention" },
-  { value: 5, suffix: "yr", label: "Experience" },
-  { value: 3, suffix: "", label: "Global Hubs" },
-];
+import { siteStats } from "@/data/siteStats";
 
 export default function AboutStats() {
-  const [counts, setCounts] = useState<number[]>(() => stats.map(() => 0));
-
-  useEffect(() => {
-    const duration = 1300;
-    const tickRate = 24;
-    const totalTicks = Math.ceil(duration / tickRate);
-    let currentTick = 0;
-
-    const timer = window.setInterval(() => {
-      currentTick += 1;
-      const progress = Math.min(1, currentTick / totalTicks);
-
-      setCounts(
-        stats.map((item) => {
-          const eased = 1 - Math.pow(1 - progress, 3);
-          return Math.round(item.value * eased);
-        })
-      );
-
-      if (progress >= 1) {
-        window.clearInterval(timer);
-      }
-    }, tickRate);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
   return (
     <div className="about-stats-row reveal">
-      {stats.map((stat, index) => (
-        <article key={stat.label} className="about-stat-card">
+      {siteStats.map((stat) => (
+        <article key={stat.key} className="about-stat-card">
           <div className="about-stat-value">
-            {counts[index]}
+            {stat.value}
             {stat.suffix}
           </div>
-          <div className="about-stat-label">{stat.label}</div>
+          <div className="about-stat-label">{stat.aboutLabel}</div>
         </article>
       ))}
 

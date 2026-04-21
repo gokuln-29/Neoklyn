@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { CSSProperties } from "react";
 import type { Project } from "./projects";
 import { projectFilters } from "./projects";
@@ -11,6 +12,7 @@ type WorkGridProps = {
 };
 
 export default function WorkGrid({ projects }: WorkGridProps) {
+  const router = useRouter();
   const [activeFilter, setActiveFilter] = useState<(typeof projectFilters)[number]>("All");
 
   const filteredProjects = useMemo(() => {
@@ -35,11 +37,14 @@ export default function WorkGrid({ projects }: WorkGridProps) {
 
       <div className="work-grid reveal">
         {filteredProjects.map((project) => (
-          <Link
-            href={`/work/${project.slug}`}
+          <div
             key={`${activeFilter}-${project.slug}`}
             className="work-card"
-            style={{ "--work-accent": project.color } as CSSProperties}
+            style={{ 
+              "--work-accent": project.color,
+              cursor: 'pointer'
+            } as CSSProperties}
+            onClick={() => router.push(`/work/${project.slug}`)}
           >
             <div
               className="work-card-bg"
@@ -65,9 +70,26 @@ export default function WorkGrid({ projects }: WorkGridProps) {
                 ))}
               </div>
 
-              <div className="work-card-link">View Case Study →</div>
+              <div className="work-card-actions">
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="work-card-live"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Live Site ↗
+                </a>
+                <Link 
+                  href={`/work/${project.slug}`} 
+                  className="work-card-case"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Case Study →
+                </Link>
+              </div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
 
@@ -222,16 +244,26 @@ export default function WorkGrid({ projects }: WorkGridProps) {
           background: rgba(0,0,0,0.24);
         }
 
-        .work-card-link {
+.work-card-actions {
           margin-top: 0.55rem;
-          color: var(--work-accent);
+          display: flex;
+          gap: 0.85rem;
+        }
+
+        .work-card-live,
+        .work-card-case {
           font-size: 0.78rem;
-          letter-spacing: 0.08em;
+          color: rgba(255,255,255,0.52);
           text-transform: uppercase;
+          letter-spacing: 0.1em;
           font-family: 'JetBrains Mono', monospace;
-          transform: translateX(0);
-          opacity: 0.85;
-          transition: transform 0.24s ease, opacity 0.24s ease;
+          transition: color 0.22s ease;
+          text-decoration: none;
+        }
+
+        .work-card-live:hover,
+        .work-card-case:hover {
+          color: var(--cyan);
         }
 
         .work-card:hover .work-card-link {

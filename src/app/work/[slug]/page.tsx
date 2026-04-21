@@ -94,7 +94,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
           <div className="case-two-col">
             <div className="case-panel reveal">
-              <h2 className="case-h2">The Challenge</h2>
+              <h2 className="case-h2">Problem</h2>
               <p className="case-body">{project.caseStudy.challenge}</p>
             </div>
             <div className="case-panel reveal case-solution-panel">

@@ -80,7 +80,7 @@ export default function CTASection() {
                         marginBottom: '1.5rem', flexDirection: 'column',
                     }}>
                         <span>Something went wrong. Please email us directly:</span>
-                        <a href="mailto:hello.neoklyn@gmail.com" style={{ color: 'var(--cyan)', textDecoration: 'underline' }}>hello.neoklyn@gmail.com</a>
+                        <a href="mailto:hello@neoklyn.com" style={{ color: 'var(--cyan)', textDecoration: 'underline' }}>hello@neoklyn.com</a>
                     </div>
                 ) : (
                     <form className="cta-form" onSubmit={handleSubmit}>
@@ -121,11 +121,11 @@ export default function CTASection() {
                         Or use the full contact form →
                     </Link>
                     <span style={{ color: 'var(--dim)', fontSize: '0.6rem' }}>|</span>
-                    <a href="mailto:hello.neoklyn@gmail.com" style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s' }}
+                    <a href="mailto:hello@neoklyn.com" style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s' }}
                         onMouseEnter={e => (e.currentTarget.style.color = 'var(--cyan)')}
                         onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
                     >
-                        hello.neoklyn@gmail.com
+                        hello@neoklyn.com
                     </a>
                 </div>
 

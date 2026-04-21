@@ -4,6 +4,51 @@ import { useState, useEffect, useRef } from 'react';
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 
+const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "ProfessionalService"],
+    "@id": "https://neoklyn.com/contact#localbusiness",
+    name: "NeoKlyn",
+    url: "https://neoklyn.com/contact",
+    image: "https://neoklyn.com/opengraph-image",
+    description: "NeoKlyn is a premium AI and software development agency in Bengaluru, offering web development, mobile apps, ecommerce, AI agents, and digital marketing services to global brands.",
+    telephone: "+916380202766",
+    email: "hello.neoklyn@gmail.com",
+    address: {
+        "@type": "PostalAddress",
+        streetAddress: "Bengaluru, Karnataka",
+        addressLocality: "Bengaluru",
+        addressRegion: "Karnataka",
+        postalCode: "560001",
+        addressCountry: "IN"
+    },
+    geo: {
+        "@type": "GeoCoordinates",
+        latitude: 12.9716,
+        longitude: 77.5946
+    },
+    openingHoursSpecification: [
+        {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "09:00",
+            closes: "18:00"
+        },
+        {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: "Saturday",
+            opens: "10:00",
+            closes: "14:00"
+        }
+    ],
+    sameAs: [
+        "https://github.com/neoklyn",
+        "https://www.linkedin.com/company/neoklyn",
+        "https://twitter.com/neoklyn",
+        "https://dribbble.com/neoklyn"
+    ]
+};
+
 const SOCIAL_LINKS = [
     {
         label: 'GitHub',
@@ -554,6 +599,10 @@ export default function ContactPage() {
 
     return (
         <PageWrapper includeCTA={false}>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+            />
             <AnimatedBackground />
 
             {/* Morphing gradient orbs */}

@@ -2,8 +2,8 @@ import {
   blogPosts,
   getAllCategories,
   getPostBySlug,
-  type BlogPost,
 } from "@/data/blogPosts";
+import { type BlogPost } from "@/types/blog";
 import {
   getMdxInsightPostBySlug,
   getMdxInsightSummaries,
