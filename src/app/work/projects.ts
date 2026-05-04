@@ -27,6 +27,8 @@ export interface Project {
   description: string;
   techStack: string[];
   caseStudy: ProjectCaseStudy;
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 export const projectFilters: Array<"All" | ProjectFilter> = [
@@ -40,7 +42,7 @@ export const projectFilters: Array<"All" | ProjectFilter> = [
 
 export const projects: Project[] = [
   {
-    slug: "dwarka-general-trading",
+    slug: "dwarka-trading",
     client: "Dwarka General Trading",
     title: "Digitizing B2B Trade Operations in the Middle East",
     tagline: "A high-performance B2B platform engineered for speed, trust, and lead capture.",
@@ -61,15 +63,17 @@ export const projects: Project[] = [
         "The result was a faster product discovery experience, stronger trust signals for enterprise buyers, and significantly improved lead quality from high-intent visitors.",
       ],
       challenge:
-        "Legacy templates, slow page delivery, and fragmented content management were creating friction for both visitors and the internal team. Mobile users dropped early, and enterprise leads were not converting consistently.",
+        "Legacy website with poor mobile performance and no content management.",
       solution:
-        "We implemented a Next.js-first architecture with structured content models, introduced focused conversion paths for key product categories, and optimized all critical templates for Core Web Vitals. The design system was rebuilt for clarity and authority across every touchpoint.",
+        "Next.js headless CMS setup, mobile-first redesign, B2B portal with RFQ system.",
       results: [
-        { metric: "+45%", description: "Mobile engagement increase" },
-        { metric: "-60%", description: "Page load time reduction" },
-        { metric: "2x", description: "B2B lead generation" },
+        { metric: "+45%", description: "Mobile engagement increase in Q1" },
+        { metric: "5x", description: "Faster content deployment for the team" },
+        { metric: "Modern", description: "B2B portal with RFQ system" },
       ],
     },
+    seoTitle: "Dwarka General Trading Case Study — NeoKlyn",
+    seoDescription: "How NeoKlyn digitized B2B trade operations for a Middle Eastern leader.",
   },
   {
     slug: "aathithyan",
@@ -157,15 +161,17 @@ export const projects: Project[] = [
         "The new platform delivered stronger engagement signals and a sharp lift in inquiry intent across core offerings.",
       ],
       challenge:
-        "The legacy experience lacked emotional pull, had weak conversion flow, and could not effectively translate premium travel packages into qualified inquiries.",
+        "Needed a premium web presence that matched their luxury brand positioning.",
       solution:
-        "We rebuilt the site with cinematic transitions, interactive sections, and a simplified inquiry pipeline. Heavy media was optimized with modern rendering patterns to ensure strong performance on both desktop and mobile.",
+        "GSAP 3D animations, custom WebGL effects, performance-optimized delivery.",
       results: [
-        { metric: "+110%", description: "Booking inquiries" },
-        { metric: "3.5x", description: "Session duration uplift" },
+        { metric: "+110%", description: "Increase in luxury booking inquiries" },
+        { metric: "Immersive", description: "GSAP 3D animations & WebGL" },
         { metric: "99.9%", description: "Platform uptime" },
       ],
     },
+    seoTitle: "Travex Ventures Case Study — NeoKlyn",
+    seoDescription: "Immersive 3D travel experiences that boosted luxury bookings by 110%.",
   },
   {
     slug: "lpsm-pvt-ltd",

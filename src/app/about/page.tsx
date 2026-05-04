@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
@@ -82,18 +83,18 @@ const teamMembers: TeamMember[] = [
   {
     name: "Monisha",
     role: "Founder & CEO",
-    bio: "Monisha is the Founder & CEO of NeoKlyn, a digital product studio focused on building high-performance websites, scalable applications, and conversion-driven platforms. She combines design thinking with modern development to create digital systems that not only look premium but also deliver measurable business results.",
-    photo: "/assets/monisha.png",
-    linkedin: "https://www.linkedin.com/in/gokul-n-1b60713a9/",
-    x: "https://x.com/neoklyn",
+    bio: "Strategic visionary and product specialist with a background in engineering and design. Monisha leads NeoKlyn with a focus on building high-conversion digital ecosystems for global brands. She is dedicated to bridging the gap between technical complexity and intuitive user experiences.",
+    photo: "/assets/monisha.webp",
+    linkedin: "#",
+    x: "#",
   },
   {
     name: "Gokulnath",
     role: "Senior Developer",
-    bio: "Gokul is a Senior Developer at NeoKlyn with expertise in building scalable web architectures and AI-integrated systems. He leads the engineering efforts to ensure every product is built with performance, security, and enterprise-grade reliability.",
-    photo: "/assets/gokulnath.png",
-    linkedin: "https://www.linkedin.com/in/gokul-n-1b60713a9/",
-    x: "https://x.com/neoklyn",
+    bio: "Full-stack architect specializing in Next.js and high-performance backend systems. With a deep passion for clean code and AI integration, Gokulnath ensures that every NeoKlyn project is built for speed, security, and enterprise-grade reliability.",
+    photo: "/assets/gokulnath.webp",
+    linkedin: "#",
+    x: "#",
   },
 ];
 
@@ -165,12 +166,13 @@ export default function AboutPage() {
             <article key={member.name} className="about-team-card">
               <div className="about-avatar">
                 {member.photo ? (
-                  <img
+                  <Image
                     src={member.photo}
-                    alt={member.name}
-                    width={800}
-                    height={800}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", borderRadius: "10px" }}
+                    alt={`NeoKlyn Team — ${member.name}, ${member.role}`}
+                    width={400}
+                    height={500}
+                    quality={90}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
                   />
                 ) : (
                   <span style={{ opacity: 0.3 }}>{member.name.charAt(0)}</span>
@@ -323,22 +325,25 @@ export default function AboutPage() {
         .about-team-card {
           border: 1px solid rgba(255,255,255,0.08);
           border-radius: 14px;
-          background: rgba(255,255,255,0.02);
+          background: rgba(20, 25, 40, 0.6);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
           padding: 2.2rem;
-          transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+          transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
         .about-team-card:hover {
           transform: translateY(-4px);
           border-color: rgba(6,182,212,0.35);
           box-shadow: 0 14px 24px rgba(0,0,0,0.25);
+          background: rgba(20, 25, 40, 0.75);
         }
 
         .about-avatar {
           width: 100%;
           aspect-ratio: 4/5;
           height: auto;
-          border-radius: 10px;
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -349,7 +354,8 @@ export default function AboutPage() {
           margin-bottom: 1.5rem;
           overflow: hidden;
           padding: 0;
-          border: 1px solid rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.1);
+          box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
         .about-member-info {

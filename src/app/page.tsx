@@ -1,6 +1,8 @@
 import Link from "next/link";
 import TerminalCode from "@/components/TerminalCode";
 import CTASection from "@/components/CTASection";
+import FAQSection from "@/components/FAQSection";
+import EngageSection from "@/components/EngageSection";
 import type { Metadata } from "next";
 import { aggregateRatingSchema } from "@/lib/schema";
 import { siteStats } from "@/data/siteStats";
@@ -39,10 +41,10 @@ export default function Home() {
 
         <div className="hero-left">
           <div className="hero-eyebrow">ENGINEERING INTELLIGENT DIGITAL SYSTEMS</div>
-          <h1 className="hero-title">
-            <span className="line"><span>WE BUILD</span></span>
-            <span className="line"><span className="title-outline">DIGITAL</span></span>
-            <span className="line"><span className="title-cyan">PRODUCTS</span></span>
+          <h1 className="hero-title" aria-label="We build digital products">
+            <span className="line" aria-hidden="true"><span>WE BUILD</span></span>
+            <span className="line" aria-hidden="true"><span className="title-outline">DIGITAL</span></span>
+            <span className="line" aria-hidden="true"><span className="title-cyan">PRODUCTS</span></span>
           </h1>
           <p className="hero-desc">Web apps, mobile, ecommerce, AI Agents, Generative AI, 3D experiences &amp; performance marketing — engineered for conversion, designed to impress.</p>
           <div className="hero-btns">
@@ -371,6 +373,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ENGAGE */}
+      <EngageSection />
+
       {/* PROCESS */}
       <section className="section section-alt" id="process">
         <div className="reveal">
@@ -529,6 +534,9 @@ export default function Home() {
           <Link href="/work" className="btn-ghost" style={{ fontSize: '1rem' }}>View All Projects <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>
         </div>
       </section> */}
+
+      {/* FAQ */}
+      <FAQSection />
 
       {/* CTA */}
       <CTASection />

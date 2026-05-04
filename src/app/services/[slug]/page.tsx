@@ -312,35 +312,35 @@ function CapabilityIcon({ name }: { name: string }) {
 
 const servicesMetadata: Record<string, { title: string; description: string }> = {
     web: {
-        title: "Web Development Agency — React & Next.js",
+        title: "Next.js Web Development Agency India — NeoKlyn",
         description: "Fast, scalable web apps built with React, Next.js & TypeScript. 99/100 Lighthouse scores guaranteed. Request a free audit.",
     },
     mobile: {
-        title: "Mobile App Development — iOS & Android",
+        title: "Mobile App Development Company India — NeoKlyn",
         description: "Cross-platform & native mobile apps with Flutter, React Native & Swift. From MVP to enterprise scale. Start your project.",
     },
     ecommerce: {
-        title: "Ecommerce Development — Shopify & Headless",
+        title: "Ecommerce Development Agency — NeoKlyn",
         description: "High-converting Shopify Plus, WooCommerce & headless commerce stores. 35% avg CR increase. Launch your store with NeoKlyn.",
     },
     marketing: {
-        title: "Digital Marketing & SEO Services — NeoKlyn",
+        title: "Digital Marketing Agency Bengaluru — NeoKlyn",
         description: "Data-driven SEO, Google Ads & Meta campaigns with 5x avg ROAS. Grow traffic 300% with NeoKlyn's performance marketing team.",
     },
     "3d": {
-        title: "3D Websites & WebGL Experiences — NeoKlyn",
+        title: "3D Website & WebGL Development — NeoKlyn",
         description: "Immersive 3D product viewers, WebGL animations & scroll-driven storytelling. 60fps on all devices. Explore our 3D portfolio.",
     },
     branding: {
-        title: "UI/UX Design & Branding Agency — NeoKlyn",
+        title: "UI/UX Design & Branding Agency India — NeoKlyn",
         description: "Premium brand identity, Figma design systems & conversion-focused UX. 95% client approval rate. Book a design consultation.",
     },
     "ai-agents": {
-        title: "Custom AI Agents & Automation — NeoKlyn",
+        title: "AI Agent Development Company — NeoKlyn",
         description: "Deploy autonomous AI agents to automate workflows, CRM ops & data pipelines. Built with LangChain & GPT. Talk to our AI team.",
     },
     "gen-ai": {
-        title: "Generative AI Solutions & LLM Integration",
+        title: "Generative AI Integration Services — NeoKlyn",
         description: "Custom LLM integration, generative UI, and predictive AI marketing. Enterprise-grade Gen AI solutions from NeoKlyn. Book a demo.",
     }
 };
@@ -370,6 +370,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             absolute: meta.title,
         },
         description: meta.description,
+        alternates: {
+            canonical: `https://neoklyn.com/services/${slug}`,
+        },
         openGraph: {
             title: meta.title,
             description: meta.description,

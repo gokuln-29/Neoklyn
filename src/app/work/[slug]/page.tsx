@@ -17,14 +17,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
+  const pageTitle = project.seoTitle || `${project.client} Case Study — NeoKlyn`;
+  const pageDescription = project.seoDescription || `${project.description} ${project.keyMetric}.`;
+
   return {
     title: {
-      absolute: `${project.client} Case Study — NeoKlyn`,
+      absolute: pageTitle,
     },
-    description: `${project.description} ${project.keyMetric}.`,
+    description: pageDescription,
     openGraph: {
-      title: `${project.client} Case Study — NeoKlyn`,
-      description: `${project.description} ${project.keyMetric}.`,
+      title: pageTitle,
+      description: pageDescription,
       url: `https://neoklyn.com/work/${project.slug}`,
       siteName: "NeoKlyn",
       type: "article",

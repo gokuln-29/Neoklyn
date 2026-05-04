@@ -144,6 +144,33 @@ const CONTACT_CHANNELS = [
     },
 ];
 
+const OFFICE_LOCATIONS = [
+    {
+        city: 'Bengaluru',
+        label: 'Head Office',
+        address: 'Karnataka, India',
+        phone: '+91 6380202766',
+        icon: (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+            </svg>
+        ),
+    },
+    {
+        city: 'Chennai',
+        label: 'Branch Office',
+        address: 'Tamil Nadu, India',
+        phone: '+91 9342382078',
+        icon: (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+            </svg>
+        ),
+    },
+];
+
 type CurrencyCode = 'USD' | 'INR' | 'GBP' | 'AED' | 'SGD';
 
 type CurrencyOption = {
@@ -655,6 +682,26 @@ export default function ContactPage() {
                             </div>
                         </div>
 
+                        {/* Office locations */}
+                        <div className="locations-section">
+                            <p className="section-eyebrow">{"// our offices"}</p>
+                            <div className="locations-grid">
+                                {OFFICE_LOCATIONS.map(loc => (
+                                    <div key={loc.city} className="location-card">
+                                        <div className="location-icon" style={{ color: 'var(--cyan)' }}>
+                                            {loc.icon}
+                                        </div>
+                                        <div className="location-info">
+                                            <span className="location-city">{loc.city}</span>
+                                            <span className="location-label">{loc.label}</span>
+                                            <span className="location-address">{loc.address}</span>
+                                            <a href={`tel:${loc.phone.replace(/\s/g, '')}`} className="location-phone">{loc.phone}</a>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
                         {/* Social links */}
                         <div className="social-section">
                             <p className="section-eyebrow">{"// follow our work"}</p>
@@ -1090,6 +1137,52 @@ export default function ContactPage() {
                 color: var(--s-color);
                 background: color-mix(in srgb, var(--s-color) 8%, transparent);
                 transform: translateY(-2px);
+            }
+
+            /* ── Locations ── */
+            .locations-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+            .location-card {
+                display: flex; align-items: center; gap: 1rem;
+                padding: 1rem 1.25rem;
+                background: var(--ink);
+                border: 1px solid rgba(255,255,255,0.06);
+                border-radius: 14px;
+                transition: all 0.2s ease;
+            }
+            .location-card:hover {
+                border-color: rgba(6,182,212,0.25);
+                background: rgba(6,182,212,0.03);
+            }
+            .location-icon {
+                width: 40px; height: 40px;
+                display: flex; align-items: center; justify-content: center;
+                background: rgba(6,182,212,0.08);
+                border-radius: 10px;
+                flex-shrink: 0;
+            }
+            .location-info { display: flex; flex-direction: column; gap: 0.15rem; }
+            .location-city {
+                font-family: var(--font-space-grotesk), sans-serif;
+                font-weight: 600; font-size: 0.95rem; color: var(--white);
+            }
+            .location-label {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em;
+                color: var(--cyan);
+            }
+            .location-address {
+                font-size: 0.8rem; color: var(--muted);
+            }
+            .location-phone {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.75rem;
+                color: var(--cyan);
+                text-decoration: none;
+                margin-top: 0.15rem;
+                display: inline-block;
+            }
+            .location-phone:hover {
+                text-decoration: underline;
             }
 
             /* ── Status card ── */

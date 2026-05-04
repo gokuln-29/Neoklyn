@@ -2,93 +2,109 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Effects() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Custom cursor setup (only runs once completely)
-    const cur = document.getElementById('cursor');
-    const ring = document.getElementById('cursor-ring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
+    const ctx = gsap.context(() => {
+      const cur = document.getElementById('cursor');
+      const ring = document.getElementById('cursor-ring');
+      let mx = 0, my = 0, rx = 0, ry = 0;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      mx = e.clientX;
-      my = e.clientY;
-      if (cur) {
-        cur.style.left = mx + 'px';
-        cur.style.top = my + 'px';
-      }
-    };
+      const handleMouseMove = (e: MouseEvent) => {
+        mx = e.clientX;
+        my = e.clientY;
+        if (cur) {
+          cur.style.left = mx + 'px';
+          cur.style.top = my + 'px';
+        }
+      };
 
-    document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mousemove', handleMouseMove);
 
-    let reqId: number;
-    const animRing = () => {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      if (ring) {
-        ring.style.left = rx + 'px';
-        ring.style.top = ry + 'px';
-      }
-      reqId = requestAnimationFrame(animRing);
-    };
-    animRing();
+      let reqId: number;
+      const animRing = () => {
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        if (ring) {
+          ring.style.left = rx + 'px';
+          ring.style.top = ry + 'px';
+        }
+        reqId = requestAnimationFrame(animRing);
+      };
+      animRing();
+
+      const curCleanup = () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        cancelAnimationFrame(reqId);
+      };
+
+      return curCleanup;
+    });
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(reqId);
+      ctx.revert();
     };
   }, []);
 
   useEffect(() => {
-    // Hover effects and Scroll reveal (re-runs on each page navigation)
-    const cur = document.getElementById('cursor');
-    const ring = document.getElementById('cursor-ring');
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const reduceMotion = mq.matches;
 
-    let elements = document.querySelectorAll('a, button, .service-item, .sc, .market, .tcard');
+    const ctx = gsap.context(() => {
+      const cur = document.getElementById('cursor');
+      const ring = document.getElementById('cursor-ring');
 
-    const handleEnter = () => {
-      if (cur) cur.style.transform = 'translate(-50%,-50%) scale(2.5)';
-      if (ring) ring.style.transform = 'translate(-50%,-50%) scale(0.6)';
-    };
-    const handleLeave = () => {
-      if (cur) cur.style.transform = 'translate(-50%,-50%) scale(1)';
-      if (ring) ring.style.transform = 'translate(-50%,-50%) scale(1)';
-    };
+      let elements = document.querySelectorAll('a, button, .service-item, .sc, .market, .tcard');
 
-    const attachHover = () => {
-      elements = document.querySelectorAll('a, button, .service-item, .sc, .market, .tcard');
-      elements.forEach(el => {
-        el.addEventListener('mouseenter', handleEnter);
-        el.addEventListener('mouseleave', handleLeave);
-      });
-    }
+      const handleEnter = () => {
+        if (cur) cur.style.transform = 'translate(-50%,-50%) scale(2.5)';
+        if (ring) ring.style.transform = 'translate(-50%,-50%) scale(0.6)';
+      };
+      const handleLeave = () => {
+        if (cur) cur.style.transform = 'translate(-50%,-50%) scale(1)';
+        if (ring) ring.style.transform = 'translate(-50%,-50%) scale(1)';
+      };
 
-    // small timeout to ensure DOM is ready on new page
-    setTimeout(attachHover, 100);
+      const attachHover = () => {
+        elements = document.querySelectorAll('a, button, .service-item, .sc, .market, .tcard');
+        elements.forEach(el => {
+          el.addEventListener('mouseenter', handleEnter);
+          el.addEventListener('mouseleave', handleLeave);
+        });
+      }
 
-    // Scroll reveal
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('up'), i * 100);
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
+      setTimeout(attachHover, 100);
 
-    const attachReveal = () => {
-      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-    };
-    setTimeout(attachReveal, 100);
+      gsap.set('.reveal', { opacity: 0, y: 40 });
+
+      if (reduceMotion) {
+        gsap.set('.reveal', { opacity: 1, y: 0 });
+      } else {
+        ScrollTrigger.batch('.reveal', {
+          onEnter: batch => gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power2.out'
+          }),
+          start: 'top 88%'
+        });
+      }
+
+      ScrollTrigger.refresh();
+    });
 
     return () => {
-      elements.forEach(el => {
-        el.removeEventListener('mouseenter', handleEnter);
-        el.removeEventListener('mouseleave', handleLeave);
-      });
-      document.querySelectorAll('.reveal').forEach(el => obs.unobserve(el));
+      ctx.revert();
     };
   }, [pathname]);
 

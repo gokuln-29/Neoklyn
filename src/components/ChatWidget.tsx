@@ -19,7 +19,7 @@ type LeadSignals = {
 
 const MAX_USER_MESSAGES = 20;
 const AUTO_GREETING =
-  "Hi, I am Klyn from NeoKlyn. I can help you scope your project and recommend the right team. What are you planning to build?";
+  "Hi, I'm KLYN — your project assistant at NeoKlyn. I can help you scope your project and connect you with the right team. What are you building?";
 
 function extractLeadSignalsFromText(text: string): Partial<LeadSignals> {
   const email = text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0] || null;
@@ -241,7 +241,7 @@ export default function ChatWidget() {
           <div className="nk-chat-window" role="dialog" aria-label="NeoKlyn AI chat assistant">
             <div className="nk-chat-header">
               <div>
-                <div className="nk-chat-title">NeoKlyn Assistant</div>
+                <div className="nk-chat-title">KLYN</div>
                 <div className="nk-chat-subtitle">Klyn - Lead Qualification</div>
               </div>
               <button type="button" className="nk-chat-close" onClick={closeWidget} aria-label="Minimize chat">
@@ -304,7 +304,7 @@ export default function ChatWidget() {
         ) : null}
 
         <button type="button" className="nk-chat-bubble" onClick={openWidget} aria-label="Open NeoKlyn chat">
-          <span className="nk-bubble-icon">AI</span>
+          <span className="nk-bubble-icon">KLYN</span>
           {hasUnread && <span className="nk-bubble-badge">1</span>}
         </button>
       </div>
