@@ -18,7 +18,10 @@ module.exports = {
       env_file: ".env",
       env: {
         NODE_ENV: "production",
-        PORT: 3000,
+        // 3000 was already taken by another app on this VPS (EADDRINUSE).
+        // Confirm this port is free with `sudo ss -tlnp` before deploying,
+        // and update the Nginx proxy_pass to match.
+        PORT: 3002,
       },
       env_production: {
         NODE_ENV: "production",
