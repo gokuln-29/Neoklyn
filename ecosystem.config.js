@@ -18,10 +18,10 @@ module.exports = {
       env_file: ".env",
       env: {
         NODE_ENV: "production",
-        // 3000 was already taken by another app on this VPS (EADDRINUSE).
-        // Confirm this port is free with `sudo ss -tlnp` before deploying,
-        // and update the Nginx proxy_pass to match.
-        PORT: 3002,
+        // 3000 and 3002 were both already taken on this VPS (confirmed via
+        // `sudo ss -tlnp`). 3001 was free. Re-check with that command if you
+        // ever see EADDRINUSE again, and update the Nginx proxy_pass to match.
+        PORT: 3001,
       },
       env_production: {
         NODE_ENV: "production",
