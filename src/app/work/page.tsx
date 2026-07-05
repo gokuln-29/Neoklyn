@@ -18,6 +18,13 @@ export const metadata: Metadata = {
     siteName: "NeoKlyn",
     type: "website",
   },
+  alternates: { canonical: "https://neoklyn.com/work" },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfolio & Case Studies — NeoKlyn",
+    description:
+      "See real results: enterprise web apps, ecommerce stores & AI integrations delivered for global clients. View our case studies.",
+  },
 };
 
 export default function WorkPage() {

@@ -1,7 +1,9 @@
 import OpenAI from "openai";
-import nodemailer from "nodemailer";
+import { sendMail } from "@/lib/mailer";
 import { NextRequest, NextResponse } from "next/server";
 import { chatSystemPrompt } from "@/lib/chatSystemPrompt";
+
+const NOTIFY_EMAIL = "hello@neoklyn.com";
 
 type IncomingMessage = {
   role: "user" | "assistant";
@@ -58,22 +60,9 @@ function sanitizeMessages(messages: unknown): IncomingMessage[] {
     .filter((message): message is IncomingMessage => Boolean(message));
 }
 
-async function sendLeadNotification(signals: any, transcript: string) {
+async function sendLeadNotification(signals: ReturnType<typeof extractLeadSignals>, transcript: string) {
   const { email, name, budget, companySize } = signals;
   
-  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
-    console.error("Email credentials missing, skipping lead notification.");
-    return;
-  }
-
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_APP_PASSWORD,
-    },
-  });
-
   const subject = `🔥 New Chat Lead — ${email || name || 'Anonymous'}`;
   const html = `
     <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a14; color: #f4f3ee; border-radius: 12px; overflow: hidden; border: 1px solid rgba(6,182,212,0.2);">
@@ -111,9 +100,9 @@ async function sendLeadNotification(signals: any, transcript: string) {
     </div>
   `;
 
-  await transporter.sendMail({
-    from: `"NeoKlyn AI" <${process.env.GMAIL_USER}>`,
-    to: process.env.GMAIL_USER,
+  await sendMail({
+    from: `"NeoKlyn AI" <${NOTIFY_EMAIL}>`,
+    to: NOTIFY_EMAIL,
     replyTo: email || undefined,
     subject,
     html,

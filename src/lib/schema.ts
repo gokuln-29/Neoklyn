@@ -18,7 +18,7 @@ export function organizationSchema() {
     description:
       "Premium AI agents, web apps, mobile, ecommerce, 3D experiences, and digital marketing services from Bengaluru.",
     telephone: "+916380202766",
-    email: "hello.neoklyn@gmail.com",
+    email: "hello@neoklyn.com",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Bengaluru, Karnataka",
@@ -36,7 +36,7 @@ export function organizationSchema() {
         "@type": "ContactPoint",
         contactType: "sales",
         telephone: "+916380202766",
-        email: "hello.neoklyn@gmail.com",
+        email: "hello@neoklyn.com",
         areaServed: "Worldwide",
         availableLanguage: ["en"],
       },
@@ -124,7 +124,7 @@ export function localBusinessSchema() {
     description:
       "NeoKlyn helps global brands with AI agents, web engineering, mobile products, ecommerce, and growth marketing.",
     telephone: "+916380202766",
-    email: "hello.neoklyn@gmail.com",
+    email: "hello@neoklyn.com",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Bengaluru, Karnataka",

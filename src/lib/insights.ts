@@ -10,9 +10,15 @@ import {
   type MdxInsightPost,
   type MdxInsightSummary,
 } from "@/lib/mdxInsights";
+import {
+  getDbInsightPostBySlug,
+  getDbInsightSummaries,
+  type DbInsightPost,
+  type DbInsightSummary,
+} from "@/lib/dbInsights";
 
 export type InsightSummary = {
-  source: "ts" | "mdx";
+  source: "ts" | "mdx" | "db";
   title: string;
   slug: string;
   category: string;
@@ -27,7 +33,8 @@ export type InsightSummary = {
 
 export type InsightDetail =
   | { source: "ts"; post: BlogPost }
-  | { source: "mdx"; post: MdxInsightPost };
+  | { source: "mdx"; post: MdxInsightPost }
+  | { source: "db"; post: DbInsightPost };
 
 type CategoryFilter = {
   label: string;
@@ -94,11 +101,32 @@ function toMdxSummary(post: MdxInsightSummary): InsightSummary {
   };
 }
 
+function toDbSummary(post: DbInsightSummary): InsightSummary {
+  return {
+    source: "db",
+    title: post.title,
+    slug: post.slug,
+    category: post.category,
+    categorySlug: post.categorySlug,
+    date: post.date,
+    readTime: post.readTime,
+    author: post.author,
+    color: post.color,
+    excerpt: post.excerpt,
+    metaDescription: post.metaDescription,
+  };
+}
+
 export async function getAllInsightSummaries(): Promise<InsightSummary[]> {
   const tsPosts = blogPosts.map(toSummary);
   const mdxPosts = (await getMdxInsightSummaries()).map(toMdxSummary);
+  const dbPosts = (await getDbInsightSummaries()).map(toDbSummary);
 
-  return [...tsPosts, ...mdxPosts].sort(
+  // File-based posts win on slug collisions; CMS posts fill in the rest
+  const fileSlugs = new Set([...tsPosts, ...mdxPosts].map((p) => p.slug));
+  const uniqueDbPosts = dbPosts.filter((p) => !fileSlugs.has(p.slug));
+
+  return [...tsPosts, ...mdxPosts, ...uniqueDbPosts].sort(
     (a, b) => parseDateSafely(b.date) - parseDateSafely(a.date)
   );
 }
@@ -117,6 +145,14 @@ export async function getInsightBySlug(slug: string): Promise<InsightDetail | un
     return {
       source: "mdx",
       post: mdxPost,
+    };
+  }
+
+  const dbPost = await getDbInsightPostBySlug(slug);
+  if (dbPost) {
+    return {
+      source: "db",
+      post: dbPost,
     };
   }
 

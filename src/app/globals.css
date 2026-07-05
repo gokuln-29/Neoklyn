@@ -89,7 +89,7 @@ body::before {
 }
 
 /* NAV */
-nav {
+nav.public-nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -1347,7 +1347,7 @@ footer {
     grid-template-columns: 1fr
   }
 
-  nav .nav-links {
+  nav.public-nav .nav-links {
     display: none
   }
 

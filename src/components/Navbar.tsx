@@ -3,7 +3,7 @@ import Logo from '@/components/Logo';
 
 export default function Navbar() {
     return (
-        <nav>
+        <nav className="public-nav">
             <div className="nav-logo">
                 <Link href="/">
                     <Logo scale={0.4} />

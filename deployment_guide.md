@@ -35,7 +35,17 @@ node -v  # Verify Node.js version
 
 ```bash
 npm install -g pm2
-pm2 --version
+pm2 --version   # Must be 5.1.0 or later — ecosystem.config.js uses env_file, added in 5.1.0
+```
+
+### 1.5 Install and start PostgreSQL
+
+The CMS requires a PostgreSQL database.
+
+```bash
+apt install -y postgresql
+sudo -u postgres createuser --pwprompt neoklyn
+sudo -u postgres createdb -O neoklyn neoklyn
 ```
 
 ## Step 2: Deploy Application
@@ -56,21 +66,29 @@ npm install
 
 ### 2.3 Set up environment variables
 
-Create a `.env.local` file in the project root:
+Create a `.env` file in the project root (this exact filename — `ecosystem.config.js` loads it via PM2's `env_file` option):
 
 ```bash
-cp .env.local.example .env.local
-# Edit with your actual values
-nano .env.local
+nano .env
 ```
 
 Required variables:
-- `OPENAI_API_KEY`
-- `ANTHROPIC_API_KEY`
-- `GOOGLE_GENERATIVE_AI_API_KEY`
-- `RESEND_API_KEY`
-- `EMAIL_USER` / `EMAIL_PASSWORD`
-- `NEXT_PUBLIC_GA_ID`
+- `DATABASE_URL` — `postgresql://neoklyn:yourpassword@localhost:5432/neoklyn?schema=public`
+- `NEXTAUTH_SECRET` — generate with `openssl rand -base64 32`
+- `NEXTAUTH_URL` — `https://neoklyn.com` (your real production URL — Auth.js rejects requests from hosts other than this)
+- `CLOUDINARY_CLOUD_NAME` / `CLOUDINARY_API_KEY` / `CLOUDINARY_API_SECRET` — media uploads
+- `GROQ_API_KEY` — powers the KLYN chatbot and the admin AI writing assistant
+- `SMTP_HOST` / `SMTP_PORT` / `SMTP_SECURE` / `SMTP_USER` / `SMTP_PASSWORD` — direct SMTP for contact form, chatbot lead alerts, and estimate emails (see your hosting control panel's Email Accounts → Connect Devices for these values)
+- `ANTHROPIC_API_KEY` — powers the AI project estimator (`/estimate`)
+
+Then run the database migrations and seed the initial admin user:
+
+```bash
+npx prisma migrate deploy
+npx tsx prisma/seed.ts
+```
+
+**Change the seeded admin password immediately** after first login (Admin → Settings → Profile) — the seed script sets a default placeholder password.
 
 ### 2.4 Build the application
 
@@ -78,7 +96,7 @@ Required variables:
 npm run build
 ```
 
-This generates the standalone build in `.next/standalone/`.
+This generates the standalone build in `.next/standalone/` and automatically copies `public/` and `.next/static/` into it (via the `postbuild` script) — required for images, fonts, and other static assets to serve correctly. Re-run `npm run build` after every code change; the copy step runs every time, so it can't go stale.
 
 ### 2.5 Start with PM2
 
@@ -86,6 +104,8 @@ This generates the standalone build in `.next/standalone/`.
 pm2 start ecosystem.config.js
 pm2 save
 ```
+
+`ecosystem.config.js` automatically loads all variables from `.env` into the running process via PM2's `env_file` option — no need to export them manually or duplicate them into the PM2 config.
 
 To auto-start on reboot:
 

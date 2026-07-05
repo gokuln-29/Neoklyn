@@ -5,6 +5,19 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Terms of Service | NeoKlyn",
     description: "Read the Terms of Service governing your use of the NeoKlyn website. Includes intellectual property rights, limitation of liability, and governing law.",
+    alternates: { canonical: "https://neoklyn.com/terms" },
+    openGraph: {
+        title: "Terms of Service | NeoKlyn",
+        description: "Read the Terms of Service governing your use of the NeoKlyn website. Includes intellectual property rights, limitation of liability, and governing law.",
+        url: "https://neoklyn.com/terms",
+        siteName: "NeoKlyn",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Terms of Service | NeoKlyn",
+        description: "Read the Terms of Service governing your use of the NeoKlyn website.",
+    },
 };
 
 export default function TermsOfServicePage() {
@@ -151,7 +164,7 @@ export default function TermsOfServicePage() {
                         </p>
                         <ol style={{ ...listStyle, listStyleType: 'decimal' }}>
                             <li>
-                                <strong style={{ color: 'var(--white)' }}>Informal Resolution</strong> — The parties shall first attempt to resolve the dispute through good-faith negotiation by contacting us at <a href="mailto:hello.neoklyn@gmail.com" style={linkStyle}>hello.neoklyn@gmail.com</a>.
+                                <strong style={{ color: 'var(--white)' }}>Informal Resolution</strong> — The parties shall first attempt to resolve the dispute through good-faith negotiation by contacting us at <a href="mailto:hello@neoklyn.com" style={linkStyle}>hello@neoklyn.com</a>.
                             </li>
                             <li style={{ marginTop: '0.5rem' }}>
                                 <strong style={{ color: 'var(--white)' }}>Arbitration</strong> — If the dispute is not resolved within 30 days of the initial notice, it shall be referred to and finally resolved by arbitration in accordance with the <strong style={{ color: 'var(--white)' }}>Arbitration and Conciliation Act, 1996</strong> (India). The seat of arbitration shall be <strong style={{ color: 'var(--white)' }}>Bengaluru, Karnataka, India</strong>.
@@ -185,7 +198,7 @@ export default function TermsOfServicePage() {
                         <div style={{ ...cardStyle, marginTop: '1rem' }}>
                             <p><strong style={{ color: 'var(--white)' }}>NeoKlyn</strong></p>
                             <p>Bengaluru, Karnataka, India</p>
-                            <p>Email: <a href="mailto:hello.neoklyn@gmail.com" style={linkStyle}>hello.neoklyn@gmail.com</a></p>
+                            <p>Email: <a href="mailto:hello@neoklyn.com" style={linkStyle}>hello@neoklyn.com</a></p>
                         </div>
                     </div>
 

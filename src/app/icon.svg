@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#ffffff"/>
+  <!-- Left vertical bar -->
+  <rect x="130" y="130" width="80" height="252" fill="#000000"/>
+  <!-- Diagonal stroke -->
+  <polygon points="130,130 245,130 382,267 382,382 267,382 130,245" fill="#000000"/>
+  <!-- Top-right triangle -->
+  <polygon points="305,130 382,130 382,207" fill="#000000"/>
+</svg>

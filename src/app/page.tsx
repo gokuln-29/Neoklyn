@@ -6,6 +6,7 @@ import EngageSection from "@/components/EngageSection";
 import type { Metadata } from "next";
 import { aggregateRatingSchema } from "@/lib/schema";
 import { siteStats } from "@/data/siteStats";
+import { getAllInsightSummaries } from "@/lib/insights";
 
 export const metadata: Metadata = {
   title: {
@@ -23,14 +24,28 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
   const ratingSchema = aggregateRatingSchema();
+  const recentInsights = (await getAllInsightSummaries()).slice(0, 3);
+  const speakableSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    url: "https://neoklyn.com",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [".hero-title", ".hero-desc"],
+    },
+  };
 
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ratingSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
       />
 
       {/* HERO */}
@@ -497,6 +512,18 @@ export default function Home() {
             </div>
           </div>
 
+          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
+            <p className="t-text" style={{ flex: 1 }}>&quot;Patients used to struggle just to find our services online, let alone book an appointment. NeoKlyn rebuilt our website around simplicity and trust, and we saw a 30% increase in booking inquiries almost immediately.&quot;</p>
+            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
+              <div className="t-av" style={{ background: 'var(--blue)', color: '#fff' }}>SP</div>
+              <div>
+                <a href="https://sharonphysio.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{ textDecoration: 'none', color: 'inherit' }}>Sharon Physio <span style={{ fontSize: '0.8em', color: 'var(--blue)' }}>↗</span></a>
+                <div className="t-loc">Physiotherapy Clinic · Madurai, India 🇮🇳</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -534,6 +561,35 @@ export default function Home() {
           <Link href="/work" className="btn-ghost" style={{ fontSize: '1rem' }}>View All Projects <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>
         </div>
       </section> */}
+
+      {/* RECENT INSIGHTS */}
+      <section className="section" id="insights">
+        <div className="reveal" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '2rem', flexWrap: 'wrap' }}>
+          <div>
+            <div className="s-label">Engineering Blog</div>
+            <h2 className="s-title" style={{ marginBottom: 0 }}>RECENT INSIGHTS</h2>
+          </div>
+          <Link href="/insights" className="btn-ghost" style={{ fontSize: '0.9rem' }}>
+            All Articles <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </Link>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.2rem', marginTop: '3rem' }}>
+          {recentInsights.map((post) => (
+            <Link key={post.slug} href={`/insights/${post.slug}`} className="reveal" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <article style={{ border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', background: 'rgba(255,255,255,0.02)', padding: '1.4rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', height: '100%' }}>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: post.color }}>{post.category}</div>
+                <h3 style={{ margin: 0, fontSize: '1rem', lineHeight: 1.45, textTransform: 'none', color: 'rgba(255,255,255,0.92)' }}>{post.title}</h3>
+                <p style={{ margin: 0, fontSize: '0.83rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6 }}>{post.excerpt}</p>
+                <div style={{ marginTop: 'auto', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', color: 'var(--muted)', display: 'flex', gap: '0.7rem' }}>
+                  <span>{post.date}</span>
+                  <span>·</span>
+                  <span>{post.readTime}</span>
+                </div>
+              </article>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* FAQ */}
       <FAQSection />

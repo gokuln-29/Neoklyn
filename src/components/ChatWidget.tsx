@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { trackEvent } from "@/lib/track";
 
 type ChatRole = "user" | "assistant";
 
@@ -19,7 +20,11 @@ type LeadSignals = {
 
 const MAX_USER_MESSAGES = 20;
 const AUTO_GREETING =
-  "Hi, I'm KLYN — your project assistant at NeoKlyn. I can help you scope your project and connect you with the right team. What are you building?";
+  "Hi, I'm KLYN — your project assistant at NeoKlyn. For the fastest response, tap WhatsApp above, or tell me what you're building and I'll help right here.";
+const WHATSAPP_NUMBER = "916380202766";
+const WHATSAPP_CHAT_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  "Hi NeoKlyn, I was chatting with Klyn about my project"
+)}`;
 
 function extractLeadSignalsFromText(text: string): Partial<LeadSignals> {
   const email = text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0] || null;
@@ -61,6 +66,29 @@ export default function ChatWidget() {
   const [errorText, setErrorText] = useState("");
 
   const viewportRef = useRef<HTMLDivElement>(null);
+  const leadEventFired = useRef(false);
+
+  useEffect(() => {
+    if (leadSignals.email && !leadEventFired.current) {
+      leadEventFired.current = true;
+      trackEvent("chat_lead_captured", { form_name: "klyn_chatbot" });
+      // Persist lead in CMS (fire-and-forget)
+      fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "AI_DEMO",
+          email: leadSignals.email,
+          name: leadSignals.name || undefined,
+          source: "klyn_chatbot",
+          metadata: {
+            budget: leadSignals.budget || undefined,
+            companySize: leadSignals.companySize || undefined,
+          },
+        }),
+      }).catch(() => {});
+    }
+  }, [leadSignals]);
 
   const userMessageCount = useMemo(
     () => messages.filter((message) => message.role === "user").length,
@@ -202,7 +230,7 @@ export default function ChatWidget() {
           id: crypto.randomUUID(),
           role: "assistant",
           content:
-            "I am having trouble right now. You can continue via the contact form or email hello.neoklyn@gmail.com.",
+            "I am having trouble right now. For the fastest response, tap WhatsApp above — or continue via the contact form or email hello@neoklyn.com.",
         },
       ]);
       setErrorText("Network error. Please try again.");
@@ -229,7 +257,7 @@ export default function ChatWidget() {
         id: crypto.randomUUID(),
         role: "assistant",
         content:
-          "We have reached the 20-message limit for this quick chat. Please continue on the contact form or book directly at https://cal.com/neoklyn.",
+          "We have reached the 20-message limit for this quick chat. For the fastest response, tap WhatsApp above — or continue on the contact form or book directly at https://cal.com/neoklyn.",
       },
     ]);
   }, [hasReachedLimit, messages]);
@@ -248,6 +276,16 @@ export default function ChatWidget() {
                 -
               </button>
             </div>
+
+            <a
+              className="nk-whatsapp-cta"
+              href={WHATSAPP_CHAT_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent("chat_whatsapp_click", { form_name: "klyn_chatbot" })}
+            >
+              💬 Chat on WhatsApp — fastest reply
+            </a>
 
             <div className="nk-chat-viewport" ref={viewportRef}>
               {messages.map((message) => (
@@ -375,7 +413,7 @@ export default function ChatWidget() {
           -webkit-backdrop-filter: blur(16px);
           box-shadow: 0 28px 54px rgba(0, 0, 0, 0.5);
           display: grid;
-          grid-template-rows: auto 1fr auto;
+          grid-template-rows: auto auto 1fr auto;
           animation: nk-chat-open 0.22s ease;
           transform-origin: bottom right;
         }
@@ -422,6 +460,30 @@ export default function ChatWidget() {
           background: rgba(255, 255, 255, 0.05);
           color: var(--white);
           cursor: pointer;
+        }
+
+        .nk-whatsapp-cta {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.4rem;
+          margin: 0.7rem 0.9rem 0;
+          padding: 0.55rem 0.7rem;
+          border-radius: 10px;
+          border: 1px solid rgba(37, 211, 102, 0.4);
+          background: rgba(37, 211, 102, 0.12);
+          color: #4ade80;
+          text-decoration: none;
+          font-size: 0.76rem;
+          font-weight: 600;
+          font-family: 'JetBrains Mono', monospace;
+          letter-spacing: 0.02em;
+          transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .nk-whatsapp-cta:hover {
+          background: rgba(37, 211, 102, 0.2);
+          transform: translateY(-1px);
         }
 
         .nk-chat-viewport {

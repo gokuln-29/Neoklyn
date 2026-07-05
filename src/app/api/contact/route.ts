@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { sendMail } from '@/lib/mailer';
+import { db } from '@/lib/db';
+
+const NOTIFY_EMAIL = 'hello@neoklyn.com';
 
 export async function POST(req: NextRequest) {
     try {
@@ -10,13 +13,22 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Email is required' }, { status: 400 });
         }
 
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.GMAIL_USER,
-                pass: process.env.GMAIL_APP_PASSWORD,
-            },
-        });
+        // Persist lead to CMS database (don't block email on failure)
+        try {
+            await db.lead.create({
+                data: {
+                    type: 'CONTACT',
+                    email,
+                    name: name || null,
+                    company: company || null,
+                    message: details || null,
+                    source: type === 'quote' ? 'cta_email_capture' : 'contact_form',
+                    metadata: budget ? { budget } : undefined,
+                },
+            });
+        } catch (dbError) {
+            console.error('Lead persistence error:', dbError);
+        }
 
         let subject: string;
         let html: string;
@@ -79,9 +91,9 @@ export async function POST(req: NextRequest) {
             `;
         }
 
-        await transporter.sendMail({
-            from: `"NeoKlyn Website" <${process.env.GMAIL_USER}>`,
-            to: process.env.GMAIL_USER,
+        await sendMail({
+            from: `"NeoKlyn Website" <${NOTIFY_EMAIL}>`,
+            to: NOTIFY_EMAIL,
             replyTo: email,
             subject,
             html,

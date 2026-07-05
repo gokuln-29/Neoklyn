@@ -7,6 +7,17 @@ import remarkGfm from "remark-gfm";
 import PageWrapper from "@/components/layout/PageWrapper";
 import ArticleClientTools from "@/components/insights/ArticleClientTools";
 import { AUTHOR } from "@/data/author";
+
+const CATEGORY_TO_SERVICE: Record<string, { path: string; label: string }> = {
+  "web-development": { path: "/services/web", label: "Web Development" },
+  "ai-agents": { path: "/services/ai-agents", label: "AI Agents" },
+  "gen-ai": { path: "/services/gen-ai", label: "Generative AI" },
+  "mobile-apps": { path: "/services/mobile", label: "Mobile Apps" },
+  "ecommerce": { path: "/services/ecommerce", label: "Ecommerce" },
+  "3d-immersive": { path: "/services/3d", label: "3D & Immersive" },
+  "digital-marketing": { path: "/services/marketing", label: "Digital Marketing" },
+  "ui-ux-branding": { path: "/services/branding", label: "UI/UX & Branding" },
+};
 import {
   getAllInsightSummaries,
   getInsightBySlug,
@@ -44,6 +55,9 @@ function extractMdxHeadings(markdown: string): TocItem[] {
       id: slugifyHeading(title),
     }));
 }
+
+// Re-render pages every 5 minutes so CMS edits and newly published posts appear
+export const revalidate = 300;
 
 export async function generateStaticParams() {
   const posts = await getAllInsightSummaries();
@@ -124,6 +138,7 @@ export default async function BlogPostPage({
   const post = insight.post;
   const tsPost = insight.source === "ts" ? insight.post : null;
   const mdxPost = insight.source === "mdx" ? insight.post : null;
+  const dbPost = insight.source === "db" ? insight.post : null;
 
   const tocItems: TocItem[] =
     tsPost
@@ -137,12 +152,28 @@ export default async function BlogPostPage({
             title: "Conclusion",
           },
         ]
-      : mdxPost && mdxPost.outline.length
-        ? mdxPost.outline.map((title) => ({
+      : dbPost
+        ? dbPost.outline.map((title) => ({
             title,
             id: slugifyHeading(title),
           }))
-        : extractMdxHeadings(mdxPost?.body || "");
+        : mdxPost && mdxPost.outline.length
+          ? mdxPost.outline.map((title) => ({
+              title,
+              id: slugifyHeading(title),
+            }))
+          : extractMdxHeadings(mdxPost?.body || "");
+
+  // Add heading ids to CMS post HTML so the table of contents anchors work
+  const dbContentHtml = dbPost
+    ? dbPost.contentHtml.replace(
+        /<h2([^>]*)>(.*?)<\/h2>/gi,
+        (_m, attrs: string, inner: string) => {
+          const text = inner.replace(/<[^>]+>/g, "").trim();
+          return `<h2${attrs} id="${slugifyHeading(text)}">${inner}</h2>`;
+        }
+      )
+    : null;
 
   const mdxCompiled = mdxPost
       ? await compileMDX({
@@ -264,6 +295,11 @@ export default async function BlogPostPage({
                   <p>{tsPost.content.conclusion}</p>
                 </section>
               </>
+            ) : dbPost ? (
+              <div
+                className="ins-mdx-body"
+                dangerouslySetInnerHTML={{ __html: dbContentHtml || "" }}
+              />
             ) : (
               <div className="ins-mdx-body">{mdxCompiled?.content}</div>
             )}
@@ -298,6 +334,17 @@ export default async function BlogPostPage({
             <Link href="/contact" className="btn-main">
               Talk to our engineering team
             </Link>
+            {CATEGORY_TO_SERVICE[post.categorySlug] && (
+              <div style={{ marginTop: "1.2rem", fontSize: "0.85rem", color: "var(--muted)" }}>
+                Explore our{" "}
+                <Link
+                  href={CATEGORY_TO_SERVICE[post.categorySlug].path}
+                  style={{ color: "var(--cyan)", textDecoration: "underline" }}
+                >
+                  {CATEGORY_TO_SERVICE[post.categorySlug].label} service →
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </section>

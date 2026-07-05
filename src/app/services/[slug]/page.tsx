@@ -3,7 +3,49 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ServiceHeroAnimation from "@/components/ServiceHeroAnimation";
-import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
+import { breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/schema";
+
+const serviceFaqs: Record<string, { question: string; answer: string }[]> = {
+    web: [
+        { question: "What technologies does NeoKlyn use for web development?", answer: "We build with React, Next.js, and TypeScript, using headless CMS platforms like Sanity for content management and deploying on modern edge infrastructure for maximum performance." },
+        { question: "How long does a web development project take?", answer: "MVP web applications take 6-12 weeks. Full-scale enterprise web platforms take 3-6 months depending on scope and integrations." },
+        { question: "How much does a website cost at NeoKlyn?", answer: "Enterprise web projects start at $5K USD. Pricing depends on scope, design complexity, and integrations. Get a free AI-powered estimate at neoklyn.com/estimate." },
+    ],
+    mobile: [
+        { question: "Does NeoKlyn build both iOS and Android apps?", answer: "Yes. We build for both platforms using modern cross-platform tooling, delivering native-quality performance from a single codebase." },
+        { question: "How long does mobile app development take?", answer: "Mobile apps typically require 8-16 weeks depending on feature complexity, integrations, and platform requirements." },
+        { question: "How much does a mobile app cost?", answer: "Mobile projects start at $5K USD depending on scope. Use the free estimator at neoklyn.com/estimate for a tailored budget." },
+    ],
+    ecommerce: [
+        { question: "Does NeoKlyn work with Shopify?", answer: "Yes. We build both Shopify storefronts and fully custom ecommerce platforms, including B2B portals with RFQ systems." },
+        { question: "Can NeoKlyn migrate my existing store?", answer: "Yes. We handle platform migrations including product data, SEO preservation, and redirect strategies to protect existing search rankings." },
+        { question: "What makes NeoKlyn ecommerce builds different?", answer: "Every build is engineered for conversion: fast page loads, optimized checkout flows, and analytics instrumentation from day one." },
+    ],
+    marketing: [
+        { question: "What digital marketing services does NeoKlyn offer?", answer: "SEO, performance marketing, content strategy, and growth engineering — focused on measurable organic and paid acquisition." },
+        { question: "How long until SEO results show?", answer: "Technical SEO improvements can show within weeks. Meaningful organic growth from content typically takes 3-6 months of consistent execution." },
+        { question: "Does NeoKlyn handle both organic and paid marketing?", answer: "Yes. We combine SEO-driven organic growth with performance marketing campaigns, sharing one analytics foundation for accurate attribution." },
+    ],
+    "3d": [
+        { question: "What 3D technologies does NeoKlyn use?", answer: "We build with Three.js, WebGL, and React Three Fiber to deliver cinema-quality 3D experiences that run in any browser without plugins." },
+        { question: "Do 3D websites hurt performance?", answer: "Not when engineered properly. We use progressive loading, level-of-detail optimization, and GPU-aware rendering so 3D experiences stay fast on all devices." },
+        { question: "What are 3D web experiences used for?", answer: "Interactive product visualization, virtual showrooms, configurators, and immersive brand storytelling that flat interfaces can't match." },
+    ],
+    branding: [
+        { question: "What does NeoKlyn's branding service include?", answer: "Brand identity, product design, UI/UX design systems, and visual language development for digital-first brands." },
+        { question: "Can NeoKlyn redesign an existing product?", answer: "Yes. We audit existing products, identify UX friction, and deliver redesigns that improve both aesthetics and conversion metrics." },
+    ],
+    "ai-agents": [
+        { question: "What are AI agents and how can they help my business?", answer: "AI agents are LLM-powered systems that autonomously handle tasks like lead qualification, customer support, and workflow automation. They work 24/7 and integrate with your existing tools." },
+        { question: "Does NeoKlyn build production-ready AI agents?", answer: "Yes. We build production-grade agents with proper guardrails, evaluation, and monitoring — integrated with your CRM, helpdesk, or internal systems, not just demos." },
+        { question: "How much does a custom AI agent cost?", answer: "AI agent projects start at $5K USD depending on complexity, integrations, and model requirements. Get a free estimate at neoklyn.com/estimate." },
+    ],
+    "gen-ai": [
+        { question: "What generative AI services does NeoKlyn offer?", answer: "GenAI product development including RAG systems, AI content pipelines, LLM integration into existing products, and custom AI tooling." },
+        { question: "Which AI models does NeoKlyn work with?", answer: "We work with leading model providers and select the right model per use case, balancing capability, latency, and cost for production workloads." },
+        { question: "Can NeoKlyn add AI to my existing product?", answer: "Yes. We specialize in integrating LLM capabilities into existing web and mobile products with proper evaluation and safety guardrails." },
+    ],
+};
 
 // Local data for all services
 const servicesData = {
@@ -405,6 +447,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         { name: "Services", url: "https://neoklyn.com/services" },
         { name: serviceName, url: `https://neoklyn.com/services/${slug}` },
     ]);
+    const faqStructuredData = serviceFaqs[slug] ? faqSchema(serviceFaqs[slug]) : null;
 
     return (
         <PageWrapper>
@@ -416,6 +459,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
             />
+            {faqStructuredData && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+                />
+            )}
 
             {/* ─── HERO SECTION ─── */}
             <section className="svc-hero">

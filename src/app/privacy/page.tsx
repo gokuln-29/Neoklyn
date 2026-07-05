@@ -5,6 +5,19 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Privacy Policy | NeoKlyn",
     description: "Learn how NeoKlyn collects, uses, and protects your personal data. Compliant with GDPR, UK GDPR, and India DPDP Act 2023.",
+    alternates: { canonical: "https://neoklyn.com/privacy" },
+    openGraph: {
+        title: "Privacy Policy | NeoKlyn",
+        description: "Learn how NeoKlyn collects, uses, and protects your personal data. Compliant with GDPR, UK GDPR, and India DPDP Act 2023.",
+        url: "https://neoklyn.com/privacy",
+        siteName: "NeoKlyn",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Privacy Policy | NeoKlyn",
+        description: "Learn how NeoKlyn collects, uses, and protects your personal data.",
+    },
 };
 
 export default function PrivacyPolicyPage() {
@@ -158,7 +171,7 @@ export default function PrivacyPolicyPage() {
                         </ul>
 
                         <p style={{ marginTop: '1rem' }}>
-                            To exercise any of these rights, please contact us at <a href="mailto:hello.neoklyn@gmail.com" style={linkStyle}>hello.neoklyn@gmail.com</a>. We will respond to your request within 30 days.
+                            To exercise any of these rights, please contact us at <a href="mailto:hello@neoklyn.com" style={linkStyle}>hello@neoklyn.com</a>. We will respond to your request within 30 days.
                         </p>
                     </div>
 
@@ -209,7 +222,7 @@ export default function PrivacyPolicyPage() {
                         <div style={{ ...cardStyle, marginTop: '1rem' }}>
                             <p><strong style={{ color: 'var(--white)' }}>NeoKlyn</strong></p>
                             <p>Bengaluru, Karnataka, India</p>
-                            <p>Email: <a href="mailto:hello.neoklyn@gmail.com" style={linkStyle}>hello.neoklyn@gmail.com</a></p>
+                            <p>Email: <a href="mailto:hello@neoklyn.com" style={linkStyle}>hello@neoklyn.com</a></p>
                         </div>
                     </div>
 

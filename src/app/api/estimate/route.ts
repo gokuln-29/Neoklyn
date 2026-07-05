@@ -1,5 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { Resend } from "resend";
+import { sendMail, isMailerConfigured } from "@/lib/mailer";
 import { NextRequest, NextResponse } from "next/server";
 import {
   ESTIMATE_FEATURES,
@@ -265,12 +265,11 @@ export async function POST(req: NextRequest) {
     const features = rawFeatures.filter((feature): feature is string => allowedFeatures.has(feature));
 
     const anthropicKey = process.env.ANTHROPIC_API_KEY;
-    const resendKey = process.env.RESEND_API_KEY;
     if (!anthropicKey) {
       return NextResponse.json({ error: "Missing ANTHROPIC_API_KEY." }, { status: 500 });
     }
-    if (!resendKey) {
-      return NextResponse.json({ error: "Missing RESEND_API_KEY." }, { status: 500 });
+    if (!isMailerConfigured()) {
+      return NextResponse.json({ error: "Email is not configured (SMTP_* env vars)." }, { status: 500 });
     }
 
     const fallback = buildFallbackEstimate({
@@ -280,6 +279,23 @@ export async function POST(req: NextRequest) {
       timeline,
       email,
     });
+
+    // Persist lead to CMS database (don't block the estimate on failure)
+    try {
+      const { db } = await import("@/lib/db");
+      await db.lead.create({
+        data: {
+          type: "CONSULTATION",
+          email,
+          name,
+          company: company || null,
+          source: "estimate_wizard",
+          metadata: { projectType, features, scale, timeline },
+        },
+      });
+    } catch (dbError) {
+      console.error("Lead persistence error:", dbError);
+    }
 
     const anthropic = new Anthropic({ apiKey: anthropicKey });
     const completion = await anthropic.messages.create({
@@ -311,10 +327,9 @@ export async function POST(req: NextRequest) {
     const parsed = parseEstimateJson(raw);
     const estimate = normalizeEstimate(parsed, fallback);
 
-    const resend = new Resend(resendKey);
-    await resend.emails.send({
-      from: "NeoKlyn Estimator <onboarding@resend.dev>",
-      to: [email],
+    await sendMail({
+      from: '"NeoKlyn Estimator" <hello@neoklyn.com>',
+      to: email,
       subject: `Your NeoKlyn estimate for ${projectType}`,
       html: `
         <div style="font-family:Segoe UI,Arial,sans-serif;max-width:620px;margin:0 auto;background:#0c0c12;color:#f4f4f5;border-radius:14px;border:1px solid rgba(255,255,255,0.08);overflow:hidden;">
@@ -340,7 +355,7 @@ export async function POST(req: NextRequest) {
             </a>
           </div>
           <div style="padding:14px 28px;border-top:1px solid rgba(255,255,255,0.08);font-size:12px;color:#71717a;">
-            NeoKlyn • Bengaluru • hello.neoklyn@gmail.com
+            NeoKlyn • Bengaluru • hello@neoklyn.com
           </div>
         </div>
       `,

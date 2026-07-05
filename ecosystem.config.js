@@ -3,8 +3,14 @@ module.exports = {
     {
       name: "neoklyn-prod",
       script: "./.next/standalone/server.js",
+      cwd: __dirname,
       instances: "max",
       exec_mode: "cluster",
+      // Loads DATABASE_URL, NEXTAUTH_SECRET, GROQ_API_KEY, SMTP_*, CLOUDINARY_*, etc.
+      // from the project's .env file into the process environment. Without this,
+      // the standalone server.js (which does NOT read .env on its own) starts with
+      // none of those variables set, breaking auth, the database, email, and AI.
+      env_file: ".env",
       env: {
         NODE_ENV: "production",
         PORT: 3000,

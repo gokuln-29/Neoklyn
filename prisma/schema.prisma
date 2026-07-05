@@ -1,0 +1,370 @@
+// Neoklyn CMS — Prisma Schema
+// PostgreSQL database with full CMS models
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ──────────────────────────────────────────────
+
+enum UserRole {
+  ADMIN
+  EDITOR
+  AUTHOR
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+  ARCHIVED
+}
+
+enum LeadType {
+  CONTACT
+  CONSULTATION
+  NEWSLETTER
+  AI_DEMO
+  PDF_DOWNLOAD
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  CLOSED
+}
+
+enum SettingGroup {
+  GENERAL
+  SEO
+  SOCIAL
+  FOOTER
+  NAV
+  HOMEPAGE
+}
+
+// ─── User ───────────────────────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      UserRole @default(AUTHOR)
+  avatar    String?
+  bio       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  posts      Post[]
+  revisions  PostRevision[]
+  media      Media[]
+  auditLogs  AuditLog[]
+
+  @@map("users")
+}
+
+// ─── Post (Blog) ────────────────────────────────────────
+
+model Post {
+  id           String     @id @default(cuid())
+  title        String
+  slug         String     @unique
+  excerpt      String?    @db.Text
+  content      Json?      // Tiptap JSON document
+  contentHtml  String?    @db.Text // Pre-rendered HTML for public display
+  featuredImage String?
+  status       PostStatus @default(DRAFT)
+  publishedAt  DateTime?
+  scheduledAt  DateTime?
+  views        Int        @default(0)
+  readTime     String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  authorId     String
+  author       User       @relation(fields: [authorId], references: [id])
+
+  categoryId   String?
+  category     Category?  @relation(fields: [categoryId], references: [id])
+
+  tags         PostTag[]
+  seoMetadata  SeoMetadata?
+  revisions    PostRevision[]
+
+  @@index([status])
+  @@index([publishedAt])
+  @@index([categoryId])
+  @@index([authorId])
+  @@map("posts")
+}
+
+// ─── Category ───────────────────────────────────────────
+
+model Category {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  slug        String  @unique
+  description String? @db.Text
+  color       String  @default("#06B6D4")
+  icon        String?
+  sortOrder   Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  posts       Post[]
+  faqs        FAQ[]
+
+  @@map("categories")
+}
+
+// ─── Tag ────────────────────────────────────────────────
+
+model Tag {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  slug        String  @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  posts       PostTag[]
+
+  @@map("tags")
+}
+
+// ─── PostTag (M2M join) ─────────────────────────────────
+
+model PostTag {
+  postId String
+  tagId  String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([postId, tagId])
+  @@map("post_tags")
+}
+
+// ─── SEO Metadata ───────────────────────────────────────
+
+model SeoMetadata {
+  id              String  @id @default(cuid())
+  postId          String  @unique
+  post            Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  seoTitle        String?
+  metaDescription String? @db.Text
+  canonicalUrl    String?
+  focusKeyword    String?
+  keywords        String[] @default([])
+  robots          String   @default("index, follow")
+  ogTitle         String?
+  ogDescription   String?  @db.Text
+  ogImage         String?
+  twitterCard     String   @default("summary_large_image")
+  schemaJsonLd    Json?
+  breadcrumbSchema Json?
+
+  @@map("seo_metadata")
+}
+
+// ─── Post Revision ──────────────────────────────────────
+
+model PostRevision {
+  id        String   @id @default(cuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  title     String
+  content   Json?
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([postId])
+  @@map("post_revisions")
+}
+
+// ─── Media ──────────────────────────────────────────────
+
+model Media {
+  id           String   @id @default(cuid())
+  filename     String
+  url          String
+  publicId     String?  // Cloudinary public ID
+  mimeType     String
+  size         Int      // Bytes
+  width        Int?
+  height       Int?
+  altText      String?
+  folder       String   @default("general")
+  uploadedById String
+  uploadedBy   User     @relation(fields: [uploadedById], references: [id])
+  createdAt    DateTime @default(now())
+
+  @@index([folder])
+  @@index([mimeType])
+  @@map("media")
+}
+
+// ─── Lead ───────────────────────────────────────────────
+
+model Lead {
+  id        String     @id @default(cuid())
+  type      LeadType
+  name      String?
+  email     String
+  phone     String?
+  company   String?
+  message   String?    @db.Text
+  source    String?    // Which page/form the lead came from
+  status    LeadStatus @default(NEW)
+  metadata  Json?      // Additional data (budget, service type, etc.)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([type])
+  @@index([status])
+  @@index([createdAt])
+  @@map("leads")
+}
+
+// ─── Service ────────────────────────────────────────────
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?  @db.Text
+  content     Json?    // Rich text content
+  icon        String?
+  color       String   @default("#06B6D4")
+  features    String[] @default([])
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  seoMetadata Json?    // Inline SEO for services
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("services")
+}
+
+// ─── Case Study ─────────────────────────────────────────
+
+model CaseStudy {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  client        String
+  description   String?  @db.Text
+  content       Json?    // Rich text content
+  featuredImage String?
+  results       Json?    // { metric: string, value: string }[]
+  technologies  String[] @default([])
+  sortOrder     Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("case_studies")
+}
+
+// ─── Testimonial ────────────────────────────────────────
+
+model Testimonial {
+  id        String  @id @default(cuid())
+  author    String
+  company   String?
+  role      String?
+  content   String  @db.Text
+  avatar    String?
+  rating    Int     @default(5)
+  isActive  Boolean @default(true)
+  sortOrder Int     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+// ─── FAQ ────────────────────────────────────────────────
+
+model FAQ {
+  id         String    @id @default(cuid())
+  question   String
+  answer     String    @db.Text
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  sortOrder  Int       @default(0)
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@map("faqs")
+}
+
+// ─── Team Member ────────────────────────────────────────
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  bio         String?  @db.Text
+  avatar      String?
+  socialLinks Json?    // { github?: string, linkedin?: string, twitter?: string }
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("team_members")
+}
+
+// ─── Site Setting ───────────────────────────────────────
+
+model SiteSetting {
+  id    String       @id @default(cuid())
+  key   String       @unique
+  value Json
+  group SettingGroup @default(GENERAL)
+  label String?      // Human-readable label for the admin UI
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([group])
+  @@map("site_settings")
+}
+
+// ─── Newsletter Subscriber ──────────────────────────────
+
+model NewsletterSubscriber {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  isActive     Boolean  @default(true)
+  subscribedAt DateTime @default(now())
+
+  @@map("newsletter_subscribers")
+}
+
+// ─── Audit Log ──────────────────────────────────────────
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  action    String   // CREATE, UPDATE, DELETE, LOGIN, LOGOUT, etc.
+  entity    String   // Post, Category, Tag, etc.
+  entityId  String?
+  metadata  Json?    // Additional context
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([entity])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

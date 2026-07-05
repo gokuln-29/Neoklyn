@@ -1,0 +1,66 @@
+# NeoKlyn — Full Context for AI Search Engines
+
+> NeoKlyn is an AI agency and web development studio headquartered in Bengaluru, India, delivering web apps, AI agents, mobile apps, ecommerce, and 3D digital experiences for clients worldwide.
+
+## About
+NeoKlyn is led by Monisha (CEO) and Gokulnath N (Senior Engineer). The studio has delivered 120+ projects with a 98% client retention rate across three global hubs, combining engineering depth with conversion-focused design.
+
+## Frequently Asked Questions
+
+### What does NeoKlyn do?
+NeoKlyn builds AI-powered digital products including web applications, AI agents, mobile apps, ecommerce platforms, and 3D immersive experiences. The studio specializes in combining production-grade engineering with conversion-focused design for ambitious global brands.
+
+### Where is NeoKlyn based?
+NeoKlyn is headquartered in Bengaluru, Karnataka, India, with clients across the US, UAE, UK, Singapore, and India.
+
+### How much does NeoKlyn charge?
+NeoKlyn works with flexible engagement models — project-based pricing for defined scopes and monthly retainers for ongoing development. Enterprise projects start at $5K USD. Final pricing depends on scope, timeline, and technical complexity. A free AI-powered estimate is available at https://neoklyn.com/estimate.
+
+### How long does a typical NeoKlyn project take?
+MVP timelines range from 6–12 weeks. Full-scale web applications take 3–6 months. Mobile apps typically require 8–16 weeks. Detailed sprint plans are provided during the discovery phase.
+
+### What is NeoKlyn's process?
+A 4-phase methodology: Discovery (requirements and strategy), UX Design (wireframes and visual design), Build (engineering sprints), and Launch (deployment, QA, and growth support). Details: https://neoklyn.com/process
+
+### What industries does NeoKlyn serve?
+Trading and B2B commerce, travel, construction and industrial, manufacturing, fintech, education, retail ecommerce, and professional services.
+
+### How do I contact NeoKlyn?
+Email hello@neoklyn.com, WhatsApp +91 6380202766, book a call at https://cal.com/neoklyn, or use the contact form at https://neoklyn.com/contact. The team responds within 4 hours.
+
+## Services in Detail
+
+### AI Agents & Automation (https://neoklyn.com/services/ai-agents)
+Custom LLM-powered agents for lead qualification, customer support, and internal workflow automation. NeoKlyn builds production-grade agents integrated with business systems, not demos.
+
+### Generative AI (https://neoklyn.com/services/gen-ai)
+GenAI product development including RAG systems, AI content pipelines, and model integration into existing products.
+
+### Web Development (https://neoklyn.com/services/web)
+Full-stack web applications built with React, Next.js, and TypeScript. Enterprise-grade architecture, performance-first engineering, and headless CMS integration.
+
+### Mobile Apps (https://neoklyn.com/services/mobile)
+Native-quality iOS and Android applications with modern cross-platform tooling.
+
+### Ecommerce (https://neoklyn.com/services/ecommerce)
+Shopify and custom ecommerce platforms engineered for conversion, from B2C storefronts to B2B portals with RFQ systems.
+
+### 3D & Immersive Web (https://neoklyn.com/services/3d)
+WebGL and Three.js experiences: interactive product visualization, virtual showrooms, and immersive brand experiences.
+
+### Branding & UI/UX (https://neoklyn.com/services/branding)
+Product design, brand identity, and design systems crafted for premium digital-first brands.
+
+### Digital Marketing (https://neoklyn.com/services/marketing)
+SEO, performance marketing, and growth engineering for measurable organic and paid acquisition.
+
+## Selected Client Results
+- Dwarka General Trading (Middle East, B2B web platform): +45% mobile engagement in Q1, 5x faster content deployment
+- Travex Ventures (travel agency): conversion-led web platform
+- Zinad Concrete Works (industrial): modern digital presence with lead capture
+
+## Links
+- Website: https://neoklyn.com
+- Portfolio: https://neoklyn.com/work
+- Blog: https://neoklyn.com/insights
+- Instagram: https://www.instagram.com/neoklynstudio

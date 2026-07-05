@@ -1,4 +1,26 @@
 import CTASection from "@/components/CTASection";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Our Process — Discovery to Launch",
+    description:
+        "NeoKlyn's 4-phase engineering process: Discovery, UX Design, Build, and Launch. A rigorous methodology that delivers enterprise-grade products on time.",
+    alternates: { canonical: "https://neoklyn.com/process" },
+    openGraph: {
+        title: "Our Process — Discovery to Launch | NeoKlyn",
+        description:
+            "NeoKlyn's 4-phase engineering process: Discovery, UX Design, Build, and Launch. A rigorous methodology that delivers enterprise-grade products on time.",
+        url: "https://neoklyn.com/process",
+        siteName: "NeoKlyn",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Our Process — Discovery to Launch | NeoKlyn",
+        description:
+            "NeoKlyn's 4-phase engineering process: Discovery, UX Design, Build, and Launch.",
+    },
+};
 
 const faqSchema = {
     "@context": "https://schema.org",

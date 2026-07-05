@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { projects, projectsBySlug } from "../projects";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -32,6 +33,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       siteName: "NeoKlyn",
       type: "article",
     },
+    alternates: { canonical: `https://neoklyn.com/work/${project.slug}` },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: pageDescription,
+    },
   };
 }
 
@@ -49,8 +56,18 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     notFound();
   }
 
+  const breadcrumbs = breadcrumbSchema([
+    { name: "Home", url: "https://neoklyn.com" },
+    { name: "Work", url: "https://neoklyn.com/work" },
+    { name: project.client, url: `https://neoklyn.com/work/${project.slug}` },
+  ]);
+
   return (
     <PageWrapper>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <section className="section" style={{ paddingTop: "145px" }}>
         <div className="case-shell" style={{ "--case-accent": project.color } as CSSProperties}>
           <div className="reveal case-breadcrumbs">

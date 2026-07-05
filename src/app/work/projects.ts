@@ -84,7 +84,7 @@ export const projects: Project[] = [
     filters: ["Web"],
     location: "India",
     color: "var(--violet)",
-    image: "/assets/work/travex.png",
+    image: "/assets/work/Aathithyan.jpg",
     liveUrl: "https://aathithyan.com",
     keyMetric: "Pixel-perfect luxury positioning",
     description:
@@ -182,7 +182,7 @@ export const projects: Project[] = [
     filters: ["Manufacturing"],
     location: "India",
     color: "var(--cyan)",
-    image: "/assets/work/zinad.jpg",
+    image: "/assets/work/lpsmpvtltd.jpg",
     liveUrl: "https://lpsm.in",
     keyMetric: "Zero-downtime migration",
     description:
@@ -204,6 +204,40 @@ export const projects: Project[] = [
         { metric: "-32%", description: "Infra cost optimization" },
       ],
     },
+  },
+  {
+    slug: "sharon-physio",
+    client: "Sharon Physio",
+    title: "A Booking-First Website for a Growing Physiotherapy Clinic",
+    tagline: "A clean, trust-building clinic website engineered to turn visitors into booked appointments.",
+    category: "Physiotherapy Clinic",
+    filters: ["Web"],
+    location: "Madurai, Tamil Nadu, India",
+    color: "var(--blue)",
+    image: "/assets/work/sharon-physio.jpg",
+    liveUrl: "https://sharonphysio.com/",
+    keyMetric: "+30% booking inquiries",
+    description:
+      "We rebuilt Sharon Physio's online presence into a fast, credible clinic website with a frictionless appointment booking flow.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    caseStudy: {
+      overview: [
+        "Sharon Physio had strong local trust and clinical expertise, but their old website made it difficult for new patients to understand services or book an appointment, especially on mobile.",
+        "NeoKlyn redesigned the site around one goal: getting a visitor from 'searching for a physiotherapist' to 'booked appointment' in as few steps as possible. We simplified the service pages, added clear calls to action, and built a clean, mobile-first layout that reflects the clinic's professionalism.",
+        "The result was a website that felt as trustworthy as the clinic itself, with a noticeable lift in patients reaching out to book care.",
+      ],
+      challenge:
+        "An outdated, hard-to-navigate website that made it difficult for prospective patients to find services or book appointments, especially on mobile.",
+      solution:
+        "A fast, mobile-first Next.js rebuild with clear service pages, streamlined appointment CTAs, and a trust-focused design suited to a healthcare practice.",
+      results: [
+        { metric: "+30%", description: "Increase in booking inquiries" },
+        { metric: "Mobile-first", description: "Fully responsive patient experience" },
+        { metric: "Faster", description: "Page loads and appointment flow" },
+      ],
+    },
+    seoTitle: "Sharon Physio Case Study — NeoKlyn",
+    seoDescription: "How NeoKlyn redesigned a physiotherapy clinic website to increase booking inquiries by 30%.",
   },
 ];
 

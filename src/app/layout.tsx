@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Effects from "@/components/Effects";
 import SchemaData from "@/components/SchemaData";
-import JsonLd from "@/components/JsonLd";
+import PublicChrome from "@/components/PublicChrome";
 import ChatWidget from "@/components/ChatWidget";
 import Script from "next/script";
 import "./globals.css";
@@ -12,11 +12,15 @@ import "./globals.css";
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -40,7 +44,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "NeoKlyn - AI Agency & Web Development Studio",
@@ -54,12 +58,14 @@ export const metadata: Metadata = {
     title: "AI Agency & Web Development Studio — NeoKlyn",
     description:
       "Web apps, AI Agents, Ecommerce & 3D experiences engineered for conversion. Based in Bengaluru.",
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image"],
   },
   // Replace with your actual code from Google Search Console > Settings > Ownership verification > HTML tag method
   verification: {
-
-    google: "PASTE_YOUR_VERIFICATION_CODE_HERE",
+    google: "eae07f2fdc2af551",
+    other: {
+      "msvalidate.01": "F4C64E2701668A1315B564F7902724B9",
+    },
   },
 };
 
@@ -72,10 +78,9 @@ export default function RootLayout({
 <html lang="en" data-scroll-behavior="smooth">
       <body className={`${spaceGrotesk.variable} ${jetBrainsMono.variable} antialiased`}>
         {/* Google Tag Manager noscript fallback */}
-        {/* TODO: Replace GTM-XXXXXXX with your actual GTM container ID */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-K4425M6M"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
@@ -83,14 +88,13 @@ export default function RootLayout({
         </noscript>
 
         {/* Google Tag Manager */}
-        {/* TODO: Replace GTM-XXXXXXX with your actual GTM container ID */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-XXXXXXX');
+            })(window,document,'script','dataLayer','GTM-K4425M6M');
           `}
         </Script>
 
@@ -117,13 +121,16 @@ export default function RootLayout({
           `}
         </Script> */}
 
-        <JsonLd />
         <SchemaData />
-        <Effects />
-        <Navbar />
+        <PublicChrome>
+          <Effects />
+          <Navbar />
+        </PublicChrome>
         {children}
-        <Footer />
-        <ChatWidget />
+        <PublicChrome>
+          <Footer />
+          <ChatWidget />
+        </PublicChrome>
       </body>
     </html>
   );

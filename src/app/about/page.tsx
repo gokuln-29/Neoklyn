@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 import AboutStats from "@/components/about/AboutStats";
+import { faqSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: {
@@ -18,6 +19,13 @@ export const metadata: Metadata = {
     url: "https://neoklyn.com/about",
     siteName: "NeoKlyn",
     type: "website",
+  },
+  alternates: { canonical: "https://neoklyn.com/about" },
+  twitter: {
+    card: "summary_large_image",
+    title: "About NeoKlyn — AI, Web & Product Engineering Team",
+    description:
+      "Meet NeoKlyn's Bengaluru-based team building AI agents, web platforms, mobile apps, and growth systems for ambitious global brands.",
   },
 };
 
@@ -105,9 +113,31 @@ const globalPresence = [
   { city: "Anywhere", flag: "✨", label: "Perfect Execution" },
 ];
 
+const aboutFaqs = faqSchema([
+  {
+    question: "Who founded NeoKlyn?",
+    answer:
+      "NeoKlyn is led by Monisha (CEO) and Gokulnath N (Senior Engineer), a multidisciplinary team of engineers, designers, and strategists based in Bengaluru, India.",
+  },
+  {
+    question: "Where is NeoKlyn located?",
+    answer:
+      "NeoKlyn is headquartered in Bengaluru, Karnataka, India, serving clients across the US, UAE, UK, Singapore, and India.",
+  },
+  {
+    question: "What makes NeoKlyn different from other agencies?",
+    answer:
+      "NeoKlyn combines production-grade engineering with conversion-focused design. The studio has delivered 120+ projects with a 98% client retention rate, shipping systems engineered for long-term scale rather than throwaway MVPs.",
+  },
+]);
+
 export default function AboutPage() {
   return (
     <PageWrapper>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutFaqs) }}
+      />
       <section className="section">
         <PageHeader
           label="About NeoKlyn"
@@ -210,9 +240,9 @@ export default function AboutPage() {
                 <line x1="22" y1="11" x2="16" y2="11" />
               </svg>
             </div>
-            <h3>We're Hiring</h3>
+            <h3>We&apos;re Hiring</h3>
             <p className="about-role">JOIN OUR TEAM</p>
-            <p className="about-bio">We're always looking for talented designers, developers, and strategists who care about craft and results.</p>
+            <p className="about-bio">We&apos;re always looking for talented designers, developers, and strategists who care about craft and results.</p>
             <Link href="/contact" className="about-hiring-btn">
               Get in Touch →
             </Link>

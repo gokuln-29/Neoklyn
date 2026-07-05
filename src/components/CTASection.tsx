@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { trackEvent } from '@/lib/track';
 
 export default function CTASection() {
     const [email, setEmail] = useState('');
@@ -21,6 +22,7 @@ export default function CTASection() {
                 }),
             });
             if (res.ok) {
+                trackEvent('cta_email_capture', { form_name: 'cta_email_capture' });
                 setStatus('success');
             } else {
                 setStatus('error');

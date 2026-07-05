@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { trackEvent } from "@/lib/track";
 import {
   ESTIMATE_FEATURES,
   PROJECT_TYPES,
@@ -112,6 +113,7 @@ export default function EstimateWizard() {
         throw new Error(payload.error || "Unable to generate estimate");
       }
 
+      trackEvent("estimate_complete", { form_name: "estimate_wizard" });
       setEstimate(payload.estimate);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Could not generate estimate right now.";

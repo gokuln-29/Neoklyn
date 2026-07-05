@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { trackEvent } from '@/lib/track';
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 
@@ -13,7 +14,7 @@ const localBusinessSchema = {
     image: "https://neoklyn.com/opengraph-image",
     description: "NeoKlyn is a premium AI and software development agency in Bengaluru, offering web development, mobile apps, ecommerce, AI agents, and digital marketing services to global brands.",
     telephone: "+916380202766",
-    email: "hello.neoklyn@gmail.com",
+    email: "hello@neoklyn.com",
     address: {
         "@type": "PostalAddress",
         streetAddress: "Bengaluru, Karnataka",
@@ -128,8 +129,8 @@ const CONTACT_CHANNELS = [
     {
         id: 'email',
         label: 'Email',
-        value: 'hello.neoklyn@gmail.com',
-        href: 'mailto:hello.neoklyn@gmail.com',
+        value: 'hello@neoklyn.com',
+        href: 'mailto:hello@neoklyn.com',
         badge: '< 4 hr Reply',
         badgeColor: '#a78bfa',
         icon: (
@@ -601,7 +602,7 @@ export default function ContactPage() {
                 payload.append('attachment_note', 'File attached via contact intake form');
             }
 
-            const res = await fetch('https://formsubmit.co/ajax/hello.neoklyn@gmail.com', {
+            const res = await fetch('https://formsubmit.co/ajax/hello@neoklyn.com', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json'
@@ -610,6 +611,24 @@ export default function ContactPage() {
             });
 
             if (res.ok) {
+                trackEvent('contact_form_submit', { form_name: 'contact_enterprise' });
+                // Persist lead in CMS (fire-and-forget)
+                fetch('/api/leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type: 'CONTACT',
+                        email: formData.email.trim(),
+                        name: formData.name.trim() || undefined,
+                        company: formData.company.trim() || undefined,
+                        message: formData.details.trim() || undefined,
+                        source: 'contact_enterprise_form',
+                        metadata: {
+                            budget: formData.budget || undefined,
+                            services: formData.services.length ? formData.services : undefined,
+                        },
+                    }),
+                }).catch(() => {});
                 setSubmittedEmail(formData.email.trim());
                 setStatus('success');
                 setFormData({ name: '', email: '', company: '', budget: '', services: [], details: '' });
@@ -987,7 +1006,7 @@ export default function ContactPage() {
                                             <div className="error-banner">
                                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
                                                 Something went wrong. Email us at{' '}
-                                                <a href="mailto:hello.neoklyn@gmail.com" style={{ color: 'var(--cyan)', textDecoration: 'underline' }}>hello.neoklyn@gmail.com</a>
+                                                <a href="mailto:hello@neoklyn.com" style={{ color: 'var(--cyan)', textDecoration: 'underline' }}>hello@neoklyn.com</a>
                                             </div>
                                         )}
 

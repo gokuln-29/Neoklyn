@@ -16,6 +16,13 @@ export const metadata: Metadata = {
         siteName: "NeoKlyn",
         type: "website",
     },
+    alternates: { canonical: "https://neoklyn.com/contact" },
+    twitter: {
+        card: "summary_large_image",
+        title: "Contact NeoKlyn — Start Your Project",
+        description:
+            "Get a free consultation with our engineering team. WhatsApp, email or form — we respond within 4 hours. Let's build together.",
+    },
 };
 
 export default function ContactLayout({ children }: { children: ReactNode }) {

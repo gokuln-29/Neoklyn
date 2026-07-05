@@ -15,6 +15,13 @@ export const metadata: Metadata = {
     siteName: "NeoKlyn",
     type: "website",
   },
+  alternates: { canonical: "https://neoklyn.com/estimate" },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Project Cost Estimator — NeoKlyn",
+    description:
+      "Get a free AI-powered project estimate from NeoKlyn. Share your scope, features, and timeline to receive budget and delivery guidance.",
+  },
 };
 
 export default function EstimatePage() {

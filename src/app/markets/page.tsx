@@ -1,5 +1,27 @@
 import CTASection from "@/components/CTASection";
 import MarketsHUD from "@/components/MarketsHUD";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Global Markets — Worldwide Digital Services",
+    description:
+        "NeoKlyn delivers AI, web, mobile and ecommerce projects globally from Bengaluru. Serving the US, UAE, UK, Singapore, India and beyond with consistent engineering excellence.",
+    alternates: { canonical: "https://neoklyn.com/markets" },
+    openGraph: {
+        title: "Global Markets — Worldwide Digital Services | NeoKlyn",
+        description:
+            "NeoKlyn delivers AI, web, mobile and ecommerce projects globally from Bengaluru. Serving the US, UAE, UK, Singapore, India and beyond.",
+        url: "https://neoklyn.com/markets",
+        siteName: "NeoKlyn",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Global Markets — Worldwide Digital Services | NeoKlyn",
+        description:
+            "NeoKlyn delivers AI, web, mobile and ecommerce projects globally from Bengaluru.",
+    },
+};
 
 export default function MarketsPage() {
     return (
