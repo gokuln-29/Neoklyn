@@ -34,6 +34,14 @@ export async function POST(req: NextRequest) {
       body.slug = generateSlug(body.name);
     }
     const data = createTagSchema.parse(body);
+
+    // Idempotent by design: the AI "suggest tags" feature frequently suggests
+    // tags that already exist, which is a normal, expected case, not an error.
+    const existing = await db.tag.findUnique({ where: { name: data.name } });
+    if (existing) {
+      return NextResponse.json({ tag: existing }, { status: 200 });
+    }
+
     const tag = await db.tag.create({ data });
 
     await logAudit({
