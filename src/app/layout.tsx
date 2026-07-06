@@ -113,6 +113,17 @@ export default function RootLayout({
           `}
         </Script>
 
+        {/* Microsoft Clarity */}
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "xht2x5b9vr");
+          `}
+        </Script>
+
         {/* External Chat Widget Placeholder (Intercom, Crisp, Zendesk, etc.) */}
         {/* TODO: Uncomment and replace with your chat widget script */}
         {/* <Script strategy="lazyOnload">

@@ -93,6 +93,24 @@ export default function ServicesPage() {
                                 <Link href="/contact" className="btn-ghost">Start a Branding Project ↗</Link>
                             </div>
                         </div>
+                        <div className="service-item" id="ai-agents">
+                            <span className="si-num">07</span>
+                            <div>
+                                <span className="si-name" style={{ display: 'block', marginBottom: '0.8rem' }}>AI Agents &amp; Automation</span>
+                                <p className="sc-desc" style={{ maxWidth: '400px' }}>Autonomous workflow agents and intelligent ops that run 24/7 to eliminate repetitive operational work.</p>
+                                <div className="sc-tags" style={{ marginTop: '1rem', marginBottom: '1.5rem' }}><span className="sc-tag">LangChain</span><span className="sc-tag">OpenAI</span><span className="sc-tag">Anthropic</span></div>
+                                <Link href="/contact" className="btn-ghost">Start an AI Agent Project ↗</Link>
+                            </div>
+                        </div>
+                        <div className="service-item" id="gen-ai">
+                            <span className="si-num">08</span>
+                            <div>
+                                <span className="si-name" style={{ display: 'block', marginBottom: '0.8rem' }}>Generative AI</span>
+                                <p className="sc-desc" style={{ maxWidth: '400px' }}>Custom LLM integration, dynamic content generation, and predictive marketing tailored to your data.</p>
+                                <div className="sc-tags" style={{ marginTop: '1rem', marginBottom: '1.5rem' }}><span className="sc-tag">GPT-4</span><span className="sc-tag">Claude</span><span className="sc-tag">Llama</span></div>
+                                <Link href="/contact" className="btn-ghost">Start a Generative AI Project ↗</Link>
+                            </div>
+                        </div>
                     </div>
 
                     {/* ═══ TECH STACK — CURSOR SPOTLIGHT GRID ═══ */}
