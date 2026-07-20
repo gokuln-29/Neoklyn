@@ -283,16 +283,31 @@ export async function POST(req: NextRequest) {
     // Persist lead to CMS database (don't block the estimate on failure)
     try {
       const { db } = await import("@/lib/db");
-      await db.lead.create({
+      const { notifyHotLead, notifyNewLead } = await import("@/lib/leadWebhooks");
+      // Anyone who finishes the estimator with an Enterprise-scale or ASAP
+      // project has already shown strong buying intent — treat as hot.
+      const segment = scale === "Enterprise" || timeline === "ASAP <4 weeks" ? "hot" : "warm";
+      const lead = await db.lead.create({
         data: {
           type: "CONSULTATION",
           email,
           name,
           company: company || null,
           source: "estimate_wizard",
+          segment,
           metadata: { projectType, features, scale, timeline },
         },
       });
+      if (segment === "hot") {
+        void notifyHotLead({
+          email,
+          name,
+          segment,
+          source: "estimate_wizard",
+          summary: `${projectType} (${scale}), timeline: ${timeline}, ${features.length} features selected.`,
+        });
+      }
+      void notifyNewLead({ leadId: lead.id, email, name, segment, source: "estimate_wizard" });
     } catch (dbError) {
       console.error("Lead persistence error:", dbError);
     }

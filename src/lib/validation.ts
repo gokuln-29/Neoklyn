@@ -71,18 +71,19 @@ export const updateTagSchema = createTagSchema.partial();
 // ─── Lead Schemas ───────────────────────────────────────
 
 export const createLeadSchema = z.object({
-  type: z.enum(["CONTACT", "CONSULTATION", "NEWSLETTER", "AI_DEMO", "PDF_DOWNLOAD"]),
+  type: z.enum(["CONTACT", "CONSULTATION", "NEWSLETTER", "AI_DEMO", "PDF_DOWNLOAD", "AUDIT_QUIZ"]),
   name: z.string().max(200).optional(),
   email: z.string().email("Valid email is required"),
   phone: z.string().max(20).optional(),
   company: z.string().max(200).optional(),
   message: z.string().max(5000).optional(),
   source: z.string().max(200).optional(),
+  segment: z.enum(["hot", "warm", "cold"]).optional(),
   metadata: z.any().optional(),
 });
 
 export const updateLeadStatusSchema = z.object({
-  status: z.enum(["NEW", "CONTACTED", "QUALIFIED", "CLOSED"]),
+  status: z.enum(["NEW", "CONTACTED", "QUALIFIED", "NURTURING", "BOOKED", "CLOSED"]),
 });
 
 // ─── Auth Schemas ───────────────────────────────────────

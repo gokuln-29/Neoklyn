@@ -15,8 +15,15 @@ type Lead = {
   message: string | null;
   source: string | null;
   status: string;
+  segment: string | null;
   metadata: Record<string, unknown> | null;
   createdAt: string;
+};
+
+const SEGMENT_COLORS: Record<string, string> = {
+  hot: "#f87171",
+  warm: "#06b6d4",
+  cold: "#71717a",
 };
 
 const TYPE_LABELS: Record<string, string> = {
@@ -25,6 +32,7 @@ const TYPE_LABELS: Record<string, string> = {
   NEWSLETTER: "Newsletter",
   AI_DEMO: "AI Chat",
   PDF_DOWNLOAD: "PDF",
+  AUDIT_QUIZ: "Audit Quiz",
 };
 
 export default function LeadsPage() {
@@ -124,12 +132,15 @@ export default function LeadsPage() {
           <option value="NEWSLETTER">Newsletter</option>
           <option value="AI_DEMO">AI Chat</option>
           <option value="PDF_DOWNLOAD">PDF Download</option>
+          <option value="AUDIT_QUIZ">Audit Quiz</option>
         </select>
         <select className="form-select" style={{ width: 140 }} value={status} onChange={(e) => { setStatus(e.target.value); setPage(1); }}>
           <option value="">All statuses</option>
           <option value="NEW">New</option>
           <option value="CONTACTED">Contacted</option>
           <option value="QUALIFIED">Qualified</option>
+          <option value="NURTURING">Nurturing</option>
+          <option value="BOOKED">Booked</option>
           <option value="CLOSED">Closed</option>
         </select>
         <input type="date" className="form-input" style={{ width: 150 }} value={from} onChange={(e) => { setFrom(e.target.value); setPage(1); }} />
@@ -167,6 +178,13 @@ export default function LeadsPage() {
                   </td>
                   <td>
                     <span className="table-meta">{TYPE_LABELS[lead.type] || lead.type}{lead.source ? ` — ${lead.source}` : ""}</span>
+                    {lead.segment && (
+                      <div style={{ marginTop: 2 }}>
+                        <span style={{ fontSize: 11, fontFamily: "monospace", textTransform: "uppercase", color: SEGMENT_COLORS[lead.segment] || "inherit" }}>
+                          {lead.segment}
+                        </span>
+                      </div>
+                    )}
                   </td>
                   <td>
                     <select
@@ -178,6 +196,8 @@ export default function LeadsPage() {
                       <option value="NEW">New</option>
                       <option value="CONTACTED">Contacted</option>
                       <option value="QUALIFIED">Qualified</option>
+                      <option value="NURTURING">Nurturing</option>
+                      <option value="BOOKED">Booked</option>
                       <option value="CLOSED">Closed</option>
                     </select>
                   </td>

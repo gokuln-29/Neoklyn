@@ -19,10 +19,10 @@ export async function GET(req: NextRequest) {
     const to = params.get("to");
 
     const where: Prisma.LeadWhereInput = {};
-    if (type && ["CONTACT", "CONSULTATION", "NEWSLETTER", "AI_DEMO", "PDF_DOWNLOAD"].includes(type)) {
+    if (type && ["CONTACT", "CONSULTATION", "NEWSLETTER", "AI_DEMO", "PDF_DOWNLOAD", "AUDIT_QUIZ"].includes(type)) {
       where.type = type as LeadType;
     }
-    if (status && ["NEW", "CONTACTED", "QUALIFIED", "CLOSED"].includes(status)) {
+    if (status && ["NEW", "CONTACTED", "QUALIFIED", "NURTURING", "BOOKED", "CLOSED"].includes(status)) {
       where.status = status as LeadStatus;
     }
     if (search) {

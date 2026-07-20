@@ -30,12 +30,15 @@ enum LeadType {
   NEWSLETTER
   AI_DEMO
   PDF_DOWNLOAD
+  AUDIT_QUIZ
 }
 
 enum LeadStatus {
   NEW
   CONTACTED
   QUALIFIED
+  NURTURING
+  BOOKED
   CLOSED
 }
 
@@ -223,7 +226,9 @@ model Lead {
   message   String?    @db.Text
   source    String?    // Which page/form the lead came from
   status    LeadStatus @default(NEW)
-  metadata  Json?      // Additional data (budget, service type, etc.)
+  segment   String?    // 'hot' | 'warm' | 'cold' — computed at capture time, drives the hot-lead alert
+  sequenceStage Int    @default(0) // how many of the 5 nurture emails have gone out (0-5)
+  metadata  Json?      // Additional data (quiz answers, budget, utm_source/campaign, etc.)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 

@@ -1,5 +1,7 @@
 import OpenAI from "openai";
 import { sendMail } from "@/lib/mailer";
+import { db } from "@/lib/db";
+import { notifyHotLead, notifyNewLead } from "@/lib/leadWebhooks";
 import { NextRequest, NextResponse } from "next/server";
 import { chatSystemPrompt } from "@/lib/chatSystemPrompt";
 
@@ -109,6 +111,37 @@ async function sendLeadNotification(signals: ReturnType<typeof extractLeadSignal
   });
 }
 
+async function persistChatLead(signals: ReturnType<typeof extractLeadSignals>, transcript: string) {
+  const { email, name, budget, companySize } = signals;
+  if (!email) return;
+
+  // A budget mentioned unprompted is a much stronger buying signal than an
+  // email alone — treat that as hot, everything else as warm.
+  const segment = budget ? "hot" : "warm";
+
+  const lead = await db.lead.create({
+    data: {
+      type: "AI_DEMO",
+      email,
+      name: name || null,
+      source: "chatbot",
+      segment,
+      metadata: { budget, companySize, transcript },
+    },
+  });
+
+  if (segment === "hot") {
+    void notifyHotLead({
+      email,
+      name,
+      segment,
+      source: "chatbot",
+      summary: `Budget mentioned: ${budget}. ${companySize ? `Company size: ${companySize}. ` : ""}"${transcript.slice(0, 300)}"`,
+    });
+  }
+  void notifyNewLead({ leadId: lead.id, email, name, segment, source: "chatbot" });
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { messages } = (await req.json()) as { messages?: unknown };
@@ -173,6 +206,7 @@ export async function POST(req: NextRequest) {
           
         // Run in background so request doesn't wait
         void sendLeadNotification(leadSignals, transcript).catch(e => console.error("Lead email fail:", e));
+        void persistChatLead(leadSignals, transcript).catch(e => console.error("Lead persistence fail:", e));
       }
     }
 
