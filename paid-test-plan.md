@@ -86,7 +86,7 @@ Every claim must stay true to the site today: from ₹50,000, 2-5 weeks, fixed p
 
 ## 5. Measuring it (no extra tools needed)
 
-Leads record their source. Weekly, run this in the database or ask me to build it into the admin:
+Leads record their source. Open **Admin, Growth** (`/admin/growth`) and read the "Ad campaigns", "Where leads came from" and "Landing pages" panels for the last 7 or 30 days. If you prefer SQL, this gives the same campaign view:
 
 ```sql
 select coalesce(metadata->'attribution'->>'utm_campaign','(none)') as campaign,
