@@ -18,12 +18,11 @@ const LEAD_EVENTS = new Set([
 ]);
 
 /**
- * Sends an event to GA4 (via gtag) and to the GTM dataLayer.
+ * Sends an event to GA4 (through gtag) and mirrors it to dataLayer.
  *
- * The GTM container (GTM-K4425M6M) currently has no GA4 tag or custom-event
- * triggers, so dataLayer pushes alone never reach GA4. Calling gtag directly
- * is what makes these events show up. If a GA4 event tag is later added in
- * GTM for the same events, remove the gtag call to avoid double counting.
+ * The Google tag in the root layout is what delivers events to GA4. The old GTM container
+ * (GTM-K4425M6M) had no tags, so it was removed from the page; if GTM is ever added back with
+ * GA4 event tags for these events, drop the gtag call below to avoid double counting.
  */
 export function trackEvent(event: string, data: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;

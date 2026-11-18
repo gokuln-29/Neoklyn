@@ -79,26 +79,9 @@ export default function RootLayout({
   return (
 <html lang="en" data-scroll-behavior="smooth">
       <body className={`${spaceGrotesk.variable} ${jetBrainsMono.variable} antialiased`}>
-        {/* Google Tag Manager noscript fallback */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-K4425M6M"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-
-        {/* Google Tag Manager */}
-        <Script id="google-tag-manager" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-K4425M6M');
-          `}
-        </Script>
+        {/* Analytics: the Google tag below sends everything to GA4. A Google Tag Manager container
+            (GTM-K4425M6M) used to be loaded here but it has no tags, so it only added ~330 KB per visit
+            and a "tag stopped sending data" warning. Re-add the GTM snippet only if tags are put in it. */}
 
         {/* Google Tag (gtag.js) */}
         <Script
