@@ -7,6 +7,10 @@ import type { Metadata } from "next";
 import { localBusinessSchema } from "@/lib/schema";
 import { siteStats } from "@/data/siteStats";
 import { whatsappUrl } from "@/lib/contact";
+import AudienceStrip from "@/components/AudienceStrip";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import { FALLBACK_TESTIMONIALS } from "@/data/testimonials";
+import { getCmsTestimonials } from "@/lib/proof";
 import { getAllInsightSummaries } from "@/lib/insights";
 
 export const metadata: Metadata = {
@@ -31,9 +35,14 @@ export const metadata: Metadata = {
   },
 };
 
+// Re-render at most every 5 minutes so edits in /admin/testimonials show up without a deploy.
+export const revalidate = 300;
+
 export default async function Home() {
   const businessSchema = localBusinessSchema();
   const recentInsights = (await getAllInsightSummaries()).slice(0, 3);
+  const cmsTestimonials = await getCmsTestimonials();
+  const testimonials = cmsTestimonials.length > 0 ? cmsTestimonials : FALLBACK_TESTIMONIALS;
   const speakableSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -521,94 +530,11 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="section" id="testimonials">
-        <div className="reveal" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '2rem' }}>
-          <div>
-            <div className="s-label">Client Trust</div>
-            <h2 className="s-title" style={{ marginBottom: 0 }}>REAL PROJECTS, LIVE RIGHT NOW</h2>
-            <p className="s-sub" style={{ margin: '0.5rem 0 0' }}>Every site below is live. Visit them — the work speaks for itself.</p>
-          </div>
-          {/* Clutch/Google rating badges removed until those profiles genuinely
-              exist with real reviews — re-add linked directly to the live
-              profiles once they do. */}
-        </div>
-        <div className="test-grid reveal" style={{ marginTop: '3rem' }}>
+      {/* WHO WE BUILD FOR */}
+      <AudienceStrip />
 
-          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
-            <p className="t-text" style={{ flex: 1 }}>&quot;They didn&apos;t just rebuild our website; they re-architected our entire B2B trading platform. Our mobile engagement jumped 45% in the first quarter, and the Next.js headless setup means our content team deploys 5x faster.&quot;</p>
-            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
-              <div className="t-av" style={{ background: 'var(--cyan)', color: '#000' }}>DG</div>
-              <div>
-                <a href="http://dwarkageneraltrading.ae/" target="_blank" rel="noopener noreferrer" className="t-name" style={{ textDecoration: 'none', color: 'inherit' }}>Dwarka Gen. Trading <span style={{ fontSize: '0.8em', color: 'var(--cyan)' }}>↗</span></a>
-                <div className="t-loc">Corporate Platform · Middle East</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
-            <p className="t-text" style={{ flex: 1 }}>&quot;As a premium brand, we needed a portal that exuded luxury and functioned flawlessly. NeoKlyn delivered a pixel-perfect application that loads instantly and positions us as an undisputed leader in our market sector.&quot;</p>
-            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
-              <div className="t-av" style={{ background: 'var(--violet)', color: '#fff' }}>AA</div>
-              <div>
-                <a href="https://aathithyan.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{ textDecoration: 'none', color: 'inherit' }}>Aathithyan <span style={{ fontSize: '0.8em', color: 'var(--violet)' }}>↗</span></a>
-                <div className="t-loc">Brand Website · India 🇮🇳</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
-            <p className="t-text" style={{ flex: 1 }}>&quot;For an industrial supplier, digital trust is everything. NeoKlyn built an enterprise-grade platform that perfectly handles international RFPs and drives high-value B2B contractors straight into our funnel.&quot;</p>
-            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
-              <div className="t-av" style={{ background: 'var(--blue)', color: '#fff' }}>ZC</div>
-              <div>
-                <a href="https://zinadconcreteworks.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{ textDecoration: 'none', color: 'inherit' }}>Zinad Concrete Works <span style={{ fontSize: '0.8em', color: 'var(--blue)' }}>↗</span></a>
-                <div className="t-loc">Industrial Web · Middle East</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
-            <p className="t-text" style={{ flex: 1 }}>&quot;The visual aesthetic is absolutely world-class. Taking our venture online with NeoKlyn resulted in an immediate 110% increase in luxury booking inquiries. Their GSAP 3D animations set us apart globally.&quot;</p>
-            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
-              <div className="t-av" style={{ background: 'var(--cyan)', color: '#000' }}>TV</div>
-              <div>
-                <a href="https://travexventures.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{ textDecoration: 'none', color: 'inherit' }}>Travex Ventures <span style={{ fontSize: '0.8em', color: 'var(--cyan)' }}>↗</span></a>
-                <div className="t-loc">Travel Agency Site · India 🇮🇳</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
-            <p className="t-text" style={{ flex: 1 }}>&quot;Total digital transformation. We moved from legacy monolithic systems to a highly performant, serverless Next.js edge network. The results? Zero downtime and an incredibly modern operational interface.&quot;</p>
-            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
-              <div className="t-av" style={{ background: 'var(--violet)', color: '#fff' }}>LP</div>
-              <div>
-                <a href="http://lpsmpvtltd.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{ textDecoration: 'none', color: 'inherit' }}>LPSM Pvt. Ltd. <span style={{ fontSize: '0.8em', color: 'var(--violet)' }}>↗</span></a>
-                <div className="t-loc">Manufacturing Hub · India 🇮🇳</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="tcard" style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="t-stars" style={{ display: 'flex', color: '#FBBF24', gap: '2px', marginBottom: '1rem', fontSize: '1.2rem' }}>★★★★★</div>
-            <p className="t-text" style={{ flex: 1 }}>&quot;Patients used to struggle just to find our services online, let alone book an appointment. NeoKlyn rebuilt our website around simplicity and trust, and we saw a 30% increase in booking inquiries almost immediately.&quot;</p>
-            <div className="t-author" style={{ marginTop: '2rem', borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
-              <div className="t-av" style={{ background: 'var(--blue)', color: '#fff' }}>SP</div>
-              <div>
-                <a href="https://sharonphysio.com/" target="_blank" rel="noopener noreferrer" className="t-name" style={{ textDecoration: 'none', color: 'inherit' }}>Sharon Physio <span style={{ fontSize: '0.8em', color: 'var(--blue)' }}>↗</span></a>
-                <div className="t-loc">Physiotherapy Clinic · Madurai, India 🇮🇳</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
+      {/* TESTIMONIALS: CMS entries when present, built-in set otherwise */}
+      <TestimonialsSection items={testimonials} fromCms={cmsTestimonials.length > 0} />
 
       {/* FEATURED WORK PREVIEW */}
       {/* <section className="section section-alt">

@@ -10,6 +10,12 @@ export interface ProjectCaseStudy {
   challenge: string;
   solution: string;
   results: ProjectResult[];
+  /**
+   * How the results were measured, shown under the results block, e.g.
+   * "Measured by the client over the 3 months after launch, from their
+   * analytics." Add one only when it is true and you can back it up.
+   */
+  resultsNote?: string;
 }
 
 export interface Project {

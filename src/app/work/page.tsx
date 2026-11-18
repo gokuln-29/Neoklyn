@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     absolute: "Portfolio & Case Studies — NeoKlyn",
   },
   description:
-    "See real results: enterprise web apps, ecommerce stores & AI integrations delivered for global clients. View our case studies.",
+    "Real websites built for clinics, traders, manufacturers and brands in India and the Middle East. See the problem, what we built and the results.",
   openGraph: {
     title: "Portfolio & Case Studies — NeoKlyn",
     description:
-      "See real results: enterprise web apps, ecommerce stores & AI integrations delivered for global clients. View our case studies.",
+      "Real websites built for clinics, traders, manufacturers and brands in India and the Middle East. See the problem, what we built and the results.",
     url: "https://neoklyn.com/work",
     siteName: "NeoKlyn",
     type: "website",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Portfolio & Case Studies — NeoKlyn",
     description:
-      "See real results: enterprise web apps, ecommerce stores & AI integrations delivered for global clients. View our case studies.",
+      "Real websites built for clinics, traders, manufacturers and brands in India and the Middle East. See the problem, what we built and the results.",
   },
 };
 
@@ -36,7 +36,7 @@ export default function WorkPage() {
           titleOutline="OUR"
           titleSolid="WORK"
           titleColorClass="title-cyan"
-          description="Case studies from web, 3D, travel, industrial, and manufacturing programs delivered for ambitious brands."
+          description="Case studies from clinics, traders, manufacturers, travel and premium brands: what the problem was, what we built, and what changed."
         />
 
         <WorkGrid projects={projects} />

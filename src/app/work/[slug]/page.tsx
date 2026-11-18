@@ -154,12 +154,18 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 </div>
               ))}
             </div>
+            {project.caseStudy.resultsNote && (
+              <p className="case-results-note">{project.caseStudy.resultsNote}</p>
+            )}
           </div>
 
-          <div className="reveal case-cta">
+          <div className="reveal case-cta" data-track-location="case_study_cta">
             <h3>Build your next success story.</h3>
-            <Link href="/contact" className="btn-main">
-              Start a Project ↗
+            <Link href="/estimate" className="btn-main">
+              Get a Free Estimate ↗
+            </Link>
+            <Link href="/contact" className="btn-ghost" style={{ marginLeft: "0.75rem" }}>
+              Start a Project
             </Link>
           </div>
         </div>
@@ -359,6 +365,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           text-transform: uppercase;
           letter-spacing: 0.08em;
           color: rgba(255,255,255,0.82);
+        }
+
+        .case-results-note {
+          margin: 1rem 0 0;
+          font-size: 0.8rem;
+          line-height: 1.6;
+          color: var(--muted);
         }
 
         .case-results-block {

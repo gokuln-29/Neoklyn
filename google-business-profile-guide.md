@@ -3,16 +3,20 @@
 ## 1) Categories to Set (and Why)
 
 ### Primary Category: **Software Company**
-Use this as primary because NeoKlyn's core commercial identity is engineering-led product development (AI systems, web platforms, mobile applications, and enterprise software delivery). Primary category strongly influences map relevance and search intent matching, so this should map to your highest-value buying intent.
+Keep this as primary. It maps to the core service (websites, apps, AI agents) and is the category Google associates with development studios.
 
-### Secondary Category: **Web Design Company**
-Use this as secondary to capture broader discovery for users searching visual-first terms such as "web design", "website redesign", and "UI/UX agency". This supports top-of-funnel discovery while preserving software positioning as primary.
+### Secondary Category: **Web Designer** (or **Web Design Company** if offered)
+This captures the searches small-business owners actually type ("website designer near me", "website for my clinic"). Add **Mobile App Developer** only if it is offered as a category in your region.
+
+**Who the profile is written for:** small and mid-sized businesses (clinics, traders, manufacturers, travel, brands) looking for a website, app or automation at a fixed price. Avoid enterprise wording ("global brands", "enterprise modernization"): it makes a small-business owner assume you are too expensive for them.
 
 ---
 
 ## 2) Business Description (GBP Field — up to 750 chars)
 
-NeoKlyn is a Bengaluru-based AI and software engineering studio helping global brands build high-performance digital products. We design and develop custom web applications, mobile apps, ecommerce platforms, AI agents, generative AI integrations, and immersive 3D web experiences. Our team combines product strategy, UX design, and full-stack engineering to deliver scalable systems with measurable business outcomes. From MVP launches to enterprise modernization, NeoKlyn focuses on speed, transparency, and long-term technical quality.
+NeoKlyn is a Bengaluru-based web and app development studio for small and mid-sized businesses. We build fast business websites, mobile apps, ecommerce stores and AI agents using AI-accelerated development, with every line reviewed by a senior engineer with 10+ years of experience. Websites start from ₹50,000 and are typically delivered in 2-5 weeks at a fixed price, and you own all the code. We have built sites for clinics, traders, manufacturers, travel companies and premium brands in India and the Middle East. Message us on WhatsApp or get a free estimate at neoklyn.com.
+
+_(580 characters. Keep claims to what is true today: pricing, delivery time and the client types above all match the website.)_
 
 ---
 
@@ -53,20 +57,20 @@ Why: Adds evidence-backed differentiation over generic agency listings.
 
 Use the following services in the GBP Services tab:
 
-1. **AI Agent Development**  
-   Custom autonomous AI agents for workflow automation, customer support, and internal operations.
+1. **Business Website Development**  
+   Fast, mobile-friendly business websites built with Next.js and delivered in 2-5 weeks. From ₹50,000, fixed price, you own the code.
 
-2. **Generative AI Integration**  
-   Enterprise-ready LLM integration, RAG pipelines, and AI-enabled product features.
+2. **AI Agent Development**  
+   WhatsApp and web AI agents that answer enquiries, take bookings and follow up leads. From ₹1 lakh.
 
 3. **Web Application Development**  
-   Fast, scalable web platforms built with React, Next.js, and TypeScript.
+   Custom web apps and portals. Typically ₹1-4 lakh depending on features.
 
 4. **Mobile App Development**  
-   Native and cross-platform mobile apps for iOS and Android, from MVP to scale.
+   iOS and Android apps from one codebase, fixed price. Typically ₹1-4 lakh depending on scope.
 
 5. **Ecommerce Development**  
-   Shopify Plus, WooCommerce, and headless commerce solutions focused on conversion growth.
+   Online stores on Shopify, WooCommerce or custom builds, focused on conversion.
 
 6. **UI/UX Design Systems**  
    Product UX, interface design, and design systems that improve usability and consistency.
@@ -97,6 +101,11 @@ Hi [Name], we loved collaborating on your immersive travel platform. If you are 
 
 ### 5. LPSM Pvt Ltd
 Hi [Name], thanks again for the trust during your modernization and migration project. If the execution and support met your expectations, we would appreciate a Google review from your side. Review link: [GBP Link]
+
+### 6. Sharon Physio
+Hi [Name], thank you for trusting NeoKlyn with your clinic's website. If patients are finding and contacting you more easily now, would you mind sharing a short Google review about working with us? Review link: [GBP Link]
+
+**Rules for review requests:** ask every client, not only happy ones; never offer a discount or gift in exchange for a review (Google prohibits it); never write the review for them; reply to every review within 48 hours.
 
 ---
 
