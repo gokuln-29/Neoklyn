@@ -4,6 +4,9 @@ import {
   getPostBySlug,
 } from "@/data/blogPosts";
 import { type BlogPost } from "@/types/blog";
+import { REMOVED_INSIGHTS } from "@/data/removedInsights";
+
+const REMOVED_SLUGS = new Set(REMOVED_INSIGHTS.map(([slug]) => slug));
 import {
   getMdxInsightPostBySlug,
   getMdxInsightSummaries,
@@ -126,12 +129,14 @@ export async function getAllInsightSummaries(): Promise<InsightSummary[]> {
   const fileSlugs = new Set([...tsPosts, ...mdxPosts].map((p) => p.slug));
   const uniqueDbPosts = dbPosts.filter((p) => !fileSlugs.has(p.slug));
 
-  return [...tsPosts, ...mdxPosts, ...uniqueDbPosts].sort(
+  // Removed or merged posts redirect elsewhere, so they must not be listed even if the CMS still has them published.
+  return [...tsPosts, ...mdxPosts, ...uniqueDbPosts].filter((p) => !REMOVED_SLUGS.has(p.slug)).sort(
     (a, b) => parseDateSafely(b.date) - parseDateSafely(a.date)
   );
 }
 
 export async function getInsightBySlug(slug: string): Promise<InsightDetail | undefined> {
+  if (REMOVED_SLUGS.has(slug)) return undefined;
   const tsPost = getPostBySlug(slug);
   if (tsPost) {
     return {
