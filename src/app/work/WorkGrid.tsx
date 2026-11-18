@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -46,12 +47,16 @@ export default function WorkGrid({ projects }: WorkGridProps) {
             } as CSSProperties}
             onClick={() => router.push(`/work/${project.slug}`)}
           >
-            <div
-              className="work-card-bg"
-              style={{
-                backgroundImage: `linear-gradient(to top, rgba(10,10,15,0.98) 6%, rgba(10,10,15,0.62) 48%, rgba(0,0,0,0.16) 100%), url(${project.image})`,
-              }}
-            />
+            <div className="work-card-bg">
+              <Image
+                src={project.image}
+                alt={`${project.client} — ${project.category}`}
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                className="work-card-bg-img"
+              />
+              <div className="work-card-bg-gradient" />
+            </div>
             <div className="work-card-content">
               <div className="work-card-meta">
                 <span className="work-card-badge">{project.category}</span>
@@ -154,14 +159,23 @@ export default function WorkGrid({ projects }: WorkGridProps) {
         .work-card-bg {
           position: absolute;
           inset: 0;
-          background-size: cover;
-          background-position: center;
+          overflow: hidden;
+        }
+
+        .work-card-bg-img {
+          object-fit: cover;
           transform: scale(1.01);
           transition: transform 0.45s ease;
         }
 
-        .work-card:hover .work-card-bg {
+        .work-card:hover .work-card-bg-img {
           transform: scale(1.06);
+        }
+
+        .work-card-bg-gradient {
+          position: absolute;
+          inset: 0;
+          background-image: linear-gradient(to top, rgba(10,10,15,0.98) 6%, rgba(10,10,15,0.62) 48%, rgba(0,0,0,0.16) 100%);
         }
 
         .work-card-content {

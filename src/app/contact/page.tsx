@@ -143,6 +143,27 @@ const CONTACT_CHANNELS = [
         bg: 'rgba(167, 139, 250, 0.06)',
         border: 'rgba(167, 139, 250, 0.2)',
     },
+    {
+        id: 'estimate',
+        label: 'Free Estimate',
+        value: 'AI-powered project calculator',
+        href: '/estimate',
+        badge: 'No Call Needed',
+        badgeColor: '#06b6d4',
+        icon: (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" />
+                <line x1="8" y1="7" x2="16" y2="7" />
+                <line x1="8" y1="11" x2="10" y2="11" />
+                <line x1="14" y1="11" x2="16" y2="11" />
+                <line x1="8" y1="15" x2="10" y2="15" />
+                <line x1="14" y1="15" x2="16" y2="15" />
+            </svg>
+        ),
+        color: '#06b6d4',
+        bg: 'rgba(6, 182, 212, 0.06)',
+        border: 'rgba(6, 182, 212, 0.2)',
+    },
 ];
 
 const OFFICE_LOCATIONS = [
@@ -151,18 +172,6 @@ const OFFICE_LOCATIONS = [
         label: 'Head Office',
         address: 'Karnataka, India',
         phone: '+91 6380202766',
-        icon: (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-            </svg>
-        ),
-    },
-    {
-        city: 'Chennai',
-        label: 'Branch Office',
-        address: 'Tamil Nadu, India',
-        phone: '+91 9342382078',
         icon: (
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
@@ -196,6 +205,7 @@ const CURRENCY_OPTIONS: Record<CurrencyCode, { label: string; flag: string; rang
         flag: '🇺🇸',
         ranges: [
             { value: 'not-sure', label: "Not sure yet — let's talk" },
+            { value: 'Under $5K', label: 'Under $5K' },
             { value: '$5K-$15K', label: '$5K - $15K' },
             { value: '$15K-$30K', label: '$15K - $30K' },
             { value: '$30K-$50K', label: '$30K - $50K' },
@@ -207,10 +217,10 @@ const CURRENCY_OPTIONS: Record<CurrencyCode, { label: string; flag: string; rang
         flag: '🇮🇳',
         ranges: [
             { value: 'not-sure', label: "Not sure yet — let's talk" },
-            { value: '₹5L-₹15L', label: '₹5L - ₹15L' },
-            { value: '₹15L-₹30L', label: '₹15L - ₹30L' },
-            { value: '₹30L-₹50L', label: '₹30L - ₹50L' },
-            { value: '₹50L+', label: '₹50L+' },
+            { value: '₹50K-₹1L', label: '₹50K - ₹1L' },
+            { value: '₹1L-₹3L', label: '₹1L - ₹3L' },
+            { value: '₹3L-₹8L', label: '₹3L - ₹8L' },
+            { value: '₹8L+', label: '₹8L+' },
         ],
     },
     GBP: {
@@ -474,8 +484,8 @@ export default function ContactPage() {
     });
     const [submittedEmail, setSubmittedEmail] = useState('');
     const [focusedField, setFocusedField] = useState<string | null>(null);
-    const [currency, setCurrency] = useState<CurrencyCode>('USD');
-    const [detectedCountry, setDetectedCountry] = useState({ code: 'US', name: 'United States', flag: '🇺🇸' });
+    const [currency, setCurrency] = useState<CurrencyCode>('INR');
+    const [detectedCountry, setDetectedCountry] = useState({ code: 'IN', name: 'India', flag: '🇮🇳' });
     const [isGeoLoading, setIsGeoLoading] = useState(true);
     const [briefFile, setBriefFile] = useState<File | null>(null);
     const [fileError, setFileError] = useState('');
@@ -502,8 +512,8 @@ export default function ContactPage() {
                 });
             } catch {
                 if (!isMounted) return;
-                setCurrency('USD');
-                setDetectedCountry({ code: 'US', name: 'Global', flag: '🌍' });
+                setCurrency('INR');
+                setDetectedCountry({ code: 'IN', name: 'India', flag: '🇮🇳' });
             } finally {
                 if (isMounted) setIsGeoLoading(false);
             }
@@ -585,7 +595,7 @@ export default function ContactPage() {
         try {
             const selectedBudget = CURRENCY_OPTIONS[currency].ranges.find((range) => range.value === formData.budget)?.label;
             const payload = new FormData();
-            payload.append('_subject', `New Enterprise Inquiry from ${formData.name}`);
+            payload.append('_subject', `New Project Inquiry from ${formData.name}`);
             payload.append('name', formData.name.trim());
             payload.append('email', formData.email.trim());
             payload.append('company', formData.company.trim() || 'Not specified');
@@ -658,11 +668,11 @@ export default function ContactPage() {
 
             <section className="section" style={{ flex: 1, position: 'relative', zIndex: 1 }}>
                 <PageHeader
-                    label="Enterprise Intake"
+                    label="Start a Project"
                     titleOutline="LET'S"
                     titleSolid="BUILD"
                     titleColorClass="title-cyan"
-                    description="We partner with ambitious companies to solve complex engineering and design problems. Fill out the intake form and a partner will reach out within 4 hours."
+                    description="Websites from ₹50,000, apps and AI agents from ₹1 lakh. Tell us what you need, big or small. We reply within 4 hours with next steps and a rough estimate."
                 />
 
                 <div className="reveal contact-root">

@@ -5,9 +5,10 @@ import Link from "next/link";
 const engagementModels = [
   {
     title: "Fixed-Price Project",
-    bestFor: "Websites, apps with defined scope",
-    howItWorks: "Discovery → Quote → Build → Deliver",
+    bestFor: "Websites and apps with defined scope",
+    howItWorks: "Discovery → Fixed quote → AI-accelerated build → Senior review → Deliver",
     price: "₹50,000 / $600",
+    priceNote: "Fixed means fixed. Scope in writing, no surprise costs.",
   },
   {
     title: "Monthly Retainer",
@@ -133,6 +134,11 @@ export default function EngageSection() {
               >
                 {model.price}
               </div>
+              {"priceNote" in model && model.priceNote && (
+                <div style={{ color: "var(--muted)", fontSize: "0.72rem", marginTop: "0.4rem", lineHeight: 1.5 }}>
+                  {model.priceNote}
+                </div>
+              )}
             </div>
 
             <Link

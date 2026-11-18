@@ -16,9 +16,11 @@ export function organizationSchema() {
     "@context": "https://schema.org",
     ...organizationBase,
     description:
-      "Premium AI agents, web apps, mobile, ecommerce, 3D experiences, and digital marketing services from Bengaluru.",
+      "AI-accelerated web and app development studio in Bengaluru, India. Websites, mobile apps, ecommerce and AI agents built with AI tools and reviewed line-by-line by a senior engineer with 10+ years of experience. Serving clients worldwide.",
     telephone: "+916380202766",
     email: "hello@neoklyn.com",
+    foundingDate: "2026-01",
+    priceRange: "₹₹",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Bengaluru, Karnataka",
@@ -29,7 +31,6 @@ export function organizationSchema() {
     founder: {
       "@type": "Person",
       name: "Gokulnath N",
-      jobTitle: "Founder & CEO",
     },
     contactPoint: [
       {
@@ -41,74 +42,14 @@ export function organizationSchema() {
         availableLanguage: ["en"],
       },
     ],
+    // Only real, live profiles — no placeholders. AggregateRating/Review schema
+    // is intentionally omitted until a real, linkable review profile (Google
+    // Business Profile or Clutch) exists; fabricated review markup violates
+    // Google's review-snippet policy and risks a manual action on the domain.
     sameAs: [
-      "https://github.com/neoklyn",
-      "https://www.linkedin.com/company/neoklyn",
-      "https://twitter.com/neoklyn",
-      "https://dribbble.com/neoklyn",
-    ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      bestRating: "5",
-      reviewCount: "47",
-    },
-  };
-}
-
-export function aggregateRatingSchema() {
-  return {
-    "@context": "https://schema.org",
-    ...organizationBase,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      bestRating: "5",
-      reviewCount: "47",
-    },
-    review: [
-      {
-        "@type": "Review",
-        author: {
-          "@type": "Organization",
-          name: "Dwarka Gen. Trading",
-        },
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: "5",
-          bestRating: "5",
-        },
-        reviewBody:
-          "They didn't just rebuild our website; they re-architected our entire B2B trading platform. Our mobile engagement jumped 45% in the first quarter.",
-      },
-      {
-        "@type": "Review",
-        author: {
-          "@type": "Organization",
-          name: "Aathithyan",
-        },
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: "5",
-          bestRating: "5",
-        },
-        reviewBody:
-          "As a premium brand, we needed a portal that exuded luxury and functioned flawlessly. NeoKlyn delivered a pixel-perfect application that loads instantly.",
-      },
-      {
-        "@type": "Review",
-        author: {
-          "@type": "Organization",
-          name: "Zinad Concrete Works",
-        },
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: "5",
-          bestRating: "5",
-        },
-        reviewBody:
-          "NeoKlyn built an enterprise-grade platform that perfectly handles international RFPs and drives high-value B2B contractors straight into our funnel.",
-      },
+      "https://www.instagram.com/neo_klyn/",
+      "https://x.com/neoklyn",
+      "https://youtube.com/@neoklyn",
     ],
   };
 }
@@ -122,9 +63,10 @@ export function localBusinessSchema() {
     url: "https://neoklyn.com/contact",
     image: "https://neoklyn.com/opengraph-image",
     description:
-      "NeoKlyn helps global brands with AI agents, web engineering, mobile products, ecommerce, and growth marketing.",
+      "AI-accelerated web and app development studio in Bengaluru, India. Websites, mobile apps, ecommerce and AI agents built with AI tools and reviewed line-by-line by a senior engineer with 10+ years of experience. Serving clients worldwide.",
     telephone: "+916380202766",
     email: "hello@neoklyn.com",
+    priceRange: "₹₹",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Bengaluru, Karnataka",
@@ -140,10 +82,9 @@ export function localBusinessSchema() {
     },
     openingHours: ["Mo-Fr 09:00-18:00", "Sa 10:00-14:00"],
     sameAs: [
-      "https://github.com/neoklyn",
-      "https://www.linkedin.com/company/neoklyn",
-      "https://twitter.com/neoklyn",
-      "https://dribbble.com/neoklyn",
+      "https://www.instagram.com/neo_klyn/",
+      "https://x.com/neoklyn",
+      "https://youtube.com/@neoklyn",
     ],
   };
 }
@@ -174,9 +115,11 @@ export function serviceSchema(name: string, description: string) {
       url: "https://neoklyn.com",
     },
     areaServed: [
-      { "@type": "City", name: "Bengaluru" },
-      { "@type": "City", name: "Singapore" },
-      { "@type": "City", name: "London" },
+      { "@type": "Country", name: "India" },
+      { "@type": "Country", name: "United Arab Emirates" },
+      { "@type": "Country", name: "United Kingdom" },
+      { "@type": "Country", name: "United States" },
+      { "@type": "Country", name: "Singapore" },
     ],
   };
 }

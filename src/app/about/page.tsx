@@ -89,18 +89,18 @@ type TeamMember = {
 
 const teamMembers: TeamMember[] = [
   {
-    name: "Monisha",
-    role: "Founder & CEO",
-    bio: "Strategic visionary and product specialist with a background in engineering and design. Monisha leads NeoKlyn with a focus on building high-conversion digital ecosystems for global brands. She is dedicated to bridging the gap between technical complexity and intuitive user experiences.",
-    photo: "/assets/monisha.webp",
+    name: "Gokulnath",
+    role: "Founder & Web/App Developer",
+    bio: "Full-stack developer with 10+ years of hands-on engineering experience, specializing in Next.js and high-performance backend systems. Gokulnath personally builds every NeoKlyn project end-to-end — no handoffs, no outsourcing.",
+    photo: "/assets/gokulnath.webp",
     linkedin: "#",
     x: "#",
   },
   {
-    name: "Gokulnath",
-    role: "Senior Developer",
-    bio: "Full-stack architect specializing in Next.js and high-performance backend systems. With a deep passion for clean code and AI integration, Gokulnath ensures that every NeoKlyn project is built for speed, security, and enterprise-grade reliability.",
-    photo: "/assets/gokulnath.webp",
+    name: "Monisha",
+    role: "Digital Marketing Expert",
+    bio: "Handles digital marketing and growth strategy for NeoKlyn and its clients, focused on turning finished projects into measurable traffic and leads.",
+    photo: "/assets/monisha.webp",
     linkedin: "#",
     x: "#",
   },
@@ -117,7 +117,7 @@ const aboutFaqs = faqSchema([
   {
     question: "Who founded NeoKlyn?",
     answer:
-      "NeoKlyn is led by Monisha (CEO) and Gokulnath N (Senior Engineer), a multidisciplinary team of engineers, designers, and strategists based in Bengaluru, India.",
+      "NeoKlyn was founded by Gokulnath N, a full-stack developer with 10+ years of experience, who personally builds every project. Monisha handles digital marketing for NeoKlyn and its clients. Both are based in Bengaluru, India.",
   },
   {
     question: "Where is NeoKlyn located?",
@@ -127,7 +127,7 @@ const aboutFaqs = faqSchema([
   {
     question: "What makes NeoKlyn different from other agencies?",
     answer:
-      "NeoKlyn combines production-grade engineering with conversion-focused design. The studio has delivered 120+ projects with a 98% client retention rate, shipping systems engineered for long-term scale rather than throwaway MVPs.",
+      "NeoKlyn launched in 2026, built on 10+ years of hands-on engineering experience. Every project is built directly by the founder — no outsourcing, no junior developers learning on your budget. You can visit any client site listed on this page to verify the work yourself.",
   },
 ]);
 
@@ -141,26 +141,35 @@ export default function AboutPage() {
       <section className="section">
         <PageHeader
           label="About NeoKlyn"
-          titleOutline="THE TEAM"
-          titleSolid="BEHIND IT ALL"
+          titleOutline="A DIFFERENT"
+          titleSolid="KIND OF STUDIO"
           titleColorClass="title-cyan"
-          description="We are a multidisciplinary team of engineers, designers, and strategists building high-performance digital systems for modern brands."
+          description="AI-accelerated development, senior-engineer judgment. Here's exactly how NeoKlyn works and why."
         />
 
         <div className="about-story reveal">
-          <h3>Founding Story</h3>
           <p>
-            NeoKlyn was founded with a clear vision — to bridge the gap between design, technology, and business performance.
+            NeoKlyn was founded in January 2026 in Bengaluru by Gokulnath N, a web developer with over 10 years of hands-on engineering experience building websites, applications, and digital products.
           </p>
           <p style={{ marginTop: "1rem" }}>
-            What started as a small initiative focused on building modern websites quickly evolved into a full-service digital studio. Early projects revealed a common problem: most businesses had either good design or good development, but rarely both working together effectively.
+            The idea behind NeoKlyn is simple: AI coding tools have genuinely changed what one experienced engineer can deliver. Work that used to need a team of five and three months can now be built by one senior engineer in three weeks — if that engineer knows exactly what they&apos;re doing. The 10 years of experience is what makes the AI acceleration safe: knowing which generated code to keep, which to rewrite, how to architect for scale, and where the security risks hide.
           </p>
           <p style={{ marginTop: "1rem" }}>
-            NeoKlyn was built to solve that. By combining user experience, scalable engineering, and performance-driven marketing, NeoKlyn helps brands create digital products that are not just visually impressive, but also engineered for growth.
+            Most agencies use these same AI tools quietly while still charging full agency prices. NeoKlyn is built on the opposite idea: use the tools openly, pass the savings to clients, and stake the studio&apos;s reputation on the one thing AI can&apos;t replace — experienced human judgment.
           </p>
           <p style={{ marginTop: "1rem" }}>
-            Today, NeoKlyn works across global markets including the United States, UAE, and India, delivering high-quality digital solutions for startups, SMEs, and enterprise clients.
+            Every NeoKlyn project is architected, reviewed, and tested personally by the founder. Every client site we list is live and visitable. Every quote is fixed and in writing. NeoKlyn incorporates as NeoKlyn Private Limited in late 2026 as the practice grows.
           </p>
+
+          <h3 style={{ marginTop: "2.5rem" }}>How I work</h3>
+          <ul className="about-how-list">
+            <li>You talk directly to the engineer — from first call to launch</li>
+            <li>AI-accelerated builds, senior-reviewed line by line</li>
+            <li>Fixed written quotes, no surprise costs</li>
+            <li>Weekly demos during the build</li>
+            <li>30 days of free post-launch fixes</li>
+            <li>You own 100% of code, data, and accounts</li>
+          </ul>
         </div>
 
         <AboutStats />
@@ -302,6 +311,33 @@ export default function AboutPage() {
           margin: 0;
           color: rgba(255,255,255,0.73);
           line-height: 1.75;
+        }
+
+        .about-how-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: grid;
+          gap: 0.65rem;
+        }
+
+        .about-how-list li {
+          position: relative;
+          padding-left: 1.5rem;
+          color: rgba(255,255,255,0.78);
+          line-height: 1.6;
+          font-size: 0.92rem;
+        }
+
+        .about-how-list li::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0.5em;
+          width: 8px;
+          height: 8px;
+          border-radius: 2px;
+          background: var(--cyan);
         }
 
         .about-values-grid {

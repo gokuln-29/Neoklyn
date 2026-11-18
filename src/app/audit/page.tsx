@@ -4,7 +4,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import AuditQuizWizard from "@/components/AuditQuizWizard";
 
 export const metadata: Metadata = {
-  title: "AI Automation Readiness Audit — NeoKlyn",
+  title: "AI Automation Readiness Audit",
   description:
     "Answer 6 quick questions and get a free, personalized read on where AI automation would help your business most.",
   openGraph: {

@@ -4,7 +4,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import EstimateWizard from "@/components/EstimateWizard";
 
 export const metadata: Metadata = {
-  title: "AI Project Cost Estimator — NeoKlyn",
+  title: "AI Project Cost Estimator",
   description:
     "Get a free AI-powered project estimate from NeoKlyn. Share your scope, features, and timeline to receive budget and delivery guidance.",
   openGraph: {

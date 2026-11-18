@@ -1,6 +1,6 @@
 export type SiteStat = {
-  key: "projects" | "retention" | "experience" | "hubs";
-  value: number;
+  key: "experience" | "delivery" | "pricing" | "founderBuilt";
+  value: string;
   suffix: string;
   aboutLabel: string;
   homeLabel: string;
@@ -10,39 +10,39 @@ export type SiteStat = {
 
 export const siteStats: SiteStat[] = [
   {
-    key: "projects",
-    value: 120,
+    key: "experience",
+    value: "10",
     suffix: "+",
-    aboutLabel: "Enterprise Projects",
-    homeLabel: "Enterprise Deployments",
-    homeSubLabel: "Successfully Delivered",
+    aboutLabel: "Years Engineering Experience",
+    homeLabel: "Years Engineering Experience",
+    homeSubLabel: "Web development since 2015",
     homeColor: "var(--cyan)",
   },
   {
-    key: "retention",
-    value: 98,
-    suffix: "%",
-    aboutLabel: "Client Retention",
-    homeLabel: "Client Retention Rate",
-    homeSubLabel: "Verified Long-Term",
+    key: "delivery",
+    value: "2-5",
+    suffix: " wks",
+    aboutLabel: "Typical Delivery",
+    homeLabel: "Typical Delivery",
+    homeSubLabel: "vs 6-14 weeks at traditional agencies",
     homeColor: "var(--violet)",
   },
   {
-    key: "experience",
-    value: 5,
-    suffix: "yr",
-    aboutLabel: "Experience",
-    homeLabel: "Engineering Excellence",
-    homeSubLabel: "Zero Compromise",
+    key: "pricing",
+    value: "40-60",
+    suffix: "%",
+    aboutLabel: "Below Agency Pricing",
+    homeLabel: "Below Agency Pricing",
+    homeSubLabel: "AI speed, passed to you",
     homeColor: "var(--blue)",
   },
   {
-    key: "hubs",
-    value: 3,
-    suffix: "",
-    aboutLabel: "Global Hubs",
-    homeLabel: "Globally We Serve",
-    homeSubLabel: "Head Office in Bengaluru",
+    key: "founderBuilt",
+    value: "100",
+    suffix: "%",
+    aboutLabel: "Founder-Built Projects",
+    homeLabel: "Founder-Built & Reviewed",
+    homeSubLabel: "You work directly with the engineer",
     homeColor: "var(--cyan)",
   },
 ];

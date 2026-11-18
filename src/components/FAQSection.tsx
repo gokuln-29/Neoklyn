@@ -5,28 +5,36 @@ import { faqSchema } from "@/lib/schema";
 
 const faqs = [
   {
-    question: "How much does a web project cost?",
-    answer: "Our web projects start from ₹50,000 for a basic landing page. More complex websites and web applications typically range from ₹2-10 lakhs depending on features, integrations, and design requirements. We provide free, detailed quotes within 24 hours.",
+    question: "What does \"AI-accelerated development\" mean?",
+    answer: "We use professional AI coding tools to handle repetitive development work at high speed, while a senior engineer with 10+ years of experience personally handles architecture, security, code review, and testing. You get the speed and cost savings of AI with the quality and accountability of an experienced human engineer.",
   },
   {
-    question: "How long does it take to build a website?",
-    answer: "Typical timelines: 3-6 weeks for standard websites with 5-10 pages. Web applications and complex platforms take 8-14 weeks. AI-powered solutions and enterprise platforms may require 3-6 months. We'll provide a detailed timeline during the discovery phase.",
+    question: "Is AI-generated code safe and reliable?",
+    answer: "Unreviewed AI code isn't — which is why we never ship it. Every line in your project is reviewed, tested, and security-checked by the senior engineer before delivery. You also get 30 days of free post-launch fixes and full ownership of the code, so nothing is hidden.",
+  },
+  {
+    question: "How can you be so much cheaper than agencies?",
+    answer: "No offices, no account managers, no sales teams, no junior developers billing hours. AI handles the repetitive work; one experienced engineer handles everything that matters. Lower overhead, not lower quality.",
+  },
+  {
+    question: "Who will actually work on my project?",
+    answer: "The founder — a senior engineer with 10+ years of web development experience. The person on your first call is the person who architects, builds, and delivers your project. No handoffs.",
+  },
+  {
+    question: "How much does a project cost?",
+    answer: "Websites start from ₹50,000 / $600. Web apps and ecommerce typically range ₹1-4 lakh / $1,200-5,000 depending on features. You get a fixed written quote within 24 hours — and it stays fixed unless you change the scope.",
+  },
+  {
+    question: "How fast can you deliver?",
+    answer: "Standard websites: 2-3 weeks. Web apps and ecommerce: 3-6 weeks. Complex platforms and AI products: 6-10 weeks. AI acceleration typically makes us 2-3x faster than traditional agency timelines.",
   },
   {
     question: "Do you work with international clients?",
-    answer: "Yes! We serve clients globally across the UAE, UK, USA, Singapore, Australia, and more. Our async-first approach with clear communication, video calls, and project management tools ensures seamless collaboration across all time zones.",
+    answer: "Yes — NeoKlyn is based in Bengaluru, India and works with clients worldwide. Clear async communication, video calls in your time zone, and everything documented in writing.",
   },
   {
-    question: "What happens after the website launches?",
-    answer: "We offer comprehensive post-launch support including 30 days of free bug fixes, monthly maintenance packages, security updates, and performance monitoring. Our retainer options include ongoing improvements, new features, and dedicated support.",
-  },
-  {
-    question: "Do you specialize in redesigns and migrations?",
-    answer: "Absolutely. Redesign and platform migration is a core expertise. We've successfully migrated clients from WordPress, Wix, Squarespace, and older platforms to modern stacks like Next.js. We handle content migration, SEO preservation, and performance optimization seamlessly.",
-  },
-  {
-    question: "What makes NeoKlyn different from other agencies?",
-    answer: "We operate with 100% in-house engineering and design teams—no outsourcing or templates. Every project gets a dedicated project manager, regular video demos, and transparent milestone-based billing. Our average client relationship spans 2+ years with 98% retention rate.",
+    question: "What happens after launch?",
+    answer: "30 days of free bug fixes, plus optional monthly retainers for ongoing development, marketing, or AI operations. You own 100% of the code, design files, accounts, and data from day one.",
   },
 ];
 

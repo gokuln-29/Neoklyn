@@ -8,13 +8,13 @@ import { breadcrumbSchema, serviceSchema, faqSchema } from "@/lib/schema";
 const serviceFaqs: Record<string, { question: string; answer: string }[]> = {
     web: [
         { question: "What technologies does NeoKlyn use for web development?", answer: "We build with React, Next.js, and TypeScript, using headless CMS platforms like Sanity for content management and deploying on modern edge infrastructure for maximum performance." },
-        { question: "How long does a web development project take?", answer: "MVP web applications take 6-12 weeks. Full-scale enterprise web platforms take 3-6 months depending on scope and integrations." },
-        { question: "How much does a website cost at NeoKlyn?", answer: "Enterprise web projects start at $5K USD. Pricing depends on scope, design complexity, and integrations. Get a free AI-powered estimate at neoklyn.com/estimate." },
+        { question: "How long does a web development project take?", answer: "Standard websites: 2-3 weeks. Web apps and ecommerce: 3-6 weeks. Complex platforms: 6-10 weeks, depending on scope and integrations." },
+        { question: "How much does a website cost at NeoKlyn?", answer: "Websites start from ₹50,000 / $600. Web apps typically range ₹1-4 lakh / $1,200-5,000 depending on features. Get a free AI-powered estimate at neoklyn.com/estimate." },
     ],
     mobile: [
         { question: "Does NeoKlyn build both iOS and Android apps?", answer: "Yes. We build for both platforms using modern cross-platform tooling, delivering native-quality performance from a single codebase." },
-        { question: "How long does mobile app development take?", answer: "Mobile apps typically require 8-16 weeks depending on feature complexity, integrations, and platform requirements." },
-        { question: "How much does a mobile app cost?", answer: "Mobile projects start at $5K USD depending on scope. Use the free estimator at neoklyn.com/estimate for a tailored budget." },
+        { question: "How long does mobile app development take?", answer: "Mobile apps typically require 3-6 weeks for standard scope, or 6-10 weeks for complex platforms, depending on feature complexity and integrations." },
+        { question: "How much does a mobile app cost?", answer: "Mobile app projects typically range ₹1-4 lakh / $1,200-5,000 depending on scope. Use the free estimator at neoklyn.com/estimate for a tailored budget." },
     ],
     ecommerce: [
         { question: "Does NeoKlyn work with Shopify?", answer: "Yes. We build both Shopify storefronts and fully custom ecommerce platforms, including B2B portals with RFQ systems." },
@@ -23,7 +23,7 @@ const serviceFaqs: Record<string, { question: string; answer: string }[]> = {
     ],
     marketing: [
         { question: "What digital marketing services does NeoKlyn offer?", answer: "SEO, performance marketing, content strategy, and growth engineering — focused on measurable organic and paid acquisition." },
-        { question: "How long until SEO results show?", answer: "Technical SEO improvements can show within weeks. Meaningful organic growth from content typically takes 3-6 months of consistent execution." },
+        { question: "How long until SEO results show?", answer: "Technical SEO improvements can show within weeks. Meaningful organic growth from content typically takes 3-6 months of consistent execution — there are no guaranteed timelines for organic rankings." },
         { question: "Does NeoKlyn handle both organic and paid marketing?", answer: "Yes. We combine SEO-driven organic growth with performance marketing campaigns, sharing one analytics foundation for accurate attribution." },
     ],
     "3d": [
@@ -38,7 +38,7 @@ const serviceFaqs: Record<string, { question: string; answer: string }[]> = {
     "ai-agents": [
         { question: "What are AI agents and how can they help my business?", answer: "AI agents are LLM-powered systems that autonomously handle tasks like lead qualification, customer support, and workflow automation. They work 24/7 and integrate with your existing tools." },
         { question: "Does NeoKlyn build production-ready AI agents?", answer: "Yes. We build production-grade agents with proper guardrails, evaluation, and monitoring — integrated with your CRM, helpdesk, or internal systems, not just demos." },
-        { question: "How much does a custom AI agent cost?", answer: "AI agent projects start at $5K USD depending on complexity, integrations, and model requirements. Get a free estimate at neoklyn.com/estimate." },
+        { question: "How much does a custom AI agent cost?", answer: "AI agent projects typically start from ₹1 lakh / $1,200 depending on complexity, integrations, and model requirements. Get a free estimate at neoklyn.com/estimate." },
     ],
     "gen-ai": [
         { question: "What generative AI services does NeoKlyn offer?", answer: "GenAI product development including RAG systems, AI content pipelines, LLM integration into existing products, and custom AI tooling." },
@@ -75,9 +75,9 @@ const servicesData = {
             }
         ],
         stats: [
-            { value: "99", unit: "/100", label: "Lighthouse Score" },
-            { value: "<1s", unit: "", label: "Avg. Load Time" },
-            { value: "120+", unit: "", label: "Sites Launched" },
+            { value: "99", unit: "/100", label: "Lighthouse Score Target" },
+            { value: "10+", unit: "", label: "Years Engineering Experience" },
+            { value: "100%", unit: "", label: "Founder-Reviewed Code" },
         ]
     },
     mobile: {
@@ -106,9 +106,9 @@ const servicesData = {
             }
         ],
         stats: [
-            { value: "50+", unit: "", label: "Apps Deployed" },
-            { value: "4.8", unit: "★", label: "Avg. Store Rating" },
-            { value: "2M+", unit: "", label: "Total Downloads" },
+            { value: "10+", unit: "", label: "Years Engineering Experience" },
+            { value: "40-60%", unit: "", label: "Below Agency Pricing" },
+            { value: "100%", unit: "", label: "Founder-Reviewed Code" },
         ]
     },
     ecommerce: {
@@ -137,9 +137,9 @@ const servicesData = {
             }
         ],
         stats: [
-            { value: "35%", unit: "", label: "Avg. CR Increase" },
-            { value: "$2M+", unit: "", label: "GMV Processed" },
-            { value: "99.9%", unit: "", label: "Uptime SLA" },
+            { value: "10+", unit: "", label: "Years Engineering Experience" },
+            { value: "40-60%", unit: "", label: "Below Agency Pricing" },
+            { value: "100%", unit: "", label: "Founder-Reviewed Code" },
         ]
     },
     marketing: {
@@ -168,9 +168,9 @@ const servicesData = {
             }
         ],
         stats: [
-            { value: "5x", unit: "", label: "Avg. ROAS" },
-            { value: "300%", unit: "", label: "Traffic Growth" },
-            { value: "45%", unit: "", label: "Lower CAC" },
+            { value: "10+", unit: "", label: "Years Engineering Experience" },
+            { value: "40-60%", unit: "", label: "Below Agency Pricing" },
+            { value: "100%", unit: "", label: "Founder-Reviewed Code" },
         ]
     },
     "3d": {
@@ -200,8 +200,8 @@ const servicesData = {
         ],
         stats: [
             { value: "60", unit: "fps", label: "Render Target" },
-            { value: "200%", unit: "", label: "Engagement Boost" },
-            { value: "40+", unit: "", label: "3D Projects" },
+            { value: "10+", unit: "", label: "Years Engineering Experience" },
+            { value: "100%", unit: "", label: "Founder-Reviewed Code" },
         ]
     },
     branding: {
@@ -230,9 +230,9 @@ const servicesData = {
             }
         ],
         stats: [
-            { value: "80+", unit: "", label: "Brands Built" },
-            { value: "95%", unit: "", label: "Client Approval" },
-            { value: "50+", unit: "", label: "Design Systems" },
+            { value: "10+", unit: "", label: "Years Engineering Experience" },
+            { value: "40-60%", unit: "", label: "Below Agency Pricing" },
+            { value: "100%", unit: "", label: "Founder-Reviewed Code" },
         ]
     },
     "ai-agents": {
@@ -241,7 +241,7 @@ const servicesData = {
         titleSolid: "AGENTS",
         titleColorClass: "title-cyan",
         accentColor: "var(--cyan)",
-        description: "Autonomous workflow automation, autonomous web agents, and intelligent ops. Leverage cutting-edge agentic frameworks to 100x your team's productivity.",
+        description: "Autonomous workflow automation, autonomous web agents, and intelligent ops. We build production-grade agents on modern agentic frameworks to cut repetitive manual work.",
         techStack: ["LangChain", "LangGraph", "OpenAI", "Anthropic", "CrewAI", "AutoGen", "Pinecone", "Weaviate"],
         content: [
             {
@@ -261,9 +261,9 @@ const servicesData = {
             }
         ],
         stats: [
-            { value: "100x", unit: "", label: "Productivity Gain" },
             { value: "24/7", unit: "", label: "Always Active" },
-            { value: "90%", unit: "", label: "Task Automation" },
+            { value: "10+", unit: "", label: "Years Engineering Experience" },
+            { value: "100%", unit: "", label: "Founder-Reviewed Code" },
         ]
     },
     "gen-ai": {
@@ -292,9 +292,9 @@ const servicesData = {
             }
         ],
         stats: [
-            { value: "10x", unit: "", label: "Content Output" },
-            { value: "95%", unit: "", label: "Accuracy Rate" },
-            { value: "500K+", unit: "", label: "AI Outputs/mo" },
+            { value: "10+", unit: "", label: "Years Engineering Experience" },
+            { value: "40-60%", unit: "", label: "Below Agency Pricing" },
+            { value: "100%", unit: "", label: "Founder-Reviewed Code" },
         ]
     }
 };
@@ -355,7 +355,7 @@ function CapabilityIcon({ name }: { name: string }) {
 const servicesMetadata: Record<string, { title: string; description: string }> = {
     web: {
         title: "Next.js Web Development Agency India — NeoKlyn",
-        description: "Fast, scalable web apps built with React, Next.js & TypeScript. 99/100 Lighthouse scores guaranteed. Request a free audit.",
+        description: "Fast, scalable web apps built with React, Next.js & TypeScript, reviewed line-by-line by a senior engineer. Request a free audit.",
     },
     mobile: {
         title: "Mobile App Development Company India — NeoKlyn",
@@ -363,19 +363,19 @@ const servicesMetadata: Record<string, { title: string; description: string }> =
     },
     ecommerce: {
         title: "Ecommerce Development Agency — NeoKlyn",
-        description: "High-converting Shopify Plus, WooCommerce & headless commerce stores. 35% avg CR increase. Launch your store with NeoKlyn.",
+        description: "High-converting Shopify Plus, WooCommerce & headless commerce stores, engineered for conversion. Launch your store with NeoKlyn.",
     },
     marketing: {
         title: "Digital Marketing Agency Bengaluru — NeoKlyn",
-        description: "Data-driven SEO, Google Ads & Meta campaigns with 5x avg ROAS. Grow traffic 300% with NeoKlyn's performance marketing team.",
+        description: "Data-driven SEO, Google Ads & Meta campaigns focused on measurable organic and paid acquisition. Talk to NeoKlyn's marketing team.",
     },
     "3d": {
         title: "3D Website & WebGL Development — NeoKlyn",
-        description: "Immersive 3D product viewers, WebGL animations & scroll-driven storytelling. 60fps on all devices. Explore our 3D portfolio.",
+        description: "Immersive 3D product viewers, WebGL animations & scroll-driven storytelling, built to stay fast on all devices. Explore our 3D portfolio.",
     },
     branding: {
         title: "UI/UX Design & Branding Agency India — NeoKlyn",
-        description: "Premium brand identity, Figma design systems & conversion-focused UX. 95% client approval rate. Book a design consultation.",
+        description: "Premium brand identity, Figma design systems & conversion-focused UX. Book a design consultation.",
     },
     "ai-agents": {
         title: "AI Agent Development Company — NeoKlyn",
@@ -385,6 +385,28 @@ const servicesMetadata: Record<string, { title: string; description: string }> =
         title: "Generative AI Integration Services — NeoKlyn",
         description: "Custom LLM integration, generative UI, and predictive AI marketing. Enterprise-grade Gen AI solutions from NeoKlyn. Book a demo.",
     }
+};
+
+// Figures mirror the pricing already published in the FAQs above and on the home page.
+const servicePricing: Record<string, { from: string; range: string; timeline: string; examples: string[] }> = {
+    web: {
+        from: "From ₹50,000 / $600",
+        range: "Web apps typically ₹1-4 lakh / $1,200-5,000, depending on features",
+        timeline: "Typical delivery: 2-5 weeks",
+        examples: ["Business or clinic website with online booking", "Company site with an enquiry funnel", "Customer portal or dashboard"],
+    },
+    mobile: {
+        from: "From ₹1 lakh / $1,200",
+        range: "Mobile apps typically ₹1-4 lakh / $1,200-5,000, depending on scope",
+        timeline: "Typical delivery: 2-5 weeks",
+        examples: ["Booking or appointment app", "Ordering or delivery app", "Membership or field-staff app"],
+    },
+    "ai-agents": {
+        from: "From ₹1 lakh / $1,200",
+        range: "Final price depends on complexity, integrations and model requirements",
+        timeline: "Typical delivery: 2-5 weeks",
+        examples: ["WhatsApp or website enquiry assistant", "Lead follow-up and booking automation", "Internal assistant over your own documents"],
+    },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -508,6 +530,39 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 </div>
             </div>
 
+            {/* ─── PRICING ─── */}
+            {servicePricing[slug] && (
+                <section className="section">
+                    <div className="svc-pricing reveal">
+                        <div className="svc-pricing-main">
+                            <div className="s-label" style={{ justifyContent: 'flex-start' }}>Pricing</div>
+                            <div className="svc-pricing-from" style={{ color: service.accentColor }}>{servicePricing[slug].from}</div>
+                            <p className="svc-pricing-range">{servicePricing[slug].range}.</p>
+                            <p className="svc-pricing-range">{servicePricing[slug].timeline}. Fixed price, you own 100% of the code.</p>
+                            <div className="hero-btns" style={{ marginTop: '1.5rem' }}>
+                                <Link href="/estimate" className="btn-main">Get a Free Estimate ↗</Link>
+                                <a
+                                    href="https://wa.me/916380202766?text=Hi%20NeoKlyn%2C%20I%27d%20like%20a%20quote%20for%20my%20project"
+                                    className="btn-ghost"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    WhatsApp Us
+                                </a>
+                            </div>
+                        </div>
+                        <div className="svc-pricing-examples">
+                            <div className="svc-pricing-examples-title">Popular things to build</div>
+                            <ul>
+                                {servicePricing[slug].examples.map((example) => (
+                                    <li key={example}>{example}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            )}
+
             {/* ─── CAPABILITIES ─── */}
             <section className="section section-alt">
                 <div className="reveal">
@@ -571,8 +626,69 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 </div>
             </section>
 
+            {/* ─── BUILT THE NEOKLYN WAY ─── */}
+            <section className="section">
+                <div className="svc-neoklyn-way reveal">
+                    <h3>Built the NeoKlyn way</h3>
+                    <p>AI-accelerated development, senior-engineer review on every line, fixed pricing, 2-3x agency speed.</p>
+                    <Link href="/how-we-work" className="btn-ghost" style={{ fontSize: '0.85rem', padding: '0.7rem 1.4rem' }}>
+                        Learn how we work →
+                    </Link>
+                </div>
+            </section>
 
             <style>{`
+                /* ─── PRICING ─── */
+                .svc-pricing {
+                    display: grid;
+                    grid-template-columns: 1.3fr 1fr;
+                    gap: 2rem;
+                    max-width: 1100px;
+                    margin: 0 auto;
+                    padding: 2rem;
+                    border: 1px solid var(--border);
+                    border-radius: 14px;
+                    background: rgba(255,255,255,0.02);
+                }
+                .svc-pricing-from {
+                    font-family: var(--font-space-grotesk), sans-serif;
+                    font-weight: 700;
+                    font-size: clamp(1.8rem, 4vw, 2.6rem);
+                    margin: 0.5rem 0 0.75rem;
+                }
+                .svc-pricing-range {
+                    font-size: 0.9rem;
+                    color: var(--muted);
+                    line-height: 1.7;
+                    margin-bottom: 0.35rem;
+                }
+                .svc-pricing-examples-title {
+                    font-family: var(--font-space-grotesk), sans-serif;
+                    font-weight: 700;
+                    margin-bottom: 0.75rem;
+                }
+                .svc-pricing-examples ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    display: grid;
+                    gap: 0.6rem;
+                }
+                .svc-pricing-examples li {
+                    font-size: 0.88rem;
+                    color: var(--muted);
+                    padding-left: 1.1rem;
+                    position: relative;
+                }
+                .svc-pricing-examples li::before {
+                    content: '→';
+                    position: absolute;
+                    left: 0;
+                }
+                @media (max-width: 800px) {
+                    .svc-pricing { grid-template-columns: 1fr; padding: 1.5rem; }
+                }
+
                 /* ─── SERVICE HERO ─── */
                 .svc-hero {
                     position: relative;
@@ -848,6 +964,29 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                     -webkit-text-fill-color: transparent;
                     background-clip: text;
                     filter: drop-shadow(0 0 20px rgba(124,58,237,0.5));
+                }
+
+                /* ─── BUILT THE NEOKLYN WAY ─── */
+                .svc-neoklyn-way {
+                    max-width: 640px;
+                    margin: 0 auto;
+                    text-align: center;
+                    border: 1px solid rgba(255,255,255,0.08);
+                    border-radius: 16px;
+                    background: rgba(255,255,255,0.02);
+                    padding: 2.25rem 2rem;
+                }
+                .svc-neoklyn-way h3 {
+                    margin: 0 0 0.75rem;
+                    font-size: 1.15rem;
+                    font-family: var(--font-space-grotesk), sans-serif;
+                    color: var(--white);
+                }
+                .svc-neoklyn-way p {
+                    margin: 0 0 1.25rem;
+                    color: rgba(255,255,255,0.72);
+                    font-size: 0.9rem;
+                    line-height: 1.7;
                 }
 
                 /* ─── RESPONSIVE ─── */

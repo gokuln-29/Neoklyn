@@ -38,41 +38,41 @@ const TIMELINE_VALUES = new Set(TIMELINE_OPTIONS.map((item) => item.value));
 
 const USD_BASE_MATRIX: Record<ProjectType, Record<ScaleOption, [number, number]>> = {
   "Web App": {
-    MVP: [12000, 24000],
-    "Growth Stage": [28000, 55000],
-    Enterprise: [70000, 140000],
+    MVP: [1200, 5000],
+    "Growth Stage": [5000, 15000],
+    Enterprise: [15000, 35000],
   },
   "Mobile App": {
-    MVP: [15000, 30000],
-    "Growth Stage": [35000, 70000],
-    Enterprise: [85000, 165000],
+    MVP: [1200, 5000],
+    "Growth Stage": [5000, 15000],
+    Enterprise: [15000, 35000],
   },
   Ecommerce: {
-    MVP: [14000, 28000],
-    "Growth Stage": [32000, 65000],
-    Enterprise: [80000, 155000],
+    MVP: [1200, 5000],
+    "Growth Stage": [5000, 15000],
+    Enterprise: [15000, 35000],
   },
   "AI Agent": {
-    MVP: [18000, 36000],
-    "Growth Stage": [42000, 90000],
-    Enterprise: [100000, 220000],
+    MVP: [1200, 6000],
+    "Growth Stage": [6000, 18000],
+    Enterprise: [18000, 40000],
   },
   "3D Website": {
-    MVP: [16000, 32000],
-    "Growth Stage": [38000, 76000],
-    Enterprise: [95000, 190000],
+    MVP: [1500, 6000],
+    "Growth Stage": [6000, 16000],
+    Enterprise: [16000, 36000],
   },
   "Full Brand + Web": {
-    MVP: [20000, 38000],
-    "Growth Stage": [45000, 85000],
-    Enterprise: [110000, 210000],
+    MVP: [2000, 7000],
+    "Growth Stage": [7000, 18000],
+    Enterprise: [18000, 40000],
   },
 };
 
 const TIMELINE_BASE: Record<ScaleOption, [number, number]> = {
-  MVP: [4, 8],
-  "Growth Stage": [8, 14],
-  Enterprise: [14, 24],
+  MVP: [3, 6],
+  "Growth Stage": [6, 10],
+  Enterprise: [10, 16],
 };
 
 function parseEstimateJson(text: string): Partial<EstimateResponse> | null {
@@ -92,8 +92,8 @@ function parseEstimateJson(text: string): Partial<EstimateResponse> | null {
 }
 
 function formatUsd(value: number) {
-  if (value >= 1000) return `$${Math.round(value / 1000)}K`;
-  return `$${Math.round(value)}`;
+  if (value >= 10000) return `$${Math.round(value / 1000)}K`;
+  return `$${Math.round(value / 100) * 100}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function formatInr(value: number) {
@@ -191,14 +191,16 @@ User input:
 - Timeline preference: ${input.timeline}
 - Features selected (${input.features.length}): ${input.features.join(", ") || "None"}
 
+Context: NeoKlyn is a small, founder-led AI-accelerated studio (not a large agency) — pricing is deliberately 40-60% below typical agency rates because AI tools handle repetitive implementation work while one senior engineer personally reviews everything. Keep this framing in "next_steps" and assumptions; do not imply a large team or enterprise-agency capacity.
+
 Pricing rules:
 1) Use base USD pricing by project type and scale:
-- Web App: MVP 12k-24k, Growth 28k-55k, Enterprise 70k-140k
-- Mobile App: MVP 15k-30k, Growth 35k-70k, Enterprise 85k-165k
-- Ecommerce: MVP 14k-28k, Growth 32k-65k, Enterprise 80k-155k
-- AI Agent: MVP 18k-36k, Growth 42k-90k, Enterprise 100k-220k
-- 3D Website: MVP 16k-32k, Growth 38k-76k, Enterprise 95k-190k
-- Full Brand + Web: MVP 20k-38k, Growth 45k-85k, Enterprise 110k-210k
+- Web App: MVP $1.2K-5K, Growth $5K-15K, Enterprise $15K-35K
+- Mobile App: MVP $1.2K-5K, Growth $5K-15K, Enterprise $15K-35K
+- Ecommerce: MVP $1.2K-5K, Growth $5K-15K, Enterprise $15K-35K
+- AI Agent: MVP $1.2K-6K, Growth $6K-18K, Enterprise $18K-40K
+- 3D Website: MVP $1.5K-6K, Growth $6K-16K, Enterprise $16K-36K
+- Full Brand + Web: MVP $2K-7K, Growth $7K-18K, Enterprise $18K-40K
 
 2) Complexity multiplier:
 - First 3 features are included in base complexity.
@@ -219,8 +221,8 @@ Output requirements:
 - No markdown, no commentary.
 - Use this exact shape:
 {
-  "estimated_timeline": "8-12 weeks",
-  "estimated_budget_range": "$30K - $55K",
+  "estimated_timeline": "3-6 weeks",
+  "estimated_budget_range": "$1,200 - $5,000",
   "key_assumptions": ["...", "...", "..."],
   "what_increases_cost": ["...", "...", "..."],
   "recommended_stack": ["...", "...", "..."],
@@ -268,9 +270,7 @@ export async function POST(req: NextRequest) {
     if (!anthropicKey) {
       return NextResponse.json({ error: "Missing ANTHROPIC_API_KEY." }, { status: 500 });
     }
-    if (!isMailerConfigured()) {
-      return NextResponse.json({ error: "Email is not configured (SMTP_* env vars)." }, { status: 500 });
-    }
+    const mailerReady = isMailerConfigured();
 
     const fallback = buildFallbackEstimate({
       projectType,
@@ -283,11 +283,10 @@ export async function POST(req: NextRequest) {
     // Persist lead to CMS database (don't block the estimate on failure)
     try {
       const { db } = await import("@/lib/db");
-      const { notifyHotLead, notifyNewLead } = await import("@/lib/leadWebhooks");
       // Anyone who finishes the estimator with an Enterprise-scale or ASAP
       // project has already shown strong buying intent — treat as hot.
       const segment = scale === "Enterprise" || timeline === "ASAP <4 weeks" ? "hot" : "warm";
-      const lead = await db.lead.create({
+      await db.lead.create({
         data: {
           type: "CONSULTATION",
           email,
@@ -298,16 +297,6 @@ export async function POST(req: NextRequest) {
           metadata: { projectType, features, scale, timeline },
         },
       });
-      if (segment === "hot") {
-        void notifyHotLead({
-          email,
-          name,
-          segment,
-          source: "estimate_wizard",
-          summary: `${projectType} (${scale}), timeline: ${timeline}, ${features.length} features selected.`,
-        });
-      }
-      void notifyNewLead({ leadId: lead.id, email, name, segment, source: "estimate_wizard" });
     } catch (dbError) {
       console.error("Lead persistence error:", dbError);
     }
@@ -342,11 +331,14 @@ export async function POST(req: NextRequest) {
     const parsed = parseEstimateJson(raw);
     const estimate = normalizeEstimate(parsed, fallback);
 
-    await sendMail({
-      from: '"NeoKlyn Estimator" <hello@neoklyn.com>',
-      to: email,
-      subject: `Your NeoKlyn estimate for ${projectType}`,
-      html: `
+    if (mailerReady) {
+      // Fire-and-forget: a broken SMTP send must never take down an
+      // already-generated estimate response (see /api/audit for the same pattern).
+      void sendMail({
+        from: '"NeoKlyn Estimator" <hello@neoklyn.com>',
+        to: email,
+        subject: `Your NeoKlyn estimate for ${projectType}`,
+        html: `
         <div style="font-family:Segoe UI,Arial,sans-serif;max-width:620px;margin:0 auto;background:#0c0c12;color:#f4f4f5;border-radius:14px;border:1px solid rgba(255,255,255,0.08);overflow:hidden;">
           <div style="padding:24px 28px;border-bottom:1px solid rgba(6,182,212,0.35);background:linear-gradient(90deg,rgba(6,182,212,0.08),rgba(59,130,246,0.08));">
             <h1 style="margin:0;font-size:22px;">Your Project Estimate is Ready</h1>
@@ -374,7 +366,10 @@ export async function POST(req: NextRequest) {
           </div>
         </div>
       `,
-    });
+      }).catch((error) => console.error("Estimate result email failed:", error));
+    } else {
+      console.log("SMTP is not configured — skipping estimate email send.");
+    }
 
     return NextResponse.json({ estimate });
   } catch (error) {

@@ -26,18 +26,18 @@ const jetBrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://neoklyn.com"),
   title: {
-    default: "AI Agency & Web Development Studio — NeoKlyn",
+    default: "AI-Accelerated Web & App Development Studio — NeoKlyn",
     template: "%s | NeoKlyn",
   },
   description:
-    "Web apps, AI Agents, Ecommerce & 3D experiences engineered for conversion. Based in Bengaluru.",
+    "AI-accelerated web apps, mobile apps, ecommerce & AI agents, reviewed line-by-line by a senior engineer. 40-60% below agency pricing. Bengaluru, worldwide.",
   alternates: {
     canonical: "https://neoklyn.com",
   },
   openGraph: {
-    title: "AI Agency & Web Development Studio — NeoKlyn",
+    title: "AI-Accelerated Web & App Development Studio — NeoKlyn",
     description:
-      "Web apps, AI Agents, Ecommerce & 3D experiences engineered for conversion. Based in Bengaluru.",
+      "AI-accelerated web apps, mobile apps, ecommerce and AI agents, built fast and reviewed line-by-line by a senior engineer. 40-60% below agency pricing.",
     url: "https://neoklyn.com",
     siteName: "NeoKlyn",
     locale: "en_US",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "NeoKlyn - AI Agency & Web Development Studio",
+        alt: "NeoKlyn - AI-Accelerated Development Studio",
       },
     ],
   },
@@ -55,9 +55,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@neoklyn",
     creator: "@neoklyn",
-    title: "AI Agency & Web Development Studio — NeoKlyn",
+    title: "AI-Accelerated Web & App Development Studio — NeoKlyn",
     description:
-      "Web apps, AI Agents, Ecommerce & 3D experiences engineered for conversion. Based in Bengaluru.",
+      "AI-accelerated web apps, mobile apps, ecommerce and AI agents, built fast and reviewed line-by-line by a senior engineer.",
     images: ["/opengraph-image"],
   },
   // Replace with your actual code from Google Search Console > Settings > Ownership verification > HTML tag method

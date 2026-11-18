@@ -14,9 +14,13 @@ export default function Footer() {
                 <Link href="/work">Work</Link>
                 <Link href="/about">About</Link>
                 <Link href="/insights">Insights</Link>
+                <Link href="/estimate">Get Estimate</Link>
                 <Link href="/contact">Contact</Link>
             </div>
-            <div className="f-copy">© 2026 NeoKlyn.com<br />All rights reserved.</div>
+            <div className="f-copy">
+                Web Development &amp; AI Agency in Bangalore, India
+                <br />© 2026 NeoKlyn.com — All rights reserved.
+            </div>
 
             {/* Social Links */}
             <div className="f-socials">

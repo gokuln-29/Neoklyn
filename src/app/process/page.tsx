@@ -31,7 +31,7 @@ const faqSchema = {
             name: "What is your pricing model?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "We work with flexible engagement models — project-based for defined scopes, and monthly retainers for ongoing development. Minimum enterprise projects start at $5K USD. Final pricing depends on scope, timeline, and tech complexity."
+                text: "Websites start from ₹50,000 / $600. Web apps and ecommerce typically range ₹1-4 lakh / $1,200-5,000 depending on features. You get a fixed written quote within 24 hours, and it stays fixed unless you change the scope."
             }
         },
         {
@@ -39,7 +39,7 @@ const faqSchema = {
             name: "How long does a typical project take?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "MVP timelines range from 6-12 weeks. Full-scale web applications take 3-6 months. Mobile apps typically require 8-16 weeks. We provide detailed sprint plans during discovery."
+                text: "Standard websites: 2-3 weeks. Web apps and ecommerce: 3-6 weeks. Complex platforms and AI products: 6-10 weeks. AI-accelerated development typically makes us 2-3x faster than traditional agency timelines."
             }
         },
         {
@@ -47,7 +47,7 @@ const faqSchema = {
             name: "Do you offer ongoing maintenance?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "Yes. All projects include a 30-day post-launch support window. For ongoing maintenance, we offer monthly retainers covering updates, monitoring, security patches, and feature iterations."
+                text: "Yes. All projects include 30 days of free post-launch bug fixes. For ongoing work, we offer monthly retainers covering updates, monitoring, security patches, and feature iterations."
             }
         },
         {
@@ -55,7 +55,7 @@ const faqSchema = {
             name: "What industries do you specialize in?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "We serve B2B SaaS,ecommerce, logistics, healthcare tech, and premium lifestyle brands. Our strength is translating complex technical requirements into intuitive user experiences."
+                text: "We've delivered projects in B2B trading, industrial and construction, travel, manufacturing, and healthcare. Our strength is translating complex technical requirements into intuitive, conversion-focused experiences."
             }
         },
         {
@@ -63,7 +63,7 @@ const faqSchema = {
             name: "How do we get started?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "Book a free 30-minute discovery call through our contact page. We'll discuss your goals, technical requirements, and provide a preliminary roadmap and estimate."
+                text: "Book a free discovery call through our contact page. You'll speak directly with the engineer who builds your project, and get a fixed quote within 24 hours."
             }
         }
     ]

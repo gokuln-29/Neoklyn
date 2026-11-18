@@ -103,7 +103,8 @@ export default function PostEditor({ postId }: PostEditorProps) {
   const [content, setContent] = useState<object | null>(null);
   const [contentHtml, setContentHtml] = useState("");
   const [seo, setSeo] = useState<SeoState>(EMPTY_SEO);
-  const [initialContent, setInitialContent] = useState<object | null>(null);
+  // Rich-text JSON, or raw HTML for drafts created by the automation API (which has no JSON).
+  const [initialContent, setInitialContent] = useState<object | string | null>(null);
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [tagQuery, setTagQuery] = useState("");
@@ -141,7 +142,7 @@ export default function PostEditor({ postId }: PostEditorProps) {
         setCategoryId(post.categoryId || "");
         setSelectedTags(post.tags.map((t: { tag: Tag }) => t.tag));
         setContent(post.content);
-        setInitialContent(post.content);
+        setInitialContent(post.content ?? post.contentHtml ?? null);
         setContentHtml(post.contentHtml || "");
         if (post.seoMetadata) {
           setSeo({

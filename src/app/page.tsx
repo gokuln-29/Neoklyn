@@ -4,28 +4,34 @@ import CTASection from "@/components/CTASection";
 import FAQSection from "@/components/FAQSection";
 import EngageSection from "@/components/EngageSection";
 import type { Metadata } from "next";
-import { aggregateRatingSchema } from "@/lib/schema";
+import { localBusinessSchema } from "@/lib/schema";
 import { siteStats } from "@/data/siteStats";
 import { getAllInsightSummaries } from "@/lib/insights";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "AI Agency & Web Development Studio — NeoKlyn",
+    absolute: "AI-Accelerated Web & App Development Studio in Bangalore | NeoKlyn",
   },
   description:
-    "Premium AI agents, web apps, mobile & ecommerce from Bengaluru. Trusted by 100+ global brands. Get a free consultation.",
+    "AI-accelerated web apps, mobile apps, ecommerce & AI agents. Every line reviewed by a senior engineer, 10+ yrs experience. 40-60% below agency pricing.",
   openGraph: {
-    title: "AI Agency & Web Development Studio — NeoKlyn",
+    title: "AI-Accelerated Web & App Development Studio in Bangalore | NeoKlyn",
     description:
-      "Premium AI agents, web apps, mobile & ecommerce from Bengaluru. Trusted by 100+ global brands. Get a free consultation.",
+      "AI-accelerated web apps, mobile apps, ecommerce & AI agents. Every line reviewed by a senior engineer, 10+ yrs experience. 40-60% below agency pricing.",
     url: "https://neoklyn.com",
     siteName: "NeoKlyn",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI-Accelerated Web & App Development Studio in Bangalore | NeoKlyn",
+    description:
+      "AI-accelerated web apps, mobile apps, ecommerce & AI agents. Every line reviewed by a senior engineer, 10+ yrs experience. 40-60% below agency pricing.",
+  },
 };
 
 export default async function Home() {
-  const ratingSchema = aggregateRatingSchema();
+  const businessSchema = localBusinessSchema();
   const recentInsights = (await getAllInsightSummaries()).slice(0, 3);
   const speakableSchema = {
     "@context": "https://schema.org",
@@ -41,7 +47,7 @@ export default async function Home() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ratingSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
       />
       <script
         type="application/ld+json"
@@ -55,17 +61,17 @@ export default async function Home() {
         <div className="orb orb-3"></div>
 
         <div className="hero-left">
-          <div className="hero-eyebrow">ENGINEERING INTELLIGENT DIGITAL SYSTEMS</div>
-          <h1 className="hero-title" aria-label="We build digital products">
-            <span className="line" aria-hidden="true"><span>WE BUILD</span></span>
-            <span className="line" aria-hidden="true"><span className="title-outline">DIGITAL</span></span>
-            <span className="line" aria-hidden="true"><span className="title-cyan">PRODUCTS</span></span>
+          <div className="hero-eyebrow">AI-ACCELERATED DEVELOPMENT STUDIO — BENGALURU, INDIA</div>
+          <h1 className="hero-title" aria-label="Agency quality. Half the price. Twice the speed.">
+            <span className="line" aria-hidden="true"><span>AGENCY QUALITY.</span></span>
+            <span className="line" aria-hidden="true"><span className="title-outline">HALF THE PRICE.</span></span>
+            <span className="line" aria-hidden="true"><span className="title-cyan">TWICE THE SPEED.</span></span>
           </h1>
-          <p className="hero-desc">Web apps, mobile, ecommerce, AI Agents, Generative AI, 3D experiences &amp; performance marketing — engineered for conversion, designed to impress.</p>
+          <p className="hero-desc">NeoKlyn builds websites, apps, ecommerce stores and AI agents using AI-accelerated development — with every line of code architected, reviewed and tested by a senior engineer with 10+ years of experience. You get agency-grade work in weeks, not months.</p>
           <div className="hero-btns">
-            <Link href="/contact" className="btn-main">Start a Project ↗</Link>
-            <Link href="/services" className="btn-ghost">
-              Explore Services
+            <Link href="/contact" className="btn-main">Get a Free Quote ↗</Link>
+            <Link href="/how-we-work" className="btn-ghost">
+              See How It Works
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </Link>
           </div>
@@ -89,6 +95,90 @@ export default async function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* THE NEOKLYN MODEL */}
+      <section className="section">
+        <div className="reveal" style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto' }}>
+          <div className="s-label" style={{ justifyContent: 'center' }}>The NeoKlyn Model</div>
+          <h2 className="s-title">WHY WE&apos;RE FASTER AND MORE AFFORDABLE — HONESTLY</h2>
+          <p className="s-sub" style={{ margin: '0 auto' }}>
+            Traditional agencies charge for offices, account managers, sales teams and layers of junior developers. Cheap freelancers cut the price by cutting quality. NeoKlyn takes a third path.
+          </p>
+          <p className="s-sub" style={{ margin: '1rem auto 0' }}>
+            We build with AI-accelerated development — the same AI coding tools used by the world&apos;s leading tech companies — which handles the repetitive 70% of coding at machine speed. The critical 30% — architecture, security, code review, testing, and judgment — is done personally by a senior engineer with 10+ years of experience. Every line that ships has been read by human eyes.
+          </p>
+          <p className="s-sub" style={{ margin: '1rem auto 0' }}>
+            The result: agency-grade quality, delivered in 2-5 weeks instead of 2-4 months, at 40-60% less than typical agency pricing. Not because we cut corners — because we cut overhead.
+          </p>
+        </div>
+
+        <div className="model-grid reveal" style={{ marginTop: '3.5rem' }}>
+          <div className="model-card">
+            <div className="model-icon" style={{ color: 'var(--cyan)' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M13 2L5 13h5l-1 9 8-11h-5l1-9Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" /></svg>
+            </div>
+            <h3 className="model-heading">AI does the repetitive work</h3>
+            <p className="model-text">Boilerplate, scaffolding, and routine code at machine speed. This is where the time and cost savings come from.</p>
+          </div>
+          <div className="model-card">
+            <div className="model-icon" style={{ color: 'var(--violet)' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.6" /><path d="M4 20c0-3.5 3.5-6 8-6s8 2.5 8 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /><path d="M17 9l1.5 1.5L21.5 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </div>
+            <h3 className="model-heading">A senior engineer does the thinking</h3>
+            <p className="model-text">Architecture, security, database design, code review, testing. 10+ years of experience on every decision.</p>
+          </div>
+          <div className="model-card">
+            <div className="model-icon" style={{ color: 'var(--blue)' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" /><path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </div>
+            <h3 className="model-heading">You get accountability</h3>
+            <p className="model-text">One person is responsible for your project end to end. 30 days of free post-launch fixes. You own 100% of the code.</p>
+          </div>
+        </div>
+
+        <style>{`
+          .model-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .model-card {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.02);
+            padding: 2rem 1.75rem;
+            text-align: left;
+          }
+          .model-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.1rem;
+          }
+          .model-heading {
+            font-family: var(--font-space-grotesk), sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+          }
+          .model-text {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.7;
+          }
+          @media (max-width: 900px) {
+            .model-grid { grid-template-columns: 1fr; }
+          }
+        `}</style>
       </section>
 
       {/* TICKER */}
@@ -123,7 +213,7 @@ export default async function Home() {
         <div className="reveal">
           <div className="s-label">Services</div>
           <h2 className="s-title">WHAT WE BUILD</h2>
-          <p className="s-sub">From pixel-perfect interfaces to scalable backends — full-stack digital execution across every channel.</p>
+          <p className="s-sub">Full-stack digital products, AI-accelerated, human-perfected.</p>
         </div>
         <div className="services-layout">
           <div className="service-list reveal">
@@ -400,31 +490,27 @@ export default async function Home() {
         </div>
         <div className="process-grid reveal">
           <div className="p-step">
-            {/* <div className="p-num">01</div> */}
             <div className="p-line"></div>
             <div className="p-title">Discovery</div>
-            <p className="p-desc">We audit your goals, audience, and competitive landscape to define a strategy that actually wins. This phase involves deep stakeholder interviews and technical feasibility assessments.</p>
+            <p className="p-desc">A direct call with the engineer who will build your project — not a salesperson. We define goals, scope, and a fixed quote within 24 hours.</p>
             <div className="p-connector"></div>
           </div>
           <div className="p-step">
-            {/* <div className="p-num">02</div> */}
             <div className="p-line"></div>
             <div className="p-title">Design</div>
-            <p className="p-desc">Wireframes → prototypes → final UI. Your approval before a single line of production code is written. We establish scalable design systems that capture your premium brand identity.</p>
+            <p className="p-desc">Wireframes and UI prototypes for your approval before production code. AI-assisted exploration means you see more options, faster.</p>
             <div className="p-connector"></div>
           </div>
           <div className="p-step">
-            {/* <div className="p-num">03</div> */}
             <div className="p-line"></div>
-            <div className="p-title">Build</div>
-            <p className="p-desc">Clean, tested code. Weekly updates, staging previews, and full transparency throughout development. We utilize edge-compute and modern stacks for uncompromising performance.</p>
+            <div className="p-title">AI-Accelerated Build</div>
+            <p className="p-desc">AI tools generate the foundation at speed; the senior engineer architects, refines, reviews and tests every component. Weekly demos, full transparency.</p>
             <div className="p-connector"></div>
           </div>
           <div className="p-step">
-            {/* <div className="p-num">04</div> */}
             <div className="p-line"></div>
-            <div className="p-title">Launch &amp; Scale</div>
-            <p className="p-desc">Deploy, monitor, iterate. Ongoing marketing and retainer options to keep growing post-launch. We provide relentless post-release support to guarantee SLA uptime.</p>
+            <div className="p-title">Launch &amp; Support</div>
+            <p className="p-desc">Deployment, monitoring, and 30 days of free post-launch fixes. Retainer options for ongoing growth. You own all code, data, and accounts.</p>
           </div>
         </div>
       </section>
@@ -434,21 +520,12 @@ export default async function Home() {
         <div className="reveal" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '2rem' }}>
           <div>
             <div className="s-label">Client Trust</div>
-            <h2 className="s-title" style={{ marginBottom: 0 }}>REAL RESULTS</h2>
+            <h2 className="s-title" style={{ marginBottom: 0 }}>REAL PROJECTS, LIVE RIGHT NOW</h2>
+            <p className="s-sub" style={{ margin: '0.5rem 0 0' }}>Every site below is live. Visit them — the work speaks for itself.</p>
           </div>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            {/* Badge Suggestion Placement */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', padding: '0.5rem 1rem', borderRadius: '30px' }}>
-              <div style={{ color: '#F87171', fontWeight: 'bold' }}>Clutch</div>
-              <div style={{ display: 'flex', color: '#FBBF24', fontSize: '0.8rem' }}>★★★★★</div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>4.9/5</div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', padding: '0.5rem 1rem', borderRadius: '30px' }}>
-              <div style={{ color: '#60A5FA', fontWeight: 'bold' }}>Google</div>
-              <div style={{ display: 'flex', color: '#FBBF24', fontSize: '0.8rem' }}>★★★★★</div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>5.0/5</div>
-            </div>
-          </div>
+          {/* Clutch/Google rating badges removed until those profiles genuinely
+              exist with real reviews — re-add linked directly to the live
+              profiles once they do. */}
         </div>
         <div className="test-grid reveal" style={{ marginTop: '3rem' }}>
 
@@ -535,21 +612,21 @@ export default async function Home() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
 
-          <a href="http://dwarkageneraltrading.ae/" target="_blank" rel="noopener noreferrer" className="tcard reveal" style={{ textDecoration: 'none', color: 'inherit', padding: '0', minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent), url(/assets/work/dwarka.jpg) center/cover' }}>
+          <a href="http://dwarkageneraltrading.ae/" target="_blank" rel="noopener noreferrer" className="tcard reveal" style={{ textDecoration: 'none', color: 'inherit', padding: '0', minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent), url(/assets/work/dwarka.webp) center/cover' }}>
             <div style={{ padding: '2rem' }}>
               <div className="m-tag" style={{ border: 'none', background: 'var(--cyan)', color: 'var(--bg)', marginBottom: '1rem', padding: '0.2rem 0.6rem', borderRadius: '4px' }}>B2B Corporate</div>
               <h3 className="p-title" style={{ fontSize: '1.4rem' }}>Dwarka General Trading</h3>
             </div>
           </a>
 
-          <a href="https://travexventures.com/" target="_blank" rel="noopener noreferrer" className="tcard reveal" style={{ textDecoration: 'none', color: 'inherit', padding: '0', minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent), url(/assets/work/travex.png) center/cover' }}>
+          <a href="https://travexventures.com/" target="_blank" rel="noopener noreferrer" className="tcard reveal" style={{ textDecoration: 'none', color: 'inherit', padding: '0', minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent), url(/assets/work/travex.webp) center/cover' }}>
             <div style={{ padding: '2rem' }}>
               <div className="m-tag" style={{ border: 'none', background: 'var(--violet)', color: '#fff', marginBottom: '1rem', padding: '0.2rem 0.6rem', borderRadius: '4px' }}>Travel Agency</div>
               <h3 className="p-title" style={{ fontSize: '1.4rem' }}>Travex Ventures</h3>
             </div>
           </a>
 
-          <a href="https://zinadconcreteworks.com/" target="_blank" rel="noopener noreferrer" className="tcard reveal" style={{ textDecoration: 'none', color: 'inherit', padding: '0', minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent), url(/assets/work/zinad.jpg) center/cover' }}>
+          <a href="https://zinadconcreteworks.com/" target="_blank" rel="noopener noreferrer" className="tcard reveal" style={{ textDecoration: 'none', color: 'inherit', padding: '0', minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent), url(/assets/work/zinad.webp) center/cover' }}>
             <div style={{ padding: '2rem' }}>
               <div className="m-tag" style={{ border: 'none', background: 'var(--blue)', color: '#000', marginBottom: '1rem', padding: '0.2rem 0.6rem', borderRadius: '4px' }}>Industrial</div>
               <h3 className="p-title" style={{ fontSize: '1.4rem' }}>Zinad Concrete Works</h3>

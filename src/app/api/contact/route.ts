@@ -91,17 +91,19 @@ export async function POST(req: NextRequest) {
             `;
         }
 
-        await sendMail({
+        // Fire-and-forget: the lead is already saved above, so a broken SMTP
+        // send must never turn a successful submission into a user-facing error.
+        void sendMail({
             from: `"NeoKlyn Website" <${NOTIFY_EMAIL}>`,
             to: NOTIFY_EMAIL,
             replyTo: email,
             subject,
             html,
-        });
+        }).catch((error) => console.error('Contact notification email failed:', error));
 
         return NextResponse.json({ success: true });
     } catch (error) {
-        console.error('Email send error:', error);
-        return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+        console.error('Contact API error:', error);
+        return NextResponse.json({ error: 'Failed to submit. Please try again.' }, { status: 500 });
     }
 }

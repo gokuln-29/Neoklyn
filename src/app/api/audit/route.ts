@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { sendMail, isMailerConfigured } from "@/lib/mailer";
 import { rateLimit, getRateLimitKey } from "@/lib/rateLimit";
-import { notifyHotLead, notifyNewLead } from "@/lib/leadWebhooks";
 import { AUDIT_QUESTIONS, type AuditAnswers } from "@/data/auditQuestions";
 import { scoreAnswers, buildTakeaway } from "@/lib/auditScoring";
 
@@ -69,17 +68,6 @@ export async function POST(req: NextRequest) {
         },
       },
     });
-
-    if (segment === "hot") {
-      void notifyHotLead({
-        email,
-        name,
-        segment,
-        source: "audit_landing_page",
-        summary: `Score ${score}/18. Biggest time sink: ${answers.biggestTimeSink}. Timeline: ${answers.timeline}. Budget: ${answers.budget}.`,
-      });
-    }
-    void notifyNewLead({ leadId: lead.id, email, name, segment, source: "audit_landing_page" });
 
     if (isMailerConfigured()) {
       void sendMail({

@@ -7,7 +7,7 @@ export const size = {
 
 export const contentType = "image/png";
 
-export const alt = "NeoKlyn - Engineering Intelligent Digital Systems";
+export const alt = "NeoKlyn - AI-Accelerated Development Studio";
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -55,10 +55,10 @@ export default function OpenGraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 20, position: "relative", marginTop: 14 }}>
           <div style={{ display: "flex", maxWidth: 900, fontSize: 64, fontWeight: 700, lineHeight: 1.08 }}>
-            Engineering Intelligent Digital Systems
+            AI-Accelerated Development Studio
           </div>
           <div style={{ display: "flex", maxWidth: 760, fontSize: 28, color: "rgba(255,255,255,0.74)", lineHeight: 1.35 }}>
-            Premium AI agents, web apps, mobile and ecommerce from Bengaluru
+            Agency quality, 40-60% below agency pricing — Bengaluru, India
           </div>
         </div>
 
@@ -73,7 +73,7 @@ export default function OpenGraphImage() {
               letterSpacing: "0.03em",
             }}
           >
-            120+ PROJECTS · 98% RETENTION · 3 GLOBAL HUBS
+            10+ YRS EXPERIENCE · AI-ACCELERATED · FOUNDER-REVIEWED
           </div>
         </div>
       </div>

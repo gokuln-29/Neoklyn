@@ -50,7 +50,7 @@ export const projects: Project[] = [
     filters: ["Web"],
     location: "Middle East",
     color: "var(--cyan)",
-    image: "/assets/work/dwarka.jpg",
+    image: "/assets/work/dwarka.webp",
     liveUrl: "http://dwarkageneraltrading.ae/",
     keyMetric: "+45% mobile engagement",
     description:
@@ -84,7 +84,7 @@ export const projects: Project[] = [
     filters: ["Web"],
     location: "India",
     color: "var(--violet)",
-    image: "/assets/work/Aathithyan.jpg",
+    image: "/assets/work/Aathithyan.webp",
     liveUrl: "https://aathithyan.com",
     keyMetric: "Pixel-perfect luxury positioning",
     description:
@@ -116,7 +116,7 @@ export const projects: Project[] = [
     filters: ["Industrial"],
     location: "Middle East",
     color: "var(--blue)",
-    image: "/assets/work/zinad.jpg",
+    image: "/assets/work/zinad.webp",
     liveUrl: "https://zinadconcreteworks.com",
     keyMetric: "Top 3 local keyword ranking",
     description:
@@ -148,7 +148,7 @@ export const projects: Project[] = [
     filters: ["Travel", "3D"],
     location: "India",
     color: "var(--violet)",
-    image: "/assets/work/travex.png",
+    image: "/assets/work/travex.webp",
     liveUrl: "https://travexventures.com",
     keyMetric: "+110% booking inquiries",
     description:
@@ -182,7 +182,7 @@ export const projects: Project[] = [
     filters: ["Manufacturing"],
     location: "India",
     color: "var(--cyan)",
-    image: "/assets/work/lpsmpvtltd.jpg",
+    image: "/assets/work/lpsmpvtltd.webp",
     liveUrl: "https://lpsm.in",
     keyMetric: "Zero-downtime migration",
     description:
@@ -214,7 +214,7 @@ export const projects: Project[] = [
     filters: ["Web"],
     location: "Madurai, Tamil Nadu, India",
     color: "var(--blue)",
-    image: "/assets/work/sharon-physio.jpg",
+    image: "/assets/work/sharon-physio.webp",
     liveUrl: "https://sharonphysio.com/",
     keyMetric: "+30% booking inquiries",
     description:

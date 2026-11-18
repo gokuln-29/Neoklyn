@@ -47,11 +47,11 @@ export default function CTASection() {
 
                 <h2 className="cta-title">
                     READY TO<br />
-                    <span className="c-cyan">GO LIVE?</span>
+                    <span className="c-cyan">BUILD FASTER?</span>
                 </h2>
 
                 <p className="cta-sub">
-                    Drop your email. We reply within 24 hours with a free project consultation and proposal.
+                    Tell us what you need. You&apos;ll get a reply from the engineer — not a sales bot — within 24 hours, with honest feasibility, timeline, and a fixed quote.
                 </p>
 
                 {status === 'success' ? (
@@ -115,7 +115,38 @@ export default function CTASection() {
 
                 <p className="cta-note">{`// no spam · no commitment · just a conversation`}</p>
 
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginTop: '1.75rem', flexWrap: 'wrap' }}>
+                    <Link
+                        href="/estimate"
+                        className="btn-ghost"
+                        style={{ fontSize: '0.85rem', padding: '0.7rem 1.4rem' }}
+                        onClick={() => trackEvent('cta_estimate_click', { form_name: 'cta_estimate' })}
+                    >
+                        Get Free Estimate ↗
+                    </Link>
+                    <a
+                        href="https://wa.me/916380202766?text=Hi%20NeoKlyn%2C%20I%27d%20like%20a%20quote%20for%20my%20project"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-ghost"
+                        style={{ fontSize: '0.85rem', padding: '0.7rem 1.4rem' }}
+                        onClick={() => trackEvent('cta_whatsapp_click', { form_name: 'cta_whatsapp' })}
+                    >
+                        WhatsApp Us
+                    </a>
+                    <a
+                        href="https://cal.com/neoklyn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-ghost"
+                        style={{ fontSize: '0.85rem', padding: '0.7rem 1.4rem' }}
+                        onClick={() => trackEvent('cta_calcom_click', { form_name: 'cta_calcom' })}
+                    >
+                        Book a 20-min Call
+                    </a>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
                     <Link href="/contact" style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s' }}
                         onMouseEnter={e => (e.currentTarget.style.color = 'var(--cyan)')}
                         onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}

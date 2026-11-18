@@ -15,7 +15,7 @@ import { useCallback, useEffect, useRef } from "react";
 const lowlight = createLowlight(common);
 
 type TiptapEditorProps = {
-  content?: object | null;
+  content?: object | string | null;
   onChange?: (json: object, html: string) => void;
   placeholder?: string;
 };

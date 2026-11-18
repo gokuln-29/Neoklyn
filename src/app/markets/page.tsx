@@ -34,11 +34,10 @@ export default function MarketsPage() {
                         <span className="title-cyan">SERVICE</span>
                     </h1>
                     <p className="hero-desc" style={{ margin: '0 auto' }}>
-                        We provide global digital services from our head office in Bengaluru, India.
+                        Engineering from Bengaluru, India — delivering for clients worldwide. Async-first communication and real overlap hours, not just a time zone map.
                     </p>
                 </div>
 
-                {/* ═══ PREMIUM WORLD MAP — IMAGE + GLOBAL CITY NETWORK ═══ */}
                 <MarketsHUD />
 
                 <div className="markets-layout reveal">

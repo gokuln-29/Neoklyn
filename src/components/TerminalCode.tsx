@@ -7,31 +7,21 @@ export default function TerminalCode() {
                 <span className="t-filename">neoklyn_sys.py</span>
             </div>
             <div className="terminal-body">
-                <span className="t-comment">{`# Initializing NeoKlyn Generative AI Core`}</span><br />
-                <span className="t-comment">{`# Loading proprietary agents...`}</span><br /><br />
+                <span className="t-comment">{`# NeoKlyn — AI-accelerated development`}</span><br /><br />
 
-                <span className="t-key">class</span> <span className="t-fn">NeoKlynIntelligence</span><span className="t-punc">(</span><span className="t-fn">BaseAgent</span><span className="t-punc">):</span><br />
+                <span className="t-key">class</span> <span className="t-fn">NeoKlyn</span><span className="t-punc">(</span><span className="t-fn">Studio</span><span className="t-punc">):</span><br />
                 &nbsp;&nbsp;<span className="t-key">def</span> <span className="t-fn">__init__</span><span className="t-punc">(</span><span className="t-key">self</span><span className="t-punc">):</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-key">self</span><span className="t-punc">.</span><span className="t-fn">model</span> <span className="t-punc">=</span> <span className="t-str">&quot;NK-Vision-v4&quot;</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-key">self</span><span className="t-punc">.</span><span className="t-fn">capabilities</span> <span className="t-punc">=</span> <span className="t-punc">[</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;Autonomous Web Agents&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;Generative UI/UX&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;Predictive Marketing&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;AI Agents&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;Generative AI&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;Web Development&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;Mobile Apps&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;Ecommerce&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;3D Websites&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;Digital Marketing&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;SEO &amp; PPC&quot;</span><span className="t-punc">,</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-punc">]</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-key">self</span><span className="t-punc">.</span><span className="t-fn">success_rate</span> <span className="t-punc">=</span> <span className="t-num">0.99</span><br /><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-key">self</span><span className="t-punc">.</span><span className="t-fn">founded</span> <span className="t-punc">=</span> <span className="t-str">&quot;Bengaluru, 2026&quot;</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-key">self</span><span className="t-punc">.</span><span className="t-fn">engineer_experience</span> <span className="t-punc">=</span> <span className="t-str">&quot;10+ years&quot;</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-key">self</span><span className="t-punc">.</span><span className="t-fn">build_method</span> <span className="t-punc">=</span> <span className="t-str">&quot;AI-accelerated&quot;</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-key">self</span><span className="t-punc">.</span><span className="t-fn">review_method</span> <span className="t-punc">=</span> <span className="t-str">&quot;senior engineer, every line&quot;</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-key">self</span><span className="t-punc">.</span><span className="t-fn">delivers</span> <span className="t-punc">=</span> <span className="t-punc">[</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;Web Apps&quot;</span><span className="t-punc">,</span> <span className="t-str">&quot;Mobile Apps&quot;</span><span className="t-punc">,</span> <span className="t-str">&quot;Ecommerce&quot;</span><span className="t-punc">,</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="t-str">&quot;AI Agents&quot;</span><span className="t-punc">,</span> <span className="t-str">&quot;Generative AI&quot;</span><span className="t-punc">,</span> <span className="t-str">&quot;3D Websites&quot;</span><span className="t-punc">,</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-punc">]</span><br /><br />
 
                 &nbsp;&nbsp;<span className="t-key">def</span> <span className="t-fn">execute</span><span className="t-punc">(</span><span className="t-key">self</span><span className="t-punc">,</span> <span className="t-fn">project</span><span className="t-punc">):</span><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-key">return</span> <span className="t-fn">optimize_conversion</span><span className="t-punc">(</span><span className="t-fn">project</span><span className="t-punc">)</span><br /><br />
-
-                <span className="t-key">await</span> <span className="t-fn">NeoKlynIntelligence</span><span className="t-punc">().</span><span className="t-fn">execute</span><span className="t-punc">(</span><span className="t-fn">target_project</span><span className="t-punc">)</span> <span className="t-cursor"></span>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span className="t-key">return</span> <span className="t-fn">build_fast</span><span className="t-punc">(</span><span className="t-fn">project</span><span className="t-punc">,</span> <span className="t-fn">review</span><span className="t-punc">=</span><span className="t-str">&quot;human&quot;</span><span className="t-punc">,</span> <span className="t-fn">quality</span><span className="t-punc">=</span><span className="t-str">&quot;agency-grade&quot;</span><span className="t-punc">)</span> <span className="t-cursor"></span>
             </div>
         </div>
     );

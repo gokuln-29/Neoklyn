@@ -1,7 +1,6 @@
 import OpenAI from "openai";
 import { sendMail } from "@/lib/mailer";
 import { db } from "@/lib/db";
-import { notifyHotLead, notifyNewLead } from "@/lib/leadWebhooks";
 import { NextRequest, NextResponse } from "next/server";
 import { chatSystemPrompt } from "@/lib/chatSystemPrompt";
 
@@ -119,7 +118,7 @@ async function persistChatLead(signals: ReturnType<typeof extractLeadSignals>, t
   // email alone — treat that as hot, everything else as warm.
   const segment = budget ? "hot" : "warm";
 
-  const lead = await db.lead.create({
+  await db.lead.create({
     data: {
       type: "AI_DEMO",
       email,
@@ -129,17 +128,6 @@ async function persistChatLead(signals: ReturnType<typeof extractLeadSignals>, t
       metadata: { budget, companySize, transcript },
     },
   });
-
-  if (segment === "hot") {
-    void notifyHotLead({
-      email,
-      name,
-      segment,
-      source: "chatbot",
-      summary: `Budget mentioned: ${budget}. ${companySize ? `Company size: ${companySize}. ` : ""}"${transcript.slice(0, 300)}"`,
-    });
-  }
-  void notifyNewLead({ leadId: lead.id, email, name, segment, source: "chatbot" });
 }
 
 export async function POST(req: NextRequest) {

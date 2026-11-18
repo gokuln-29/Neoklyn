@@ -1,4 +1,5 @@
 import PageWrapper from "@/components/layout/PageWrapper";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -100,7 +101,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         </div>
 
-        <div className="reveal case-hero-image" style={{ backgroundImage: `url(${project.image})` }} />
+        <div className="reveal case-hero-image">
+          <Image
+            src={project.image}
+            alt={`${project.client} — ${project.title}`}
+            fill
+            sizes="(max-width: 1380px) 92vw, 1380px"
+            style={{ objectFit: "cover" }}
+            priority
+          />
+        </div>
 
         <div className="case-shell" style={{ "--case-accent": project.color } as CSSProperties}>
           <div className="case-panel reveal">
@@ -286,8 +296,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           height: clamp(280px, 52vw, 620px);
           border-radius: 16px;
           border: 1px solid rgba(255,255,255,0.1);
-          background-size: cover;
-          background-position: center;
           position: relative;
           overflow: hidden;
         }
