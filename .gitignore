@@ -43,3 +43,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.automation/
+
+# local debug/scratch files
+lint.json
+lint-utf8.json
+log.txt
+log_utf8.txt
+page_head*.txt
+page_markets_log.txt
+restore_markets.js
+scratch/
