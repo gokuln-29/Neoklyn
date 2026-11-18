@@ -15,7 +15,8 @@
     "generate:article": "tsx scripts/generate-article.ts",
     "auto:blog": "tsx scripts/vps/blog-draft.ts",
     "auto:leads": "tsx scripts/vps/lead-digest.ts",
-    "auto:outreach": "tsx scripts/vps/outreach-drafts.ts"
+    "auto:outreach": "tsx scripts/vps/outreach-drafts.ts",
+    "auto:nurture": "tsx scripts/vps/nurture.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

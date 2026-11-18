@@ -68,6 +68,7 @@ export async function POST(req: NextRequest) {
           utm_source: body.utmSource || null,
           utm_campaign: body.utmCampaign || null,
           attribution: cleanAttribution(body.attribution) ?? null,
+          nurture_ok: true,
         },
       },
     });

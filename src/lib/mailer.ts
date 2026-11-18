@@ -38,6 +38,8 @@ type SendMailInput = {
   subject: string;
   html: string;
   replyTo?: string;
+  /** Extra headers, e.g. List-Unsubscribe for marketing mail. */
+  headers?: Record<string, string>;
 };
 
 /**

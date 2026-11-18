@@ -124,6 +124,9 @@ export default function AuditQuizWizard() {
                     {touched && emailError && <span className="audit-error">{emailError}</span>}
                   </div>
                   {error && <div className="audit-api-error">{error}</div>}
+                  <p className="audit-followup-note" style={{ margin: 0 }}>
+                    We&apos;ll email your results plus a few short, useful follow-ups over about two weeks. Unsubscribe any time.
+                  </p>
                   <button type="button" className="btn-main audit-submit-btn" onClick={() => void submit()} disabled={isLoading}>
                     {isLoading ? "Analyzing..." : "Get My Results →"}
                   </button>

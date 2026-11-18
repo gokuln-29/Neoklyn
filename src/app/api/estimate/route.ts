@@ -296,7 +296,7 @@ export async function POST(req: NextRequest) {
           company: company || null,
           source: "estimate_wizard",
           segment,
-          metadata: { projectType, features, scale, timeline, attribution: cleanAttribution(body.attribution) },
+          metadata: { projectType, features, scale, timeline, attribution: cleanAttribution(body.attribution), nurture_ok: true },
         },
       });
     } catch (dbError) {

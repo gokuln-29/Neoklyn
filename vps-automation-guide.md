@@ -7,7 +7,8 @@ Nothing is published or sent without you:
 |---|---|---|
 | `auto:blog` | Writes 1 SEO article, saves it as a **DRAFT**, and writes LinkedIn + X copy to `.automation/social/` | Read it, fix anything wrong, click Publish in `/admin/posts` |
 | `auto:leads` | Emails you new and unanswered leads with a suggested WhatsApp reply | Edit the reply and send it yourself |
-| `auto:outreach` | Turns your prospect list into personalised message drafts | Check, edit, and send them by hand |
+| `auto:outreach` | Audits each prospect's website and turns your list into personalised drafts that open with a measured finding | Check, edit, and send them by hand |
+| `auto:nurture` | Sends the 5-email follow-up series (days 2, 4, 7, 10, 14) to people who used the website audit, estimator or AI quiz and opted in | Mark a lead CONTACTED when you start talking to them; that stops the series |
 
 ## 1. One-time setup (on the VPS)
 
@@ -42,13 +43,27 @@ npm run auto:leads            # emails the digest (or says no leads)
 ```
 
 For outreach, copy `scripts/vps/prospects.example.csv` to `.automation/prospects.csv` and add real prospects
-(find them on Google Maps, Instagram, LinkedIn; write one specific thing you noticed in `observation`). Then:
+(find them on Google Maps, Instagram, LinkedIn; write one specific thing you noticed in `observation`, and put
+their site in `website`: the script then runs the same audit as /website-audit and the draft opens with one
+measured issue). Then:
 
 ```bash
 npm run auto:outreach
 ```
 
-Drafts appear in `.automation/outreach/<date>.md`.
+Drafts appear in `.automation/outreach/<date>.md`, with the audit results behind each one listed at the bottom
+so you can check them before sending.
+
+For the follow-up series, test first with a dry run, which only prints what would be sent:
+
+```bash
+DRY_RUN=1 npm run auto:nurture
+npm run auto:nurture
+```
+
+It needs `UNSUBSCRIBE_SECRET` (or `AUTH_SECRET`/`NEXTAUTH_SECRET`) in `.env`, because every email carries a signed
+unsubscribe link; it refuses to send without one. A lead gets emails only if it opted in on the form (the forms
+now say so), has not unsubscribed, and its status is still NEW or NURTURING.
 
 ## 3. Schedule it
 
@@ -64,6 +79,8 @@ CRON_TZ=Asia/Kolkata
 0 8 * * *      cd /path/to/neoklyn && /usr/bin/npm run auto:leads  >> /var/log/neoklyn-auto.log 2>&1
 # Outreach drafts Mon-Fri 8:30
 30 8 * * 1-5   cd /path/to/neoklyn && /usr/bin/npm run auto:outreach >> /var/log/neoklyn-auto.log 2>&1
+# Follow-up emails every day 10:00 (sends only what is due, max one per lead per day)
+0 10 * * *     cd /path/to/neoklyn && /usr/bin/npm run auto:nurture >> /var/log/neoklyn-auto.log 2>&1
 ```
 
 Check `which npm` and use that path. Watch the log for the first few days: `tail -f /var/log/neoklyn-auto.log`.

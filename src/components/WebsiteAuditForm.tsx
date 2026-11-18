@@ -170,7 +170,7 @@ export default function WebsiteAuditForm() {
           {loading ? "Checking your site… (about 10 seconds)" : "Run my free audit →"}
         </button>
         <p className="wa-note">
-          We only read your public homepage. We use your email to send the report and may follow up about it. No spam. See our{" "}
+          We only read your public homepage. We use your email to send the report, plus a few short, useful follow-up emails over about two weeks. Unsubscribe any time. See our{" "}
           <Link href="/privacy">privacy policy</Link>.
         </p>
       </form>

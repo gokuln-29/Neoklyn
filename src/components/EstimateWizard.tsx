@@ -269,6 +269,10 @@ export default function EstimateWizard() {
 
                   {error && <div className="est-api-error">{error}</div>}
 
+                  <p style={{ margin: 0, fontSize: "0.78rem", lineHeight: 1.6, color: "var(--muted)" }}>
+                    We&apos;ll show your estimate here and email it to you, plus a few short, useful follow-ups over about two weeks. Unsubscribe any time.
+                  </p>
+
                   <button
                     type="button"
                     className="btn-main est-submit-btn"

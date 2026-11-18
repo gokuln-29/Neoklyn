@@ -130,7 +130,9 @@ export async function POST(req: NextRequest) {
           url: report.finalUrl,
           score: report.score,
           categoryScores: Object.fromEntries(report.categories.map((c) => [c.id, c.score])),
-          topFixes: report.topFixes.map((f) => f.id),
+          topFixes: report.topFixes.map((f) => ({ id: f.id, label: f.label, fix: f.fix })),
+          // The form tells people a few follow-up emails will come; this records that notice was shown.
+          nurture_ok: true,
           attribution: cleanAttribution(body.attribution) ?? null,
         },
       },
