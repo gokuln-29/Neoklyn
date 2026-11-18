@@ -12,6 +12,7 @@ const navItems = [
   { label: "Media", href: "/admin/media", icon: "🖼️" },
   { label: "Leads", href: "/admin/leads", icon: "📬" },
   { label: "Growth", href: "/admin/growth", icon: "📈" },
+  { label: "Outreach", href: "/admin/outreach", icon: "🎯" },
   { label: "Services", href: "/admin/services", icon: "⚙️" },
   { label: "Case Studies", href: "/admin/case-studies", icon: "📋" },
   { label: "Testimonials", href: "/admin/testimonials", icon: "💬" },

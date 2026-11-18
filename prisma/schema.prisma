@@ -42,6 +42,25 @@ enum LeadStatus {
   CLOSED
 }
 
+enum OutreachChannel {
+  WHATSAPP
+  EMAIL
+  INSTAGRAM
+  LINKEDIN
+}
+
+enum OutreachStatus {
+  NEW        // imported, not yet audited or drafted
+  QUEUED     // drafted, waiting for your approval
+  APPROVED   // approved, ready for you to send
+  SENT       // you sent it (follow-ups may be due)
+  REPLIED
+  WON
+  LOST
+  SKIPPED
+  OPTED_OUT  // asked not to be contacted: never message again
+}
+
 enum SettingGroup {
   GENERAL
   SEO
@@ -372,4 +391,36 @@ model AuditLog {
   @@index([entity])
   @@index([createdAt])
   @@map("audit_logs")
+}
+
+// ─── Outreach (human-approved prospecting) ───────────────
+
+model OutreachProspect {
+  id             String          @id @default(cuid())
+  businessName   String
+  contactName    String?
+  channel        OutreachChannel @default(WHATSAPP)
+  phone          String?
+  email          String?
+  handle         String?         // Instagram or LinkedIn handle or URL
+  website        String?
+  niche          String?
+  city           String?
+  observation    String?         @db.Text // a specific thing you noticed, required for a draft when there is no audit
+  auditScore     Int?
+  auditFindings  Json?           // [{ id, label, status, detail }]
+  auditedAt      DateTime?
+  draft          String?         @db.Text
+  status         OutreachStatus  @default(NEW)
+  followUpStage  Int             @default(0) // 0 = first message sent, 1-3 = follow-ups sent
+  sentAt         DateTime?
+  lastSentAt     DateTime?
+  nextFollowUpAt DateTime?
+  notes          String?         @db.Text
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([status])
+  @@index([nextFollowUpAt])
+  @@map("outreach_prospects")
 }
