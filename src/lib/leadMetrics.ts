@@ -30,6 +30,16 @@ export type LeadMetrics = {
   byCampaign: Count[];
   byLanding: Count[];
   bySegment: Count[];
+  /** What leads asked for, from the answers they gave in each tool. */
+  interest: {
+    projectTypes: Count[];
+    features: Count[];
+    timelines: Count[];
+    services: Count[];
+    budgets: Count[];
+    timeSinks: Count[];
+    auditProblems: Count[];
+  };
   audit: { runs: number; averageScore: number | null; below60: number };
   nurture: { optedIn: number; emailsSent: number; unsubscribed: number };
   /** Share of leads in range that carry any attribution record. */
@@ -58,6 +68,7 @@ const SOURCE_LABELS: Record<string, string> = {
   website_audit: "Website audit",
   audit_landing_page: "AI readiness quiz",
   klyn_chatbot: "Chat assistant",
+  chatbot: "Chat assistant",
 };
 
 export function sourceLabel(source: string | null): string {
@@ -112,6 +123,43 @@ export function metricsQueryStart(days: number, now: Date = new Date()): Date {
   return new Date(start - days * DAY);
 }
 
+function strings(value: unknown): string[] {
+  if (typeof value === "string") return value.trim() ? [value.trim()] : [];
+  return Array.isArray(value) ? value.filter((v): v is string => typeof v === "string" && !!v.trim()).map((v) => v.trim()) : [];
+}
+
+function computeInterest(leads: MetricLead[]): LeadMetrics["interest"] {
+  const projectTypes: string[] = [], features: string[] = [], timelines: string[] = [], services: string[] = [];
+  const budgets: string[] = [], timeSinks: string[] = [], auditProblems: string[] = [];
+  for (const lead of leads) {
+    const m = meta(lead);
+    if (lead.source === "estimate_wizard") {
+      projectTypes.push(...strings(m.projectType));
+      features.push(...strings(m.features));
+      timelines.push(...strings(m.timeline));
+    }
+    services.push(...strings(m.services));
+    budgets.push(...strings(m.budget).filter((b) => b !== "not-sure"));
+    const answers = m.answers && typeof m.answers === "object" ? (m.answers as Record<string, unknown>) : null;
+    if (answers) timeSinks.push(...strings(answers.biggestTimeSink));
+    if (lead.source === "website_audit" && Array.isArray(m.topFixes)) {
+      for (const fix of m.topFixes) {
+        if (fix && typeof fix === "object" && "label" in fix) auditProblems.push(String((fix as { label: unknown }).label));
+      }
+    }
+  }
+  const top = (values: string[], n = 8) => tally(values).slice(0, n);
+  return {
+    projectTypes: top(projectTypes),
+    features: top(features, 10),
+    timelines: top(timelines),
+    services: top(services),
+    budgets: top(budgets),
+    timeSinks: top(timeSinks),
+    auditProblems: top(auditProblems),
+  };
+}
+
 export function computeLeadMetrics(leads: MetricLead[], days: number, now: Date = new Date()): LeadMetrics {
   // Windows start at midnight India time, so the total always equals the sum of the daily bars.
   const start = Date.parse(`${istDate(new Date(now.getTime() - (days - 1) * DAY))}T00:00:00+05:30`);
@@ -159,6 +207,7 @@ export function computeLeadMetrics(leads: MetricLead[], days: number, now: Date 
     byCampaign: tally(current.map((l) => attribution(l)?.utm_campaign).filter((c): c is string => !!c)),
     byLanding: tally(landing).slice(0, 8),
     bySegment: tally(current.map((l) => l.segment || "unscored")),
+    interest: computeInterest(current),
     audit: {
       runs: audits.length,
       averageScore: scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : null,

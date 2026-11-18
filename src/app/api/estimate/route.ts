@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { sendMail, isMailerConfigured } from "@/lib/mailer";
-import { cleanAttribution } from "@/lib/leadFollowUp";
+import { cleanAttribution, escapeHtml } from "@/lib/leadFollowUp";
 import { NextRequest, NextResponse } from "next/server";
 import {
   ESTIMATE_FEATURES,
@@ -13,6 +13,9 @@ import {
 } from "@/data/estimateFeatures";
 
 export const runtime = "nodejs";
+
+// Override with ESTIMATE_MODEL in .env. Later entries are tried only if a model is unavailable.
+const ESTIMATE_MODELS = [...(process.env.ESTIMATE_MODEL ? [process.env.ESTIMATE_MODEL] : []), "claude-sonnet-5-5", "claude-sonnet-4-5"];
 
 type EstimateRequestBody = {
   projectType: string;
@@ -269,9 +272,6 @@ export async function POST(req: NextRequest) {
     const features = rawFeatures.filter((feature): feature is string => allowedFeatures.has(feature));
 
     const anthropicKey = process.env.ANTHROPIC_API_KEY;
-    if (!anthropicKey) {
-      return NextResponse.json({ error: "Missing ANTHROPIC_API_KEY." }, { status: 500 });
-    }
     const mailerReady = isMailerConfigured();
 
     const fallback = buildFallbackEstimate({
@@ -303,35 +303,41 @@ export async function POST(req: NextRequest) {
       console.error("Lead persistence error:", dbError);
     }
 
-    const anthropic = new Anthropic({ apiKey: anthropicKey });
-    const completion = await anthropic.messages.create({
-      model: "claude-sonnet-4-5",
-      max_tokens: 800,
-      temperature: 0.3,
-      messages: [
-        {
-          role: "user",
-          content: buildEstimatorPrompt({
-            projectType,
-            features,
-            scale,
-            timeline,
-            name,
-            email,
-            company,
-          }),
-        },
-      ],
-    });
-
-    const raw = completion.content
-      .filter((block) => block.type === "text")
-      .map((block) => block.text)
-      .join("\n")
-      .trim();
-
-    const parsed = parseEstimateJson(raw);
-    const estimate = normalizeEstimate(parsed, fallback);
+    // The AI refines the standard estimate. If it is unavailable (missing or invalid key, retired
+    // model, outage) the visitor still gets the standard estimate instead of an error, because the
+    // lead has already been saved and failing here would lose the conversation.
+    let estimate = fallback;
+    if (anthropicKey) {
+      const anthropic = new Anthropic({ apiKey: anthropicKey });
+      for (const model of ESTIMATE_MODELS) {
+        try {
+          const completion = await anthropic.messages.create({
+            model,
+            max_tokens: 800,
+            temperature: 0.3,
+            messages: [
+              {
+                role: "user",
+                content: buildEstimatorPrompt({ projectType, features, scale, timeline, name, email, company }),
+              },
+            ],
+          });
+          const raw = completion.content
+            .filter((block) => block.type === "text")
+            .map((block) => block.text)
+            .join("\n")
+            .trim();
+          estimate = normalizeEstimate(parseEstimateJson(raw), fallback);
+          break;
+        } catch (aiError) {
+          const status = (aiError as { status?: number }).status;
+          console.error(`Estimator AI call failed (${model}, status ${status ?? "n/a"}); ${status === 404 ? "trying the next model" : "using the standard estimate"}.`, (aiError as Error).message);
+          if (status !== 404) break; // only an unavailable model is worth retrying with another one
+        }
+      }
+    } else {
+      console.error("ANTHROPIC_API_KEY is not set; using the standard estimate.");
+    }
 
     if (mailerReady) {
       // Fire-and-forget: a broken SMTP send must never take down an
@@ -344,21 +350,21 @@ export async function POST(req: NextRequest) {
         <div style="font-family:Segoe UI,Arial,sans-serif;max-width:620px;margin:0 auto;background:#0c0c12;color:#f4f4f5;border-radius:14px;border:1px solid rgba(255,255,255,0.08);overflow:hidden;">
           <div style="padding:24px 28px;border-bottom:1px solid rgba(6,182,212,0.35);background:linear-gradient(90deg,rgba(6,182,212,0.08),rgba(59,130,246,0.08));">
             <h1 style="margin:0;font-size:22px;">Your Project Estimate is Ready</h1>
-            <p style="margin:8px 0 0;color:#94a3b8;font-size:13px;">Hi ${name}, here is your AI-generated NeoKlyn estimate.</p>
+            <p style="margin:8px 0 0;color:#94a3b8;font-size:13px;">Hi ${escapeHtml(name)}, here is your NeoKlyn estimate.</p>
           </div>
           <div style="padding:24px 28px;">
             <p style="margin:0 0 12px;font-size:13px;color:#a1a1aa;">Project Type</p>
             <p style="margin:0 0 18px;font-size:18px;color:#e2e8f0;">${projectType}</p>
             <p style="margin:0 0 12px;font-size:13px;color:#a1a1aa;">Estimated Budget Range</p>
-            <p style="margin:0 0 18px;font-size:28px;color:#67e8f9;font-weight:700;">${estimate.estimated_budget_range}</p>
+            <p style="margin:0 0 18px;font-size:28px;color:#67e8f9;font-weight:700;">${escapeHtml(estimate.estimated_budget_range)}</p>
             <p style="margin:0 0 12px;font-size:13px;color:#a1a1aa;">Estimated Timeline</p>
-            <p style="margin:0 0 18px;font-size:17px;color:#f8fafc;">${estimate.estimated_timeline}</p>
+            <p style="margin:0 0 18px;font-size:17px;color:#f8fafc;">${escapeHtml(estimate.estimated_timeline)}</p>
             <p style="margin:0 0 8px;font-size:13px;color:#a1a1aa;">Top Assumptions</p>
             <ul style="margin:0 0 18px;padding-left:18px;color:#e4e4e7;line-height:1.7;">
-              ${estimate.key_assumptions.map((item) => `<li>${item}</li>`).join("")}
+              ${estimate.key_assumptions.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
             </ul>
             <p style="margin:0 0 8px;font-size:13px;color:#a1a1aa;">Next Steps</p>
-            <p style="margin:0 0 22px;line-height:1.7;color:#e4e4e7;">${estimate.next_steps}</p>
+            <p style="margin:0 0 22px;line-height:1.7;color:#e4e4e7;">${escapeHtml(estimate.next_steps)}</p>
             <a href="https://cal.com/neoklyn" style="display:inline-block;padding:12px 18px;border-radius:9px;background:#06b6d4;color:#032028;text-decoration:none;font-weight:700;">
               Book a Strategy Call
             </a>

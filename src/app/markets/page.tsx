@@ -2,10 +2,11 @@ import CTASection from "@/components/CTASection";
 import MarketsHUD from "@/components/MarketsHUD";
 import type { Metadata } from "next";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
     title: "Global Markets — Worldwide Digital Services",
     description:
-        "NeoKlyn delivers AI, web, mobile and ecommerce projects globally from Bengaluru. Serving the US, UAE, UK, Singapore, India and beyond with consistent engineering excellence.",
+        "AI, web, mobile and ecommerce projects delivered from Bengaluru to clients in the US, UAE, UK, Singapore and India. Fixed prices, senior-engineer reviewed.",
     alternates: { canonical: "https://neoklyn.com/markets" },
     openGraph: {
         title: "Global Markets — Worldwide Digital Services | NeoKlyn",
@@ -13,10 +14,12 @@ export const metadata: Metadata = {
             "NeoKlyn delivers AI, web, mobile and ecommerce projects globally from Bengaluru. Serving the US, UAE, UK, Singapore, India and beyond.",
         url: "https://neoklyn.com/markets",
         siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
         title: "Global Markets — Worldwide Digital Services | NeoKlyn",
         description:
             "NeoKlyn delivers AI, web, mobile and ecommerce projects globally from Bengaluru.",

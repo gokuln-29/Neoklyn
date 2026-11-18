@@ -145,6 +145,20 @@ export default async function GrowthPage({ searchParams }: { searchParams: Promi
         <BarList title="Lead quality" items={m.bySegment} empty="No leads in this period." note="Hot: larger budget or a weak website audit score. Unscored: no rating at capture." />
       </div>
 
+      <h2 className="gr-section">What people are looking for</h2>
+      <p className="gr-section-note">
+        Taken from what leads chose or answered in the estimator, the AI readiness quiz, the contact form and the website audit. Page views by topic are in Google Analytics.
+      </p>
+      <div className="gr-grid">
+        <BarList title="Project types (estimator)" items={m.interest.projectTypes} empty="No estimator leads in this period." />
+        <BarList title="Features asked for (estimator)" items={m.interest.features} empty="No estimator leads in this period." />
+        <BarList title="How soon they want it" items={m.interest.timelines} empty="No estimator leads in this period." />
+        <BarList title="Services ticked on the contact form" items={m.interest.services} empty="No contact-form services recorded yet." />
+        <BarList title="Budgets mentioned" items={m.interest.budgets} empty="No budgets recorded in this period." />
+        <BarList title="Biggest time sink (AI quiz)" items={m.interest.timeSinks} empty="No AI quiz answers in this period." note="Good topics for articles and the AI agents page." />
+        <BarList title="Problems found by website audits" items={m.interest.auditProblems} empty="No audits in this period." note="The top fix for each audited site. Common ones make good articles and outreach openers." />
+      </div>
+
       <div className="gr-grid">
         <section className="gr-card">
           <h2 className="gr-h">Website audit</h2>
@@ -174,6 +188,8 @@ export default async function GrowthPage({ searchParams }: { searchParams: Promi
 
       <style>{`
         .gr-stats { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+        .gr-section { margin: 2.2rem 0 0.4rem; font-size: 1.1rem; font-weight: 600; color: var(--admin-text); }
+        .gr-section-note { margin: 0; color: var(--admin-text-muted); font-size: 0.85rem; line-height: 1.6; max-width: 70ch; }
         .gr-ranges { display: flex; gap: 0.4rem; }
         .gr-ranges a { padding: 0.45rem 0.9rem; border: 1px solid var(--admin-border-hover); border-radius: var(--admin-radius-sm); color: var(--admin-text-muted); text-decoration: none; font-size: 0.85rem; }
         .gr-ranges a:hover { color: var(--admin-text); }

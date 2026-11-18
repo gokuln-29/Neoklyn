@@ -8,6 +8,7 @@ import { projectsBySlug } from "@/app/work/projects";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 import { whatsappUrl } from "@/lib/contact";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export function generateStaticParams() {
   return solutions.map((solution) => ({ slug: solution.slug }));
 }
@@ -27,9 +28,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: solution.metaDescription,
       url,
       siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
       type: "website",
     },
-    twitter: { card: "summary_large_image", title: solution.metaTitle, description: solution.metaDescription },
+    twitter: { card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES, title: solution.metaTitle, description: solution.metaDescription },
   };
 }
 

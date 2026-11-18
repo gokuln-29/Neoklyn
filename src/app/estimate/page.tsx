@@ -3,6 +3,7 @@ import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 import EstimateWizard from "@/components/EstimateWizard";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "AI Project Cost Estimator",
   description:
@@ -13,11 +14,13 @@ export const metadata: Metadata = {
       "Get a free AI-powered project estimate from NeoKlyn. Share your scope, features, and timeline to receive budget and delivery guidance.",
     url: "https://neoklyn.com/estimate",
     siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
     type: "website",
   },
   alternates: { canonical: "https://neoklyn.com/estimate" },
   twitter: {
     card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
     title: "AI Project Cost Estimator — NeoKlyn",
     description:
       "Get a free AI-powered project estimate from NeoKlyn. Share your scope, features, and timeline to receive budget and delivery guidance.",

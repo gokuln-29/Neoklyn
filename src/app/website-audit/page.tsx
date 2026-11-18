@@ -4,6 +4,7 @@ import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 import WebsiteAuditForm from "@/components/WebsiteAuditForm";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 const TITLE = "Free Website Audit: Speed, SEO & Enquiries";
 const DESCRIPTION =
   "Enter your website address and get a free health check in about 10 seconds: mobile, speed, Google visibility, enquiry paths and security, with the top fixes.";
@@ -17,9 +18,11 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     url: "https://neoklyn.com/website-audit",
     siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
     type: "website",
   },
-  twitter: { card: "summary_large_image", title: `${TITLE} | NeoKlyn`, description: DESCRIPTION },
+  twitter: { card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES, title: `${TITLE} | NeoKlyn`, description: DESCRIPTION },
 };
 
 const CHECKS = [

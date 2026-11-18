@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
   title: {
     absolute: "AI-Accelerated Development — How NeoKlyn Builds Faster",
@@ -15,11 +16,13 @@ export const metadata: Metadata = {
       "How NeoKlyn's AI-accelerated development model works: AI tools handle the repetitive 70%, a senior engineer with 10+ years of experience handles the critical 30%.",
     url: "https://neoklyn.com/how-we-work",
     siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
     type: "website",
   },
   alternates: { canonical: "https://neoklyn.com/how-we-work" },
   twitter: {
     card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
     title: "AI-Accelerated Development — How NeoKlyn Builds Faster",
     description:
       "AI tools handle the repetitive 70%, a senior engineer with 10+ years of experience handles the critical 30%.",

@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import PageWrapper from "@/components/layout/PageWrapper";
 import ArticleClientTools from "@/components/insights/ArticleClientTools";
 import ArticleCTA from "@/components/insights/ArticleCTA";
+import { buildTitle } from "@/lib/seo";
 import { AUTHOR } from "@/data/author";
 
 const CATEGORY_TO_SERVICE: Record<string, { path: string; label: string }> = {
@@ -82,7 +83,7 @@ export async function generateMetadata({
   }
 
   const post = insight.post;
-  const title = `${post.title} | NeoKlyn Insights`;
+  const title = buildTitle(post.seoTitle || post.title);
   const description = post.metaDescription;
   const canonicalUrl = `https://neoklyn.com/insights/${post.slug}`;
   const ogImageUrl = `${canonicalUrl}/opengraph-image`;

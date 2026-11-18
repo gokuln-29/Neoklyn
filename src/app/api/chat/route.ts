@@ -3,6 +3,8 @@ import { sendMail } from "@/lib/mailer";
 import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { chatSystemPrompt } from "@/lib/chatSystemPrompt";
+import { cleanAttribution, escapeHtml, sendLeadAutoReply } from "@/lib/leadFollowUp";
+import { getRateLimitKey, rateLimit } from "@/lib/rateLimit";
 
 const NOTIFY_EMAIL = "hello@neoklyn.com";
 
@@ -12,6 +14,14 @@ type IncomingMessage = {
 };
 
 const MAX_USER_MESSAGES = 20;
+
+// First entry is tried first. Override with CHAT_MODEL in .env; the rest are fallbacks.
+const CHAT_MODELS = [
+  ...(process.env.CHAT_MODEL ? [process.env.CHAT_MODEL] : []),
+  "openai/gpt-oss-120b",
+  "openai/gpt-oss-20b",
+  "qwen/qwen3.8-27b",
+];
 
 function extractLeadSignals(messages: IncomingMessage[]) {
   const userText = messages
@@ -61,10 +71,11 @@ function sanitizeMessages(messages: unknown): IncomingMessage[] {
     .filter((message): message is IncomingMessage => Boolean(message));
 }
 
-async function sendLeadNotification(signals: ReturnType<typeof extractLeadSignals>, transcript: string) {
+async function sendLeadNotification(signals: ReturnType<typeof extractLeadSignals>, transcript: string, attribution?: Record<string, string>) {
   const { email, name, budget, companySize } = signals;
-  
-  const subject = `🔥 New Chat Lead — ${email || name || 'Anonymous'}`;
+  // Everything below comes from what the visitor typed, so it is escaped before going into HTML.
+  const subject = `${budget ? "[HOT] " : ""}New Chat Lead — ${String(email || name || "Anonymous").replace(/[\r\n]/g, " ")}`;
+  const source = escapeHtml(attribution?.utm_source || attribution?.referrer || "unknown");
   const html = `
     <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a14; color: #f4f3ee; border-radius: 12px; overflow: hidden; border: 1px solid rgba(6,182,212,0.2);">
         <div style="padding: 2rem; border-bottom: 2px solid #06B6D4; background: linear-gradient(90deg, rgba(6,182,212,0.1), transparent);">
@@ -75,24 +86,28 @@ async function sendLeadNotification(signals: ReturnType<typeof extractLeadSignal
             <table style="width: 100%; border-collapse: collapse;">
                 <tr>
                     <td style="color: #999; font-size: 0.85rem; padding: 0.5rem 0; vertical-align: top; width: 120px;">Name</td>
-                    <td style="font-size: 1rem; padding: 0.5rem 0;">${name || 'Not specified'}</td>
+                    <td style="font-size: 1rem; padding: 0.5rem 0;">${escapeHtml(name || 'Not specified')}</td>
                 </tr>
                 <tr>
                     <td style="color: #999; font-size: 0.85rem; padding: 0.5rem 0; vertical-align: top;">Email</td>
-                    <td style="font-size: 1rem; padding: 0.5rem 0;"><a href="mailto:${email}" style="color: #06B6D4;">${email || 'Not specified'}</a></td>
+                    <td style="font-size: 1rem; padding: 0.5rem 0;"><a href="mailto:${escapeHtml(email)}" style="color: #06B6D4;">${escapeHtml(email || 'Not specified')}</a></td>
                 </tr>
                 <tr>
                     <td style="color: #999; font-size: 0.85rem; padding: 0.5rem 0; vertical-align: top;">Budget</td>
-                    <td style="font-size: 1rem; padding: 0.5rem 0;">${budget || 'Not specified'}</td>
+                    <td style="font-size: 1rem; padding: 0.5rem 0;">${escapeHtml(budget || 'Not specified')}</td>
                 </tr>
                 <tr>
                     <td style="color: #999; font-size: 0.85rem; padding: 0.5rem 0; vertical-align: top;">Company</td>
-                    <td style="font-size: 1rem; padding: 0.5rem 0;">${companySize || 'Not specified'}</td>
+                    <td style="font-size: 1rem; padding: 0.5rem 0;">${escapeHtml(companySize || 'Not specified')}</td>
+                </tr>
+                <tr>
+                    <td style="color: #999; font-size: 0.85rem; padding: 0.5rem 0; vertical-align: top;">Came from</td>
+                    <td style="font-size: 1rem; padding: 0.5rem 0;">${source}</td>
                 </tr>
             </table>
             <div style="margin-top: 1.5rem; padding: 1.2rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
                 <p style="color: #999; font-size: 0.85rem; margin: 0 0 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Initial Requirements</p>
-                <p style="font-size: 0.95rem; line-height: 1.6; margin: 0; white-space: pre-wrap; color: #ccc;">${transcript}</p>
+                <p style="font-size: 0.95rem; line-height: 1.6; margin: 0; white-space: pre-wrap; color: #ccc;">${escapeHtml(transcript)}</p>
             </div>
         </div>
         <div style="padding: 1rem 2rem; background: rgba(6,182,212,0.05); font-size: 0.75rem; color: #666; text-align: center;">
@@ -110,7 +125,7 @@ async function sendLeadNotification(signals: ReturnType<typeof extractLeadSignal
   });
 }
 
-async function persistChatLead(signals: ReturnType<typeof extractLeadSignals>, transcript: string) {
+async function persistChatLead(signals: ReturnType<typeof extractLeadSignals>, transcript: string, attribution?: Record<string, string>) {
   const { email, name, budget, companySize } = signals;
   if (!email) return;
 
@@ -125,14 +140,24 @@ async function persistChatLead(signals: ReturnType<typeof extractLeadSignals>, t
       name: name || null,
       source: "chatbot",
       segment,
-      metadata: { budget, companySize, transcript },
+      metadata: { budget, companySize, transcript, attribution: attribution ?? null },
     },
   });
 }
 
 export async function POST(req: NextRequest) {
+  // The chat calls a paid model, so cap how fast one visitor can use it.
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || null;
+  if (!rateLimit(getRateLimitKey(ip, "chat"), { limit: 20, windowSeconds: 60 }).success) {
+    return NextResponse.json(
+      { error: "Too many requests.", message: "You're sending messages quickly. Please wait a moment and try again." },
+      { status: 429 }
+    );
+  }
+
   try {
-    const { messages } = (await req.json()) as { messages?: unknown };
+    const { messages, attribution: rawAttribution } = (await req.json()) as { messages?: unknown; attribution?: unknown };
+    const attribution = cleanAttribution(rawAttribution);
     const sanitizedMessages = sanitizeMessages(messages);
 
     if (!sanitizedMessages.length) {
@@ -164,20 +189,42 @@ export async function POST(req: NextRequest) {
       baseURL: "https://api.groq.com/openai/v1",
     });
 
-    const response = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
-      messages: [
-        { role: "system", content: chatSystemPrompt },
-        ...sanitizedMessages.map((msg) => ({
-          role: msg.role === "assistant" ? "assistant" as const : "user" as const,
-          content: msg.content,
-        })),
-      ],
-      max_tokens: 800,
-      temperature: 0.7,
-    });
+    const chatMessages = [
+      { role: "system" as const, content: chatSystemPrompt },
+      ...sanitizedMessages.map((msg) => ({
+        role: msg.role === "assistant" ? ("assistant" as const) : ("user" as const),
+        content: msg.content,
+      })),
+    ];
 
-    const assistantText = response.choices[0].message.content?.trim();
+    // Hosted models get retired (llama-3.3-70b-versatile was, and the chat silently broke), so try the
+    // configured model first and fall back to the next one only when a model is unavailable.
+    let assistantText: string | undefined;
+    let lastError: unknown;
+    for (const model of CHAT_MODELS) {
+      try {
+        const response = await groq.chat.completions.create({
+          model,
+          messages: chatMessages,
+          // gpt-oss models spend tokens on hidden reasoning, so keep that low and leave room for the answer.
+          max_tokens: 1200,
+          temperature: 0.7,
+          ...(model.startsWith("openai/gpt-oss") ? { reasoning_effort: "low" as const } : {}),
+        });
+        assistantText = response.choices[0].message.content?.trim();
+        if (assistantText) break;
+      } catch (error) {
+        lastError = error;
+        const status = (error as { status?: number }).status;
+        const code = (error as { code?: string }).code;
+        if (status === 404 || status === 400 || code === "model_not_found" || code === "model_decommissioned") {
+          console.error(`Chat model ${model} unavailable, trying the next one:`, (error as Error).message);
+          continue;
+        }
+        throw error;
+      }
+    }
+    if (!assistantText && lastError) throw lastError;
     const leadSignals = extractLeadSignals(sanitizedMessages);
 
     // If an email was just captured in the latest message, trigger the notification
@@ -193,8 +240,9 @@ export async function POST(req: NextRequest) {
           .join("\n\n");
           
         // Run in background so request doesn't wait
-        void sendLeadNotification(leadSignals, transcript).catch(e => console.error("Lead email fail:", e));
-        void persistChatLead(leadSignals, transcript).catch(e => console.error("Lead persistence fail:", e));
+        void sendLeadNotification(leadSignals, transcript, attribution).catch(e => console.error("Lead email fail:", e));
+        void persistChatLead(leadSignals, transcript, attribution).catch(e => console.error("Lead persistence fail:", e));
+        void sendLeadAutoReply({ email: leadSignals.email, name: leadSignals.name, ip });
       }
     }
 

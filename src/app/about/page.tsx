@@ -6,6 +6,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import AboutStats from "@/components/about/AboutStats";
 import { faqSchema } from "@/lib/schema";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
   title: {
     absolute: "About NeoKlyn — AI, Web & Product Engineering Team",
@@ -18,11 +19,13 @@ export const metadata: Metadata = {
       "Meet NeoKlyn's Bengaluru-based team building AI agents, web platforms, mobile apps, and growth systems for ambitious global brands.",
     url: "https://neoklyn.com/about",
     siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
     type: "website",
   },
   alternates: { canonical: "https://neoklyn.com/about" },
   twitter: {
     card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
     title: "About NeoKlyn — AI, Web & Product Engineering Team",
     description:
       "Meet NeoKlyn's Bengaluru-based team building AI agents, web platforms, mobile apps, and growth systems for ambitious global brands.",

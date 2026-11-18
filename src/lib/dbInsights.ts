@@ -11,6 +11,7 @@ export type DbInsightPost = {
   color: string;
   excerpt: string;
   metaDescription: string;
+  seoTitle?: string;
   primaryKeyword: string;
   secondaryKeywords: string[];
   outline: string[];
@@ -63,7 +64,7 @@ type PostWithRelations = {
   readTime: string | null;
   author: { name: string };
   category: { name: string; slug: string; color: string } | null;
-  seoMetadata: { metaDescription: string | null; focusKeyword: string | null; keywords: string[] } | null;
+  seoMetadata: { seoTitle: string | null; metaDescription: string | null; focusKeyword: string | null; keywords: string[] } | null;
 };
 
 function toDbPost(post: PostWithRelations): DbInsightPost {
@@ -81,6 +82,7 @@ function toDbPost(post: PostWithRelations): DbInsightPost {
     color,
     excerpt: post.excerpt || "",
     metaDescription: post.seoMetadata?.metaDescription || post.excerpt || "",
+    seoTitle: post.seoMetadata?.seoTitle || undefined,
     primaryKeyword: post.seoMetadata?.focusKeyword || "",
     secondaryKeywords: post.seoMetadata?.keywords || [],
     outline: extractOutline(contentHtml),
@@ -92,7 +94,7 @@ function toDbPost(post: PostWithRelations): DbInsightPost {
 const RELATION_INCLUDE = {
   author: { select: { name: true } },
   category: { select: { name: true, slug: true, color: true } },
-  seoMetadata: { select: { metaDescription: true, focusKeyword: true, keywords: true } },
+  seoMetadata: { select: { seoTitle: true, metaDescription: true, focusKeyword: true, keywords: true } },
 } as const;
 
 export async function getDbInsightSummaries(): Promise<DbInsightSummary[]> {

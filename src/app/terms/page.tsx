@@ -2,6 +2,7 @@ import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 import type { Metadata } from "next";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
     title: "Terms of Service | NeoKlyn",
     description: "Read the Terms of Service governing your use of the NeoKlyn website. Includes intellectual property rights, limitation of liability, and governing law.",
@@ -11,10 +12,12 @@ export const metadata: Metadata = {
         description: "Read the Terms of Service governing your use of the NeoKlyn website. Includes intellectual property rights, limitation of liability, and governing law.",
         url: "https://neoklyn.com/terms",
         siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
         title: "Terms of Service | NeoKlyn",
         description: "Read the Terms of Service governing your use of the NeoKlyn website.",
     },

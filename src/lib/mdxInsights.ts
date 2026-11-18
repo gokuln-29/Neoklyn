@@ -13,6 +13,7 @@ export type MdxInsightPost = {
   color: string;
   excerpt: string;
   metaDescription: string;
+  seoTitle?: string;
   primaryKeyword: string;
   secondaryKeywords: string[];
   outline: string[];
@@ -109,6 +110,7 @@ function parseMdxInsight(fileName: string, fileContent: string): MdxInsightPost 
     metaDescription:
       (typeof data.metaDescription === "string" && data.metaDescription.trim()) ||
       "Read the latest NeoKlyn insight on engineering, AI, and digital growth.",
+    seoTitle: (typeof data.seoTitle === "string" && data.seoTitle.trim()) || undefined,
     primaryKeyword:
       (typeof data.primaryKeyword === "string" && data.primaryKeyword.trim()) ||
       slug.replace(/-/g, " "),

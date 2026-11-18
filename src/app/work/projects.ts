@@ -93,6 +93,7 @@ export const projects: Project[] = [
     image: "/assets/work/Aathithyan.webp",
     liveUrl: "https://aathithyan.com",
     keyMetric: "Pixel-perfect luxury positioning",
+    seoDescription: "How NeoKlyn designed a fast, premium brand website for Aathithyan, a luxury brand in India, with 95+ Lighthouse scores.",
     description:
       "We translated Aathithyan's premium brand language into a cinematic, ultra-fast digital experience that converts attention into trust.",
     techStack: ["Next.js", "TypeScript", "GSAP", "Vercel Edge", "Figma"],
@@ -177,7 +178,7 @@ export const projects: Project[] = [
       ],
     },
     seoTitle: "Travex Ventures Case Study — NeoKlyn",
-    seoDescription: "Immersive 3D travel experiences that boosted luxury bookings by 110%.",
+    seoDescription: "How NeoKlyn built an immersive 3D travel website for Travex Ventures that boosted luxury booking inquiries by 110%.",
   },
   {
     slug: "lpsm-pvt-ltd",

@@ -71,23 +71,9 @@ export default function ChatWidget() {
   useEffect(() => {
     if (leadSignals.email && !leadEventFired.current) {
       leadEventFired.current = true;
+      // The lead itself is saved by /api/chat (with the transcript). Saving it here
+      // as well created a duplicate lead and a second email for every chat.
       trackEvent("chat_lead_captured", { form_name: "klyn_chatbot" });
-      // Persist lead in CMS (fire-and-forget)
-      fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "AI_DEMO",
-          email: leadSignals.email,
-          name: leadSignals.name || undefined,
-          source: "klyn_chatbot",
-          metadata: {
-            budget: leadSignals.budget || undefined,
-            companySize: leadSignals.companySize || undefined,
-            attribution: getAttribution(),
-          },
-        }),
-      }).catch(() => {});
     }
   }, [leadSignals]);
 
@@ -185,6 +171,7 @@ export default function ChatWidget() {
             role: message.role,
             content: message.content,
           })),
+          attribution: getAttribution(),
         }),
       });
 

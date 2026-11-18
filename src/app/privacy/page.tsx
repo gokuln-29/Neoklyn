@@ -2,6 +2,7 @@ import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 import type { Metadata } from "next";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
     title: "Privacy Policy | NeoKlyn",
     description: "Learn how NeoKlyn collects, uses, and protects your personal data. Compliant with GDPR, UK GDPR, and India DPDP Act 2023.",
@@ -11,10 +12,12 @@ export const metadata: Metadata = {
         description: "Learn how NeoKlyn collects, uses, and protects your personal data. Compliant with GDPR, UK GDPR, and India DPDP Act 2023.",
         url: "https://neoklyn.com/privacy",
         siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
         title: "Privacy Policy | NeoKlyn",
         description: "Learn how NeoKlyn collects, uses, and protects your personal data.",
     },

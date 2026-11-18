@@ -14,7 +14,7 @@ NeoKlyn builds AI-accelerated digital products including web applications, AI ag
 NeoKlyn is headquartered in Bengaluru, Karnataka, India, with clients across the US, UAE, UK, Singapore, and India.
 
 ### How much does NeoKlyn charge?
-Websites start from ₹50,000 / $600. Web apps and ecommerce typically range ₹1-4 lakh / $1,200-5,000 depending on features. Every project gets a fixed written quote within 24 hours that stays fixed unless scope changes. A free AI-powered estimate is available at [neoklyn.com/estimate](https://neoklyn.com/estimate).
+Websites start from ₹50,000 / $600. Web apps, mobile apps and ecommerce typically range ₹1-4 lakh / $1,200-5,000 depending on features. AI agents start from ₹1 lakh / $1,200. Every project gets a fixed written quote within 24 hours that stays fixed unless scope changes. A free AI-powered estimate is available at [neoklyn.com/estimate](https://neoklyn.com/estimate).
 
 ### How long does a typical NeoKlyn project take?
 Standard websites: 2-3 weeks. Web apps and ecommerce: 3-6 weeks. Complex platforms and AI products: 6-10 weeks. AI-accelerated development typically makes NeoKlyn 2-3x faster than traditional agency timelines.
@@ -26,7 +26,7 @@ A 4-phase methodology: Discovery (goals and scope), Design (UX/UI), AI-Accelerat
 NeoKlyn has delivered projects in B2B trading, industrial and construction, travel, manufacturing, and healthcare.
 
 ### How do I contact NeoKlyn?
-Email hello@neoklyn.com, WhatsApp +91 6380202766, [book a call](https://cal.com/neoklyn), or use the [contact form](https://neoklyn.com/contact). Average first response time is under 4 hours.
+Email hello@neoklyn.com, WhatsApp +91 6380202766, [book a call](https://cal.com/neoklyn), or use the [contact form](https://neoklyn.com/contact). Replies usually come within a few hours and always within 24 hours.
 
 ## Services in Detail
 
@@ -54,14 +54,34 @@ Product design, brand identity, and design systems.
 ### [Digital Marketing](https://neoklyn.com/services/marketing)
 SEO, performance marketing, and growth engineering for measurable organic and paid acquisition.
 
+## Free Tools
+- [Free website audit](https://neoklyn.com/website-audit): enter a website address and get a score out of 100 with the top fixes (speed, mobile, Google visibility, enquiry paths, security) in about 10 seconds.
+- [Free AI automation readiness audit](https://neoklyn.com/audit): six questions that show which workflows are worth automating first.
+- [Free project estimate](https://neoklyn.com/estimate): a budget and timeline range for a web, mobile or AI project in about two minutes.
+
+## Solutions by Business Type
+- [Websites for clinics and doctors](https://neoklyn.com/solutions/website-for-clinics): appointment enquiries, WhatsApp and tap-to-call, from ₹50,000
+- [B2B websites for traders and distributors](https://neoklyn.com/solutions/website-for-traders-and-distributors): catalogue and quote requests
+- [Websites for manufacturers and industrial firms](https://neoklyn.com/solutions/website-for-manufacturers): capabilities, projects and RFQ forms
+- [Websites for travel agencies](https://neoklyn.com/solutions/website-for-travel-agencies): package pages and booking enquiries
+- [Websites for premium and D2C brands](https://neoklyn.com/solutions/website-for-premium-brands): brand-led, fast websites
+- [Mobile app development cost in India](https://neoklyn.com/solutions/mobile-app-development-cost-india): typical ₹1-4 lakh range and what moves the price
+- [AI agents for small business](https://neoklyn.com/solutions/ai-agent-for-small-business): WhatsApp and website assistants, from ₹1 lakh
+- [Website development in Bengaluru](https://neoklyn.com/solutions/website-development-bengaluru) and [in Madurai](https://neoklyn.com/solutions/website-development-madurai)
+
 ## Selected Client Results
 - Dwarka General Trading (Middle East, B2B trading platform): +45% mobile engagement in Q1, 5x faster content deployment for the client's team
 - Zinad Concrete Works (Middle East, industrial/construction): Top 3 local keyword ranking, +80% international traffic growth, 100/100 Lighthouse performance score
 - Travex Ventures (India, travel): +110% increase in luxury booking inquiries, 99.9% platform uptime
+- Sharon Physio (India, physiotherapy clinic in Madurai): +30% increase in booking inquiries
+- Aathithyan (India, luxury brand website): 95+ Lighthouse scores, under 1 second average first load
+- LPSM Pvt. Ltd. (India, manufacturing): zero-downtime migration to a unified operations interface
 
 ## Links
 - [Website](https://neoklyn.com)
 - [Portfolio](https://neoklyn.com/work)
 - [Blog](https://neoklyn.com/insights)
+- [Solutions by business type](https://neoklyn.com/solutions)
+- [How we work](https://neoklyn.com/how-we-work)
 - [Instagram](https://www.instagram.com/neo_klyn/)
 - [X / Twitter](https://x.com/neoklyn)

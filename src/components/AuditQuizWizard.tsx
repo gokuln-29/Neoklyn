@@ -65,7 +65,11 @@ export default function AuditQuizWizard() {
       const payload = (await response.json()) as AuditResult & { error?: string };
       if (!response.ok) throw new Error(payload.error || "Unable to process the audit");
 
-      trackEvent("audit_quiz_complete", { form_name: "audit_quiz", segment: payload.segment });
+      trackEvent("audit_quiz_complete", {
+        form_name: "audit_quiz",
+        segment: payload.segment,
+        biggest_time_sink: answers.biggestTimeSink,
+      });
       setResult(payload);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not process the audit right now.");

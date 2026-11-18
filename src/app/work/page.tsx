@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import WorkGrid from "./WorkGrid";
 import { projects } from "./projects";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
   title: {
     absolute: "Portfolio & Case Studies — NeoKlyn",
@@ -16,11 +17,13 @@ export const metadata: Metadata = {
       "Real websites built for clinics, traders, manufacturers and brands in India and the Middle East. See the problem, what we built and the results.",
     url: "https://neoklyn.com/work",
     siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
     type: "website",
   },
   alternates: { canonical: "https://neoklyn.com/work" },
   twitter: {
     card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
     title: "Portfolio & Case Studies — NeoKlyn",
     description:
       "Real websites built for clinics, traders, manufacturers and brands in India and the Middle East. See the problem, what we built and the results.",

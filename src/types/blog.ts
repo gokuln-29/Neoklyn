@@ -1,5 +1,7 @@
 export interface BlogPost {
   title: string;
+  /** Optional shorter title for search results and link previews. */
+  seoTitle?: string;
   slug: string;
   category: string;
   categorySlug: string;

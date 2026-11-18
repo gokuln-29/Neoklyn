@@ -1,6 +1,7 @@
 import CTASection from "@/components/CTASection";
 import type { Metadata } from "next";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
     title: "Our Process — Discovery to Launch",
     description:
@@ -12,10 +13,12 @@ export const metadata: Metadata = {
             "NeoKlyn's 4-phase engineering process: Discovery, UX Design, Build, and Launch. A rigorous methodology that delivers enterprise-grade products on time.",
         url: "https://neoklyn.com/process",
         siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
         title: "Our Process — Discovery to Launch | NeoKlyn",
         description:
             "NeoKlyn's 4-phase engineering process: Discovery, UX Design, Build, and Launch.",

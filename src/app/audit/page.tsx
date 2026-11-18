@@ -4,6 +4,7 @@ import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 import AuditQuizWizard from "@/components/AuditQuizWizard";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "AI Automation Readiness Audit",
   description:
@@ -14,11 +15,13 @@ export const metadata: Metadata = {
       "Answer 6 quick questions and get a free, personalized read on where AI automation would help your business most.",
     url: "https://neoklyn.com/audit",
     siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
     type: "website",
   },
   alternates: { canonical: "https://neoklyn.com/audit" },
   twitter: {
     card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
     title: "AI Automation Readiness Audit — NeoKlyn",
     description:
       "Answer 6 quick questions and get a free, personalized read on where AI automation would help your business most.",

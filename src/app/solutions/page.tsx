@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { solutions } from "@/data/solutions";
 import { breadcrumbSchema } from "@/lib/schema";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 const TITLE = "Solutions by Business Type: Websites, Apps & AI | NeoKlyn";
 const DESCRIPTION =
   "Websites, mobile apps and AI agents for clinics, traders, manufacturers, travel agencies and brands. Fixed prices from ₹50,000, built in 2-5 weeks.";
@@ -13,8 +14,10 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "https://neoklyn.com/solutions" },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: "https://neoklyn.com/solutions", siteName: "NeoKlyn", type: "website" },
-  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: "https://neoklyn.com/solutions", siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES, type: "website" },
+  twitter: { card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES, title: TITLE, description: DESCRIPTION },
 };
 
 export default function SolutionsIndexPage() {

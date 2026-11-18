@@ -4,6 +4,7 @@ import InsightsGrid from "@/components/InsightsGrid";
 import { getAllInsightSummaries, getInsightFilterCategories } from "@/lib/insights";
 import type { Metadata } from "next";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Engineering Insights — AI, Web & Growth Blog",
   description:
@@ -15,10 +16,12 @@ export const metadata: Metadata = {
       "Technical deep dives, strategic playbooks, and implementation notes from NeoKlyn engineering across AI agents, web development, mobile, and growth marketing.",
     url: "https://neoklyn.com/insights",
     siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
     title: "Engineering Insights — AI, Web & Growth Blog | NeoKlyn",
     description:
       "Technical deep dives, strategic playbooks, and implementation notes from NeoKlyn engineering.",

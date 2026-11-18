@@ -114,7 +114,12 @@ export default function EstimateWizard() {
         throw new Error(payload.error || "Unable to generate estimate");
       }
 
-      trackEvent("estimate_complete", { form_name: "estimate_wizard" });
+      trackEvent("estimate_complete", {
+        form_name: "estimate_wizard",
+        project_type: form.projectType,
+        timeline: form.timeline,
+        scale: form.scale,
+      });
       setEstimate(payload.estimate);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Could not generate estimate right now.";

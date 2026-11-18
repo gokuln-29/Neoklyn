@@ -4,6 +4,7 @@ import TechStackGrid from "@/components/services/TechStackGrid";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/seo";
 export const metadata: Metadata = {
     title: "Digital Services — AI, Web, Mobile & More",
     description:
@@ -14,11 +15,13 @@ export const metadata: Metadata = {
             "Explore NeoKlyn's full-stack services: AI agents, web dev, mobile apps, ecommerce, 3D, marketing & UI/UX. Start your project today.",
         url: "https://neoklyn.com/services",
         siteName: "NeoKlyn",
+        images: DEFAULT_OG_IMAGES,
         type: "website",
     },
     alternates: { canonical: "https://neoklyn.com/services" },
     twitter: {
         card: "summary_large_image",
+        images: DEFAULT_TWITTER_IMAGES,
         title: "Digital Services — AI, Web, Mobile & More | NeoKlyn",
         description:
             "Explore NeoKlyn's full-stack services: AI agents, web dev, mobile apps, ecommerce, 3D, marketing & UI/UX. Start your project today.",
