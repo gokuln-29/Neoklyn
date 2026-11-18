@@ -54,3 +54,8 @@ page_head*.txt
 page_markets_log.txt
 restore_markets.js
 scratch/
+
+# planning docs live outside the repo (the repo is public)
+private-docs/
+/*-plan.md
+/*-guide.md

@@ -139,7 +139,7 @@ export default async function GrowthPage({ searchParams }: { searchParams: Promi
       <div className="gr-grid">
         <BarList title="Where leads came from" items={m.byChannel} empty="No leads in this period." note={`Based on UTM tags and the referring site. ${Math.round(m.trackedShare * 100)}% of these leads carry tracking data; older leads show as "Not tracked".`} />
         <BarList title="Which tool they used" items={m.bySource} empty="No leads in this period." />
-        <BarList title="Ad campaigns" items={m.byCampaign} empty="No leads with a utm_campaign yet. Tag ad links as described in paid-test-plan.md." />
+        <BarList title="Ad campaigns" items={m.byCampaign} empty="No leads with a utm_campaign yet. Tag ad links with utm_source, utm_medium=cpc and utm_campaign." />
         <BarList title="Landing pages (first page visited)" items={m.byLanding} empty="No landing-page data yet." />
         <BarList title="What happened to them" items={m.funnel} empty="No leads in this period." note="Update a lead's status in Leads so this stays accurate. It also stops the follow-up email series." />
         <BarList title="Lead quality" items={m.bySegment} empty="No leads in this period." note="Hot: larger budget or a weak website audit score. Unscored: no rating at capture." />
