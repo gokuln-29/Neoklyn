@@ -325,6 +325,44 @@ export const projects: Project[] = [
     },
     seoTitle: "NeoKlyn Shop: Live Ecommerce Demo — NeoKlyn",
   },
+  {
+    slug: "shop-crm",
+    client: "NeoKlyn Shop CRM",
+    title: "Shop CRM: Billing, Customers and Credit for Small Shops",
+    tagline: "A multilingual business app we built as our own product, covering GST billing, credit and collections.",
+    category: "Business App · NeoKlyn Product",
+    filters: ["Web"],
+    location: "India",
+    color: "var(--blue)",
+    image: "/assets/work/shop-crm.webp",
+    liveUrl: "https://pos.neoklyn.com",
+    keyMetric: "GST billing, credit and WhatsApp reminders in 3 languages",
+    seoDescription:
+      "Shop CRM is NeoKlyn's own business app for small shops: GST billing, khata credit and collections, and WhatsApp reminders in English, Tamil and Kannada.",
+    description:
+      "Shop CRM is our own business app for small shops, covering GST billing, customer credit (khata) and collections, and WhatsApp reminders in English, Tamil and Kannada.",
+    techStack: ["Next.js", "Multilingual", "Billing & credit"],
+    caseStudy: {
+      overview: [
+        "Shop CRM is a NeoKlyn product built for small shops that run on billing, customer credit and collections. Its promise is simple: billing, customers and credit for every kind of shop.",
+        "It covers GST billing, a khata (credit ledger) with collections, and WhatsApp reminders for following up on payments. The app works in English, Tamil and Kannada, and people sign in with an email and password or with a phone code.",
+        "It is also a working example of the kind of business app NeoKlyn builds: accounts, billing and customer records in a language the user is comfortable with. Only the sign-in and sign-up pages are public, and you can create an account to try it.",
+      ],
+      challenge:
+        "Small shops need one simple place for GST billing, customer credit and payment follow-ups, in the language they work in.",
+      solution:
+        "A multi-language Next.js app with GST billing, a khata credit ledger with collections, and WhatsApp reminders, with email or phone-code sign-in and self-serve account creation.",
+      resultsHeading: "What it does",
+      results: [
+        { metric: "GST", description: "Billing for Indian shops" },
+        { metric: "Khata", description: "Customer credit tracking and collections" },
+        { metric: "WhatsApp", description: "Reminders for following up on payments" },
+      ],
+      resultsNote:
+        "This is NeoKlyn's own product, not a client project, so there are no client results to report. Only the sign-in page is public.",
+    },
+    seoTitle: "Shop CRM: Billing and Credit App — NeoKlyn",
+  },
 ];
 
 export const projectsBySlug = projects.reduce<Record<string, Project>>((acc, project) => {

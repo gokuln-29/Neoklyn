@@ -78,6 +78,7 @@ SEO, performance marketing, and growth engineering for measurable organic and pa
 - LPSM Pvt. Ltd. (India, manufacturing): zero-downtime migration to a unified operations interface
 - Athira Flowers (Dubai, UAE, flower delivery): online store with a CRM, delivering across Dubai, Abu Dhabi and Sharjah; live at athiraflowers.ae
 - NeoKlyn Shop (NeoKlyn's own product): a multilingual ecommerce storefront in English, Tamil and Kannada, running as a live demo store at shop.neoklyn.com (demo orders and payments are not real)
+- Shop CRM (NeoKlyn's own product): a billing, customer-credit and collections app for small shops with GST billing, khata and WhatsApp reminders in English, Tamil and Kannada; sign-in at pos.neoklyn.com
 
 ## Links
 - [Website](https://neoklyn.com)
