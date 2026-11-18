@@ -1,66 +1,67 @@
 # NeoKlyn — Full Context for AI Search Engines
 
-> NeoKlyn is an AI agency and web development studio headquartered in Bengaluru, India, delivering web apps, AI agents, mobile apps, ecommerce, and 3D digital experiences for clients worldwide.
+> NeoKlyn is an AI-accelerated development studio headquartered in Bengaluru, India, delivering web apps, AI agents, mobile apps, ecommerce, and 3D digital experiences for clients worldwide.
 
 ## About
-NeoKlyn is led by Monisha (CEO) and Gokulnath N (Senior Engineer). The studio has delivered 120+ projects with a 98% client retention rate across three global hubs, combining engineering depth with conversion-focused design.
+NeoKlyn was founded in January 2026 by Gokulnath N, a full-stack developer with 10+ years of experience who personally architects, builds, and reviews every project end-to-end — no handoffs, no outsourcing. Monisha handles digital marketing for NeoKlyn and its clients. The studio's model: professional AI coding tools handle repetitive implementation work at high speed, while the senior engineer personally reviews, tests, and secures every line before delivery. This combination delivers agency-quality work at roughly 40-60% below typical agency pricing, in about 2-5 weeks instead of the 6-14 weeks a traditional agency takes.
 
 ## Frequently Asked Questions
 
 ### What does NeoKlyn do?
-NeoKlyn builds AI-powered digital products including web applications, AI agents, mobile apps, ecommerce platforms, and 3D immersive experiences. The studio specializes in combining production-grade engineering with conversion-focused design for ambitious global brands.
+NeoKlyn builds AI-accelerated digital products including web applications, AI agents, mobile apps, ecommerce platforms, and 3D immersive experiences, combining AI-assisted development speed with senior human engineering review.
 
 ### Where is NeoKlyn based?
 NeoKlyn is headquartered in Bengaluru, Karnataka, India, with clients across the US, UAE, UK, Singapore, and India.
 
 ### How much does NeoKlyn charge?
-NeoKlyn works with flexible engagement models — project-based pricing for defined scopes and monthly retainers for ongoing development. Enterprise projects start at $5K USD. Final pricing depends on scope, timeline, and technical complexity. A free AI-powered estimate is available at https://neoklyn.com/estimate.
+Websites start from ₹50,000 / $600. Web apps and ecommerce typically range ₹1-4 lakh / $1,200-5,000 depending on features. Every project gets a fixed written quote within 24 hours that stays fixed unless scope changes. A free AI-powered estimate is available at [neoklyn.com/estimate](https://neoklyn.com/estimate).
 
 ### How long does a typical NeoKlyn project take?
-MVP timelines range from 6–12 weeks. Full-scale web applications take 3–6 months. Mobile apps typically require 8–16 weeks. Detailed sprint plans are provided during the discovery phase.
+Standard websites: 2-3 weeks. Web apps and ecommerce: 3-6 weeks. Complex platforms and AI products: 6-10 weeks. AI-accelerated development typically makes NeoKlyn 2-3x faster than traditional agency timelines.
 
 ### What is NeoKlyn's process?
-A 4-phase methodology: Discovery (requirements and strategy), UX Design (wireframes and visual design), Build (engineering sprints), and Launch (deployment, QA, and growth support). Details: https://neoklyn.com/process
+A 4-phase methodology: Discovery (goals and scope), Design (UX/UI), AI-Accelerated Build (engineering, reviewed line-by-line by the senior engineer), and Launch & Support (deployment, QA, 30 days of free post-launch bug fixes). Details: [neoklyn.com/process](https://neoklyn.com/process) and [neoklyn.com/how-we-work](https://neoklyn.com/how-we-work)
 
 ### What industries does NeoKlyn serve?
-Trading and B2B commerce, travel, construction and industrial, manufacturing, fintech, education, retail ecommerce, and professional services.
+NeoKlyn has delivered projects in B2B trading, industrial and construction, travel, manufacturing, and healthcare.
 
 ### How do I contact NeoKlyn?
-Email hello@neoklyn.com, WhatsApp +91 6380202766, book a call at https://cal.com/neoklyn, or use the contact form at https://neoklyn.com/contact. The team responds within 4 hours.
+Email hello@neoklyn.com, WhatsApp +91 6380202766, [book a call](https://cal.com/neoklyn), or use the [contact form](https://neoklyn.com/contact). Average first response time is under 4 hours.
 
 ## Services in Detail
 
-### AI Agents & Automation (https://neoklyn.com/services/ai-agents)
-Custom LLM-powered agents for lead qualification, customer support, and internal workflow automation. NeoKlyn builds production-grade agents integrated with business systems, not demos.
+### [AI Agents & Automation](https://neoklyn.com/services/ai-agents)
+Custom LLM-powered agents for lead qualification, customer support, and internal workflow automation, integrated with real business systems rather than delivered as demos.
 
-### Generative AI (https://neoklyn.com/services/gen-ai)
+### [Generative AI](https://neoklyn.com/services/gen-ai)
 GenAI product development including RAG systems, AI content pipelines, and model integration into existing products.
 
-### Web Development (https://neoklyn.com/services/web)
-Full-stack web applications built with React, Next.js, and TypeScript. Enterprise-grade architecture, performance-first engineering, and headless CMS integration.
+### [Web Development](https://neoklyn.com/services/web)
+Full-stack web applications built with React, Next.js, and TypeScript, reviewed and tested by a senior engineer before delivery.
 
-### Mobile Apps (https://neoklyn.com/services/mobile)
-Native-quality iOS and Android applications with modern cross-platform tooling.
+### [Mobile Apps](https://neoklyn.com/services/mobile)
+iOS and Android applications using modern cross-platform tooling (Flutter, React Native) plus native development where required.
 
-### Ecommerce (https://neoklyn.com/services/ecommerce)
+### [Ecommerce](https://neoklyn.com/services/ecommerce)
 Shopify and custom ecommerce platforms engineered for conversion, from B2C storefronts to B2B portals with RFQ systems.
 
-### 3D & Immersive Web (https://neoklyn.com/services/3d)
+### [3D & Immersive Web](https://neoklyn.com/services/3d)
 WebGL and Three.js experiences: interactive product visualization, virtual showrooms, and immersive brand experiences.
 
-### Branding & UI/UX (https://neoklyn.com/services/branding)
-Product design, brand identity, and design systems crafted for premium digital-first brands.
+### [Branding & UI/UX](https://neoklyn.com/services/branding)
+Product design, brand identity, and design systems.
 
-### Digital Marketing (https://neoklyn.com/services/marketing)
+### [Digital Marketing](https://neoklyn.com/services/marketing)
 SEO, performance marketing, and growth engineering for measurable organic and paid acquisition.
 
 ## Selected Client Results
-- Dwarka General Trading (Middle East, B2B web platform): +45% mobile engagement in Q1, 5x faster content deployment
-- Travex Ventures (travel agency): conversion-led web platform
-- Zinad Concrete Works (industrial): modern digital presence with lead capture
+- Dwarka General Trading (Middle East, B2B trading platform): +45% mobile engagement in Q1, 5x faster content deployment for the client's team
+- Zinad Concrete Works (Middle East, industrial/construction): Top 3 local keyword ranking, +80% international traffic growth, 100/100 Lighthouse performance score
+- Travex Ventures (India, travel): +110% increase in luxury booking inquiries, 99.9% platform uptime
 
 ## Links
-- Website: https://neoklyn.com
-- Portfolio: https://neoklyn.com/work
-- Blog: https://neoklyn.com/insights
-- Instagram: https://www.instagram.com/neoklynstudio
+- [Website](https://neoklyn.com)
+- [Portfolio](https://neoklyn.com/work)
+- [Blog](https://neoklyn.com/insights)
+- [Instagram](https://www.instagram.com/neo_klyn/)
+- [X / Twitter](https://x.com/neoklyn)

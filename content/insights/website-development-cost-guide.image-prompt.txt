@@ -1,0 +1,7 @@
+Blog: "Website Development Cost in 2026: A Real Pricing Breakdown"
+
+Hero / social image prompt:
+
+A dark, minimal tech-editorial illustration on a near-black background (#040406). A single glowing wireframe of a browser window sits center-left, rendered as thin cyan (#06B6D4) outline lines, tilted slightly in 3D perspective. Inside the browser window, abstract stacked UI blocks in varying widths suggest a webpage layout. Floating beside the browser window are three small glowing price/coin-shaped tokens in violet (#7C3AED) and blue (#3B82F6), connected to the browser by thin glowing lines, implying "cost breakdown." Soft radial glow gradients bleed from the tokens into the dark background (cyan top-left, violet top-right, blue lower-center), matching a moody indigo-black gradient. Fine grain noise texture over the whole image. No visible text, no logos, no people. Clean, modern SaaS/tech editorial style, high contrast, lots of negative space, 16:9 aspect ratio, suitable as a blog hero and social share image.
+
+Negative prompt: no text, no watermark, no stock-photo people, no clutter, no bright white background, no cartoon style.

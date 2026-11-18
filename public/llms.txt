@@ -3,32 +3,32 @@
 > NeoKlyn is an AI agency and web development studio based in Bengaluru, India. We build web apps, AI agents, mobile apps, ecommerce platforms, and 3D digital experiences engineered for conversion, serving clients globally.
 
 ## Services
-- AI Agents & Automation: custom LLM-powered agents, chatbots, and workflow automation — https://neoklyn.com/services/ai-agents
-- Generative AI: GenAI integration, RAG systems, and AI product development — https://neoklyn.com/services/gen-ai
-- Web Development: React, Next.js, TypeScript, full-stack web applications — https://neoklyn.com/services/web
-- Mobile Apps: iOS and Android app development — https://neoklyn.com/services/mobile
-- Ecommerce: Shopify and custom ecommerce platforms — https://neoklyn.com/services/ecommerce
-- 3D & Immersive: WebGL, Three.js, immersive digital experiences — https://neoklyn.com/services/3d
-- Branding & UI/UX: product design and brand identity — https://neoklyn.com/services/branding
-- Digital Marketing: SEO, performance marketing, growth — https://neoklyn.com/services/marketing
+- [AI Agents & Automation](https://neoklyn.com/services/ai-agents): custom LLM-powered agents, chatbots, and workflow automation
+- [Generative AI](https://neoklyn.com/services/gen-ai): GenAI integration, RAG systems, and AI product development
+- [Web Development](https://neoklyn.com/services/web): React, Next.js, TypeScript, full-stack web applications
+- [Mobile Apps](https://neoklyn.com/services/mobile): iOS and Android app development
+- [Ecommerce](https://neoklyn.com/services/ecommerce): Shopify and custom ecommerce platforms
+- [3D & Immersive](https://neoklyn.com/services/3d): WebGL, Three.js, immersive digital experiences
+- [Branding & UI/UX](https://neoklyn.com/services/branding): product design and brand identity
+- [Digital Marketing](https://neoklyn.com/services/marketing): SEO, performance marketing, growth
 
 ## Contact
 - Email: hello@neoklyn.com
 - WhatsApp: +91 6380202766
-- Website: https://neoklyn.com
-- Booking: https://cal.com/neoklyn
-- Contact form: https://neoklyn.com/contact
-- Free AI project estimate: https://neoklyn.com/estimate
+- [Website](https://neoklyn.com)
+- [Booking](https://cal.com/neoklyn)
+- [Contact form](https://neoklyn.com/contact)
+- [Free AI project estimate](https://neoklyn.com/estimate)
 
 ## Location
 Bengaluru, Karnataka, India. Serving clients in the US, UAE, UK, Singapore, and India.
 
 ## Key Pages
-- Services: https://neoklyn.com/services
-- Work / Case Studies: https://neoklyn.com/work
-- Engineering Blog: https://neoklyn.com/insights
-- About the Team: https://neoklyn.com/about
-- Our Process: https://neoklyn.com/process
+- [Services](https://neoklyn.com/services)
+- [Work / Case Studies](https://neoklyn.com/work)
+- [Engineering Blog](https://neoklyn.com/insights)
+- [About the Team](https://neoklyn.com/about)
+- [Our Process](https://neoklyn.com/process)
 
 ## Optional
-- Detailed context: https://neoklyn.com/llms-full.txt
+- [Detailed context](https://neoklyn.com/llms-full.txt)

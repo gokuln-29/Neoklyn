@@ -1,0 +1,92 @@
+---
+title: "The AI Code Review Checklist: What Ships and What Gets Rejected"
+slug: "ai-code-review-checklist"
+category: "AI-Accelerated Development"
+categorySlug: "ai-accelerated-development"
+date: "Aug 5, 2026"
+readTime: "7 min read"
+author: "Gokulnath N"
+color: "var(--violet)"
+excerpt: "AI can write a working feature in minutes. Whether it should ship is a separate question. Here is the exact checklist we run before any AI-generated code reaches a client."
+metaDescription: "The practical code review checklist NeoKlyn runs on every AI-generated feature before it ships, covering architecture, security, testing, and cost."
+primaryKeyword: "ai code review checklist"
+secondaryKeywords:
+  - "is ai generated code safe"
+  - "ai accelerated development"
+  - "reviewing ai code"
+outline:
+  - "Fast Is Not the Same as Ready"
+  - "Architecture Review"
+  - "Security Review"
+  - "Testing Before It Counts as Done"
+  - "Cost and Performance Review"
+  - "The Sign-Off"
+  - "Why We Do This on Every Project, Not Just the Big Ones"
+---
+
+AI coding tools can generate a working authentication flow, a payment integration, or an admin dashboard in the time it takes to write the prompt. That part is no longer impressive — every serious studio has access to the same models. The part that actually matters, and the part almost nobody talks about honestly, is what happens between "AI wrote this" and "this is safe to ship."
+
+At NeoKlyn, every feature goes through the same review before it reaches a client, regardless of how small the project is. This is the actual AI code review checklist we use, not a marketing version of it — the same one described in more general terms on our [how we work](/how-we-work) page.
+
+## Fast Is Not the Same as Ready
+
+Unreviewed AI code has a specific failure pattern. It usually *works* in the demo case. It handles the happy path correctly, looks clean, and passes a casual glance. Where it breaks is at the edges: an input the model didn't anticipate, a permission check that got quietly dropped, an API call with no timeout or retry logic, a database query that's fine at 100 rows and falls over at 100,000.
+
+None of these show up by running the app and clicking around. They show up in production, usually at the worst possible time. That gap is exactly what a review process exists to close.
+
+## Architecture Review
+
+Before touching whether the code works, the first question is whether it's built the right way at all:
+
+- Does this fit the existing data model, or did the AI invent a parallel structure because it didn't have full context on the schema?
+- Is business logic living in the right layer (server-side where it needs to be trusted, not duplicated client-side)?
+- Are there hidden N+1 queries or redundant API calls that will get expensive at scale?
+- Does naming and structure match the rest of the codebase, or does this look like it was dropped in from a different project?
+
+AI models are very good at producing code that *works* and very inconsistent at producing code that *fits*. This step catches the second problem before it compounds.
+
+## Security Review
+
+This is the step that gets skipped most often by people shipping AI-generated code without review, and it's the one with the highest cost when it's skipped:
+
+- Every user input gets validated server-side, not just in a client-side form
+- Authentication and authorization checks are present on every route that needs them, not just the obvious ones
+- No secrets, API keys, or credentials in code, commit history, or client-visible bundles
+- Third-party dependencies the AI pulled in are checked for maintenance status and known vulnerabilities
+- Rate limiting on anything that touches email, SMS, payments, or AI API calls (all of which cost real money per request)
+
+AI models don't have an incentive to be paranoid about security. They optimize for "this satisfies the prompt." A reviewer's job is to think like someone trying to break it — this list maps closely to the [OWASP Top 10](https://owasp.org/www-project-top-ten/), the industry-standard reference for the most common web application vulnerabilities, and every item on it gets checked against that list before sign-off.
+
+## Testing Before It Counts as Done
+
+"It works when I tried it" and "it's tested" are different claims. Before anything ships:
+
+- Core user flows are tested end-to-end, not just unit-tested in isolation
+- Error states are tested deliberately: what happens on a failed payment, a timeout, a malformed response
+- Edge cases the AI likely didn't consider get tried on purpose — empty states, maximum-length inputs, concurrent requests
+
+If a bug is going to surface, the goal is for it to surface here, not in front of a client's customer.
+
+## Cost and Performance Review
+
+AI-generated code has a specific blind spot around cost, because the model has no visibility into your actual usage patterns or budget:
+
+- Are AI API calls (LLM calls, image generation, embeddings) bounded, cached where sensible, and impossible to trigger in a runaway loop?
+- Is the database being queried efficiently, or is the AI's first-draft approach going to generate an unnecessary bill at scale?
+- Are images and assets optimized, or served at full resolution regardless of where they're displayed?
+
+This step alone has caught things that would have turned a predictable monthly hosting cost into a five-figure surprise.
+
+## The Sign-Off
+
+After architecture, security, testing, and cost are checked, one person reads the actual diff, line by line, before it ships. Not a summary of what changed. The lines themselves.
+
+This is the step that doesn't scale, doesn't get automated, and is also the entire reason "AI-accelerated" doesn't mean "AI-shipped." The AI writes fast. A senior engineer with 10+ years of experience decides what's actually safe to ship, and only then does it go out.
+
+## Why We Do This on Every Project, Not Just the Big Ones
+
+It would be easy to argue this checklist is overkill for a small business website and reserve it for larger, more complex builds. We don't make that distinction, for a simple reason: a client running a six-page business site has just as much to lose from a security hole or a runaway API bill as a client running something more complex. The checklist doesn't get lighter because the project is smaller. It gets applied the same way every time, which is the only way it's actually worth having.
+
+This is also the direct answer to the question we get most often: is AI-generated code safe? Not by itself. It's safe when someone with the experience to catch what it misses reads every line before it ships. That's the model, on every project, not just the ones where it's convenient.
+
+If you want a second opinion on a project — yours or one an AI tool already helped build — you can [get a free estimate](/estimate) or [reach out directly](/contact).
