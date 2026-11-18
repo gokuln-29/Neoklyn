@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { trackEvent } from "@/lib/track";
+import { getAttribution, trackEvent } from "@/lib/track";
 import { AUDIT_QUESTIONS, type AuditAnswers } from "@/data/auditQuestions";
 
 type AuditResult = {
@@ -58,6 +58,7 @@ export default function AuditQuizWizard() {
           email,
           utmSource: getUtmParam("utm_source"),
           utmCampaign: getUtmParam("utm_campaign"),
+          attribution: getAttribution(),
         }),
       });
 

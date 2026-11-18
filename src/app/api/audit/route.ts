@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { sendMail, isMailerConfigured } from "@/lib/mailer";
+import { cleanAttribution } from "@/lib/leadFollowUp";
 import { rateLimit, getRateLimitKey } from "@/lib/rateLimit";
 import { AUDIT_QUESTIONS, type AuditAnswers } from "@/data/auditQuestions";
 import { scoreAnswers, buildTakeaway } from "@/lib/auditScoring";
@@ -13,6 +14,7 @@ type AuditRequestBody = {
   email: string;
   utmSource?: string;
   utmCampaign?: string;
+  attribution?: unknown;
 };
 
 function isValidEmail(email: string) {
@@ -65,6 +67,7 @@ export async function POST(req: NextRequest) {
           score,
           utm_source: body.utmSource || null,
           utm_campaign: body.utmCampaign || null,
+          attribution: cleanAttribution(body.attribution) ?? null,
         },
       },
     });

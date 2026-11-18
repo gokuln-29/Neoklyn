@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 import AuditQuizWizard from "@/components/AuditQuizWizard";
@@ -37,6 +38,14 @@ export default function AuditPage() {
         />
 
         <AuditQuizWizard />
+
+        <p style={{ textAlign: "center", color: "var(--muted)", fontSize: "0.85rem", marginTop: "2rem" }}>
+          Looking for a check of your website instead?{" "}
+          <Link href="/website-audit" style={{ color: "var(--cyan)" }}>
+            Run the free website audit
+          </Link>
+          .
+        </p>
       </section>
     </PageWrapper>
   );

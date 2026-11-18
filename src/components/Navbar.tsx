@@ -13,17 +13,19 @@ const NAV_ITEMS = [
     { href: '/about', label: 'About' },
     { href: '/insights', label: 'Insights' },
     { href: '/estimate', label: 'Get Estimate' },
+    { href: '/website-audit', label: 'Free Audit' },
 ];
 
 export default function Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
-
-    // Close the mobile menu on route change so it never stays open
-    // across navigations.
-    useEffect(() => {
-        setIsOpen(false);
-    }, [pathname]);
+    // The menu is "open" only for the path it was opened on, so it closes by
+    // itself on route change without an effect that sets state.
+    const [openOnPath, setOpenOnPath] = useState<string | null>(null);
+    const isOpen = openOnPath === pathname;
+    const setIsOpen = (next: boolean | ((prev: boolean) => boolean)) => {
+        const value = typeof next === 'function' ? next(isOpen) : next;
+        setOpenOnPath(value ? pathname : null);
+    };
 
     useEffect(() => {
         document.body.style.overflow = isOpen ? 'hidden' : '';

@@ -15,6 +15,7 @@ export default function Footer() {
                 <Link href="/about">About</Link>
                 <Link href="/insights">Insights</Link>
                 <Link href="/estimate">Get Estimate</Link>
+                <Link href="/website-audit">Free Website Audit</Link>
                 <Link href="/contact">Contact</Link>
             </div>
             <div className="f-copy">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { trackEvent } from "@/lib/track";
+import { getAttribution, trackEvent } from "@/lib/track";
 import {
   ESTIMATE_FEATURES,
   PROJECT_TYPES,
@@ -105,6 +105,7 @@ export default function EstimateWizard() {
           name: form.name,
           email: form.email,
           company: form.company,
+          attribution: getAttribution(),
         }),
       });
 

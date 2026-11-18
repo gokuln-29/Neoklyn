@@ -6,6 +6,7 @@ import EngageSection from "@/components/EngageSection";
 import type { Metadata } from "next";
 import { localBusinessSchema } from "@/lib/schema";
 import { siteStats } from "@/data/siteStats";
+import { whatsappUrl } from "@/lib/contact";
 import { getAllInsightSummaries } from "@/lib/insights";
 
 export const metadata: Metadata = {
@@ -75,6 +76,11 @@ export default async function Home() {
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </Link>
           </div>
+          <p className="hero-quick-links" data-track-location="home_hero" style={{ marginTop: '1.25rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.75rem', letterSpacing: '0.04em', color: 'var(--muted)', display: 'flex', flexWrap: 'wrap', gap: '0.4rem 1.25rem' }}>
+            <Link href="/website-audit" style={{ color: 'var(--cyan)', textDecoration: 'none' }}>Free website audit →</Link>
+            <Link href="/estimate" style={{ color: 'var(--cyan)', textDecoration: 'none' }}>Instant price estimate →</Link>
+            <a href={whatsappUrl("Hi NeoKlyn, I'd like to discuss a project")} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--cyan)', textDecoration: 'none' }}>Chat on WhatsApp →</a>
+          </p>
         </div>
         {/* hero stats */}
         <div className="hero-right">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { trackEvent } from '@/lib/track';
+import { getAttribution, trackEvent } from '@/lib/track';
 import PageWrapper from "@/components/layout/PageWrapper";
 import PageHeader from "@/components/ui/PageHeader";
 
@@ -636,6 +636,7 @@ export default function ContactPage() {
                         metadata: {
                             budget: formData.budget || undefined,
                             services: formData.services.length ? formData.services : undefined,
+                            attribution: getAttribution(),
                         },
                     }),
                 }).catch(() => {});

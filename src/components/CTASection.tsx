@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { trackEvent } from '@/lib/track';
+import { getAttribution, trackEvent } from '@/lib/track';
 
 export default function CTASection() {
     const [email, setEmail] = useState('');
@@ -19,6 +19,7 @@ export default function CTASection() {
                 body: JSON.stringify({
                     type: 'quote',
                     email: email,
+                    attribution: getAttribution(),
                 }),
             });
             if (res.ok) {
@@ -152,6 +153,10 @@ export default function CTASection() {
                         onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
                     >
                         Or use the full contact form →
+                    </Link>
+                    <span style={{ color: 'var(--dim)', fontSize: '0.6rem' }}>|</span>
+                    <Link href="/website-audit" style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', textDecoration: 'none' }}>
+                        Free website audit →
                     </Link>
                     <span style={{ color: 'var(--dim)', fontSize: '0.6rem' }}>|</span>
                     <a href="mailto:hello@neoklyn.com" style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s' }}

@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { sendMail, isMailerConfigured } from "@/lib/mailer";
+import { cleanAttribution } from "@/lib/leadFollowUp";
 import { NextRequest, NextResponse } from "next/server";
 import {
   ESTIMATE_FEATURES,
@@ -21,6 +22,7 @@ type EstimateRequestBody = {
   name: string;
   email: string;
   company?: string;
+  attribution?: unknown;
 };
 
 type EstimateResponse = {
@@ -294,7 +296,7 @@ export async function POST(req: NextRequest) {
           company: company || null,
           source: "estimate_wizard",
           segment,
-          metadata: { projectType, features, scale, timeline },
+          metadata: { projectType, features, scale, timeline, attribution: cleanAttribution(body.attribution) },
         },
       });
     } catch (dbError) {

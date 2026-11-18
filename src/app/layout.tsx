@@ -6,6 +6,8 @@ import Effects from "@/components/Effects";
 import SchemaData from "@/components/SchemaData";
 import PublicChrome from "@/components/PublicChrome";
 import ChatWidget from "@/components/ChatWidget";
+import SiteTracking from "@/components/SiteTracking";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
 import Script from "next/script";
 import "./globals.css";
 
@@ -133,6 +135,7 @@ export default function RootLayout({
         </Script> */}
 
         <SchemaData />
+        <SiteTracking />
         <PublicChrome>
           <Effects />
           <Navbar />
@@ -140,6 +143,7 @@ export default function RootLayout({
         {children}
         <PublicChrome>
           <Footer />
+          <StickyMobileCTA />
           <ChatWidget />
         </PublicChrome>
       </body>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { trackEvent } from "@/lib/track";
+import { getAttribution, trackEvent } from "@/lib/track";
 
 type ChatRole = "user" | "assistant";
 
@@ -84,6 +84,7 @@ export default function ChatWidget() {
           metadata: {
             budget: leadSignals.budget || undefined,
             companySize: leadSignals.companySize || undefined,
+            attribution: getAttribution(),
           },
         }),
       }).catch(() => {});

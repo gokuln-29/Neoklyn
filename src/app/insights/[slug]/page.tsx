@@ -6,6 +6,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import PageWrapper from "@/components/layout/PageWrapper";
 import ArticleClientTools from "@/components/insights/ArticleClientTools";
+import ArticleCTA from "@/components/insights/ArticleCTA";
 import { AUTHOR } from "@/data/author";
 
 const CATEGORY_TO_SERVICE: Record<string, { path: string; label: string }> = {
@@ -305,6 +306,8 @@ export default async function BlogPostPage({
             )}
           </article>
         </div>
+
+        <ArticleCTA categorySlug={post.categorySlug} title={post.title} />
 
         {relatedPosts.length > 0 && (
           <div className="ins-shell" style={{ marginTop: "4rem" }}>
