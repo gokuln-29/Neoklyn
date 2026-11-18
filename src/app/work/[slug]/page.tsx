@@ -146,7 +146,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
 
           <div className="case-results-block reveal">
-            <h2 className="case-h2 case-results-title">Results</h2>
+            <h2 className="case-h2 case-results-title">{project.caseStudy.resultsHeading ?? "Results"}</h2>
             <div className="case-results-grid">
               {project.caseStudy.results.map((result) => (
                 <div key={result.metric + result.description} className="case-result-card">

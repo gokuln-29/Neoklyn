@@ -1,4 +1,4 @@
-export type ProjectFilter = "Web" | "3D" | "Travel" | "Industrial" | "Manufacturing";
+export type ProjectFilter = "Web" | "3D" | "Travel" | "Industrial" | "Manufacturing" | "Ecommerce";
 
 export interface ProjectResult {
   metric: string;
@@ -10,6 +10,8 @@ export interface ProjectCaseStudy {
   challenge: string;
   solution: string;
   results: ProjectResult[];
+  /** Heading for the results block. Defaults to "Results"; use "Highlights" when no measured results are published. */
+  resultsHeading?: string;
   /**
    * How the results were measured, shown under the results block, e.g.
    * "Measured by the client over the 3 months after launch, from their
@@ -44,6 +46,7 @@ export const projectFilters: Array<"All" | ProjectFilter> = [
   "Travel",
   "Industrial",
   "Manufacturing",
+  "Ecommerce",
 ];
 
 export const projects: Project[] = [
@@ -245,6 +248,82 @@ export const projects: Project[] = [
     },
     seoTitle: "Sharon Physio Case Study — NeoKlyn",
     seoDescription: "How NeoKlyn redesigned a physiotherapy clinic website to increase booking inquiries by 30%.",
+  },
+  {
+    slug: "athira-flowers",
+    client: "Athira Flowers",
+    title: "An Online Flower Shop with a Built-In CRM for a Dubai Florist",
+    tagline: "A fast online store for ordering hand bouquets in Dubai, connected to a CRM.",
+    category: "Ecommerce · Flower Delivery",
+    filters: ["Web", "Ecommerce"],
+    location: "Dubai, UAE",
+    color: "var(--cyan)",
+    image: "/assets/work/athira-flowers.webp",
+    liveUrl: "https://athiraflowers.ae",
+    keyMetric: "Online store with a CRM, live in Dubai",
+    seoDescription:
+      "How NeoKlyn built an online flower shop with a CRM for Athira Flowers, a Dubai florist delivering across Dubai, Abu Dhabi and Sharjah.",
+    description:
+      "We built Athira Flowers' online shop for ordering hand bouquets and single flowers in Dubai, Abu Dhabi and Sharjah, together with a CRM to manage customers.",
+    techStack: ["Next.js", "Custom storefront", "CRM"],
+    caseStudy: {
+      overview: [
+        "Athira Flowers sells fresh hand bouquets and single flowers for delivery across Dubai, Abu Dhabi and Sharjah, with customised bouquets available on request. For a business like this, the website has to make choosing and ordering flowers quick on a phone, and give customers clear delivery information before they pay.",
+        "NeoKlyn built the online shop around that: a clean storefront with three clear categories (Athira Special, Hand Bouquets and Single Flowers), product search, a cart and customer accounts, with prices in AED. Delivery, returns, contact and policy pages sit alongside it, and a WhatsApp chat button gives customers a fast way to ask questions or request a custom bouquet.",
+        "Behind the storefront, a CRM helps the business keep track of its customers, so the shop is not just a catalogue but the start of a relationship with each buyer.",
+      ],
+      challenge:
+        "A flower business needs customers to find the right bouquet and order quickly on a phone, with clear delivery and returns information, and a way to keep track of those customers afterwards.",
+      solution:
+        "A fast Next.js storefront with product categories, search, cart and customer accounts in AED, delivery and returns pages, WhatsApp chat and a cookie choice that lets visitors decline, connected to a CRM.",
+      resultsHeading: "Highlights",
+      results: [
+        { metric: "3-4 hrs", description: "Delivery window promoted across Dubai, Abu Dhabi and Sharjah" },
+        { metric: "AED", description: "Dirham pricing with a cart and customer accounts" },
+        { metric: "Store + CRM", description: "An online shop with customer management behind it" },
+      ],
+      resultsNote:
+        "The delivery window is Athira Flowers' own service promise, as shown on their site. Performance figures for this project have not been published.",
+    },
+    seoTitle: "Athira Flowers Ecommerce Case Study — NeoKlyn",
+  },
+  {
+    slug: "neoklyn-shop",
+    client: "NeoKlyn Shop",
+    title: "NeoKlyn's Own Ecommerce Store, Live as a Demo",
+    tagline: "A multilingual storefront we built as our own product, so you can try it before you commit.",
+    category: "Ecommerce · NeoKlyn Product",
+    filters: ["Web", "Ecommerce"],
+    location: "India (live demo)",
+    color: "var(--violet)",
+    image: "/assets/work/neoklyn-shop.webp",
+    liveUrl: "https://shop.neoklyn.com/en",
+    keyMetric: "Live demo in English, Tamil and Kannada",
+    seoDescription:
+      "Try NeoKlyn Shop, our own multilingual ecommerce storefront, as a live demo store with categories, search, cart, accounts and promotions.",
+    description:
+      "NeoKlyn Shop is our own ecommerce storefront, running as a live demo store with clothing, food and electronics so you can use a real store before commissioning one.",
+    techStack: ["Next.js", "Multilingual", "Cart & accounts"],
+    caseStudy: {
+      overview: [
+        "NeoKlyn Shop is the ecommerce product we built ourselves. It runs as a demo store: orders and payments are not real, and the site says so at the top of every page, so you can click through a full shopping experience without any risk.",
+        "It shows what a NeoKlyn store can include: categories for clothing, food and electronics, product search, a cart, customer accounts with order history, promotions such as free delivery above ₹999 and a discount code, and a language switcher for English, Tamil and Kannada.",
+        "If you are deciding between a custom store and a template, this is the quickest way to see how ours feels on a phone and in your customers' own language before you commit.",
+      ],
+      challenge:
+        "Small businesses selling online in India need a store that works in their customers' languages and feels fast on a phone, but it is hard to judge an ecommerce build from screenshots alone.",
+      solution:
+        "A Next.js storefront with product categories, search, cart, customer accounts and order history, promotions, and a language switcher for English, Tamil and Kannada, published as a live demo you can try.",
+      resultsHeading: "What's in the demo",
+      results: [
+        { metric: "3", description: "Languages: English, Tamil and Kannada" },
+        { metric: "3", description: "Product categories: clothing, food and electronics" },
+        { metric: "Demo", description: "No real orders or payments, so it is safe to try" },
+      ],
+      resultsNote:
+        "This is NeoKlyn's own product demo, not a client project, so there are no client results to report.",
+    },
+    seoTitle: "NeoKlyn Shop: Live Ecommerce Demo — NeoKlyn",
   },
 ];
 

@@ -76,6 +76,8 @@ SEO, performance marketing, and growth engineering for measurable organic and pa
 - Sharon Physio (India, physiotherapy clinic in Madurai): +30% increase in booking inquiries
 - Aathithyan (India, luxury brand website): 95+ Lighthouse scores, under 1 second average first load
 - LPSM Pvt. Ltd. (India, manufacturing): zero-downtime migration to a unified operations interface
+- Athira Flowers (Dubai, UAE, flower delivery): online store with a CRM, delivering across Dubai, Abu Dhabi and Sharjah; live at athiraflowers.ae
+- NeoKlyn Shop (NeoKlyn's own product): a multilingual ecommerce storefront in English, Tamil and Kannada, running as a live demo store at shop.neoklyn.com (demo orders and payments are not real)
 
 ## Links
 - [Website](https://neoklyn.com)
