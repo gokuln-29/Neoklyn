@@ -1,3 +1,4 @@
+import { solutionsForService } from "@/data/solutions";
 import PageWrapper from "@/components/layout/PageWrapper";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -352,14 +353,17 @@ function CapabilityIcon({ name }: { name: string }) {
     }
 }
 
-const servicesMetadata: Record<string, { title: string; description: string }> = {
+// `name` is the plain service name used in structured data; `title` is the search-result title.
+const servicesMetadata: Record<string, { title: string; description: string; name?: string }> = {
     web: {
-        title: "Next.js Web Development Agency India — NeoKlyn",
-        description: "Fast, scalable web apps built with React, Next.js & TypeScript, reviewed line-by-line by a senior engineer. Request a free audit.",
+        name: "Website and web app development",
+        title: "Website Development in India, From ₹50,000 — NeoKlyn",
+        description: "Fast business websites and web apps, fixed price from ₹50,000, built in 2-5 weeks and reviewed line-by-line by a senior engineer. Get a free estimate.",
     },
     mobile: {
-        title: "Mobile App Development Company India — NeoKlyn",
-        description: "Cross-platform & native mobile apps with Flutter, React Native & Swift. From MVP to enterprise scale. Start your project.",
+        name: "Mobile app development",
+        title: "Mobile App Development in India, From ₹1 Lakh — NeoKlyn",
+        description: "iOS and Android apps from one codebase, fixed price from ₹1 lakh, built in weeks. You own the code. See typical costs and get a free estimate.",
     },
     ecommerce: {
         title: "Ecommerce Development Agency — NeoKlyn",
@@ -378,8 +382,9 @@ const servicesMetadata: Record<string, { title: string; description: string }> =
         description: "Premium brand identity, Figma design systems & conversion-focused UX. Book a design consultation.",
     },
     "ai-agents": {
-        title: "AI Agent Development Company — NeoKlyn",
-        description: "Deploy autonomous AI agents to automate workflows, CRM ops & data pipelines. Built with LangChain & GPT. Talk to our AI team.",
+        name: "AI agent development",
+        title: "AI Agents for Business Automation, From ₹1 Lakh — NeoKlyn",
+        description: "AI agents that answer customer questions, take bookings and follow up leads on WhatsApp and your website. From ₹1 lakh. Free readiness audit.",
     },
     "gen-ai": {
         title: "Generative AI Integration Services — NeoKlyn",
@@ -462,7 +467,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     }
 
     const meta = servicesMetadata[slug] || { title: service.titleSolid, description: service.description };
-    const serviceName = meta.title.replace(/\s+—\s+NeoKlyn$/, "");
+    const serviceName = ("name" in meta && meta.name) || meta.title.replace(/\s+—\s+NeoKlyn$/, "");
     const serviceStructuredData = serviceSchema(serviceName, meta.description);
     const breadcrumbStructuredData = breadcrumbSchema([
         { name: "Home", url: "https://neoklyn.com" },
@@ -558,6 +563,22 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                                     <li key={example}>{example}</li>
                                 ))}
                             </ul>
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* ─── SOLUTIONS FOR THIS SERVICE ─── */}
+            {solutionsForService(slug).length > 0 && (
+                <section className="section" style={{ paddingTop: 0 }}>
+                    <div className="reveal" data-track-location="service_solutions">
+                        <div className="s-label">Built for your business</div>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem 1.6rem', marginTop: '1rem' }}>
+                            {solutionsForService(slug).map((solution) => (
+                                <Link key={solution.slug} href={`/solutions/${solution.slug}`} style={{ color: 'var(--cyan)', textDecoration: 'none', fontSize: '0.95rem' }}>
+                                    {solution.eyebrow} →
+                                </Link>
+                            ))}
                         </div>
                     </div>
                 </section>

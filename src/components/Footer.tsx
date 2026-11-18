@@ -18,6 +18,15 @@ export default function Footer() {
                 <Link href="/website-audit">Free Website Audit</Link>
                 <Link href="/contact">Contact</Link>
             </div>
+            <nav className="f-solutions" aria-label="Solutions by business type" style={{ gridColumn: '1 / -1', display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1.25rem', justifyContent: 'center', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.65rem', letterSpacing: '0.04em' }}>
+                <Link href="/solutions/website-for-clinics" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Websites for clinics</Link>
+                <Link href="/solutions/website-for-traders-and-distributors" style={{ color: 'var(--muted)', textDecoration: 'none' }}>For traders</Link>
+                <Link href="/solutions/website-for-manufacturers" style={{ color: 'var(--muted)', textDecoration: 'none' }}>For manufacturers</Link>
+                <Link href="/solutions/mobile-app-development-cost-india" style={{ color: 'var(--muted)', textDecoration: 'none' }}>App cost in India</Link>
+                <Link href="/solutions/ai-agent-for-small-business" style={{ color: 'var(--muted)', textDecoration: 'none' }}>AI agents for small business</Link>
+                <Link href="/solutions/website-development-bengaluru" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Bengaluru</Link>
+                <Link href="/solutions" style={{ color: 'var(--cyan)', textDecoration: 'none' }}>All solutions →</Link>
+            </nav>
             <div className="f-copy">
                 Web Development &amp; AI Agency in Bangalore, India
                 <br />© 2026 NeoKlyn.com — All rights reserved.

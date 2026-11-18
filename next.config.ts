@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { REMOVED_INSIGHTS } from "./src/data/removedInsights";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -12,6 +13,22 @@ const nextConfig: NextConfig = {
     qualities: [75, 90],
   },
   poweredByHeader: false,
+  async redirects() {
+    return [
+      // One canonical host: send www to the apex domain in a single hop.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.neoklyn.com" }],
+        destination: "https://neoklyn.com/:path*",
+        permanent: true,
+      },
+      ...REMOVED_INSIGHTS.map(([slug, destination]) => ({
+        source: `/insights/${slug}`,
+        destination,
+        permanent: true,
+      })),
+    ];
+  },
   async headers() {
     return [
       {

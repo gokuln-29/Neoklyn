@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { projects, projectsBySlug } from "../projects";
 import { breadcrumbSchema } from "@/lib/schema";
+import { solutionsForCase } from "@/data/solutions";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -158,6 +159,20 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               <p className="case-results-note">{project.caseStudy.resultsNote}</p>
             )}
           </div>
+
+          {solutionsForCase(project.slug).length > 0 && (
+            <p className="case-results-note" style={{ marginTop: "2rem" }}>
+              Looking for something similar?{" "}
+              {solutionsForCase(project.slug).map((solution, index) => (
+                <span key={solution.slug}>
+                  {index > 0 && " · "}
+                  <Link href={`/solutions/${solution.slug}`} style={{ color: "var(--cyan)" }}>
+                    {solution.eyebrow}
+                  </Link>
+                </span>
+              ))}
+            </p>
+          )}
 
           <div className="reveal case-cta" data-track-location="case_study_cta">
             <h3>Build your next success story.</h3>
