@@ -53,19 +53,32 @@ async function resolveCategoryId(categorySlug?: string): Promise<string | null> 
   return category?.id ?? null;
 }
 
+// Tag slugs are unique, so "AI agents" and "AI Agents" are the same tag. Match on slug
+// (and name, case-insensitively) before creating, and dedupe so a post never links one tag twice.
 async function resolveTagIds(tagNames?: string[]): Promise<string[]> {
   if (!tagNames?.length) return [];
-  const ids: string[] = [];
-  for (const name of tagNames) {
-    const existing = await db.tag.findUnique({ where: { name } });
+  const ids = new Set<string>();
+  for (const raw of tagNames) {
+    const name = raw.trim();
+    const slug = generateSlug(name);
+    if (!name || !slug) continue;
+
+    const existing = await db.tag.findFirst({
+      where: { OR: [{ slug }, { name: { equals: name, mode: "insensitive" } }] },
+    });
     if (existing) {
-      ids.push(existing.id);
+      ids.add(existing.id);
       continue;
     }
-    const created = await db.tag.create({ data: { name, slug: generateSlug(name) } });
-    ids.push(created.id);
+    try {
+      ids.add((await db.tag.create({ data: { name, slug } })).id);
+    } catch (error) {
+      const raced = await db.tag.findUnique({ where: { slug } });
+      if (!raced) throw error;
+      ids.add(raced.id);
+    }
   }
-  return ids;
+  return [...ids];
 }
 
 export async function POST(req: NextRequest) {
@@ -93,6 +106,11 @@ export async function POST(req: NextRequest) {
         { error: "No automation author configured or found (set AUTOMATION_AUTHOR_EMAIL)" },
         { status: 500 }
       );
+    }
+
+    const slugTaken = await db.post.findUnique({ where: { slug: data.slug }, select: { id: true } });
+    if (slugTaken) {
+      return NextResponse.json({ error: `A post with slug "${data.slug}" already exists` }, { status: 409 });
     }
 
     const [categoryId, tagIds] = await Promise.all([
